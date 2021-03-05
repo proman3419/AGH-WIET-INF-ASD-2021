@@ -1,4 +1,5 @@
 from random import randint, seed
+from math import inf
 
 
 
@@ -14,14 +15,13 @@ def mergesort(T):
     ms(T, m, r)
 
     # wartości inf na końcach tablic są wartownikami, oznaczają koniec tablicy
-    # dzięki nim nie trzeba sprawdzać czy wychodzi się poza tablice
-    L = T[l:m]
-    L += [inf]
-    R = T[m:r]
-    R += [inf]
+    L = T[l:m] + [inf]
+    R = T[m:r] + [inf]
 
     i = j = 0
     for k in range(l, r):
+      # dzięki wartownikom nie trzeba sprawdzać czy wychodzi się poza tablice
+      # gdy dojdzie się do końca jednej tablicy poniższy if zapewni, że brane będą elementy z drugiej tablicy
       if L[i] < R[j]:
         T[k] = L[i]
         i += 1
@@ -39,7 +39,7 @@ def mergesort(T):
 seed(42)
 
 n = 10
-T = [ randint(1,10) for i in range(10) ]
+T = [ randint(1,10) for i in range(n) ]
 
 print("przed sortowaniem: T =", T) 
 T = mergesort(T)
