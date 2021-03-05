@@ -5,8 +5,8 @@ vowels = 'aeiouy'
 # is_prime
 def is_prime(n):
   if n < 2: return False
-  if n == 2: return True
-  if n % 2 == 0: return False
+  if n == 2 or n == 3: return True
+  if n % 2 == 0 or n % 3 == 0: return False
 
   i = 3
   while i*i <= n:
