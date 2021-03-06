@@ -39,6 +39,7 @@ def heap_sort(A):
     max_heapify(A, n, 0)
 
 
+# test_sort
 from random import randint, seed
 from time import time
 def test_sort():
@@ -70,6 +71,5 @@ def test_sort():
 
     print('result:  ', res)
     print('time:    ', stop-start, '\n')
-
 
 test_sort()
