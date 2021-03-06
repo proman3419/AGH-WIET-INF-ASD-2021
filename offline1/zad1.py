@@ -1,11 +1,21 @@
 from random import randint, seed
 from math import inf
+from time import time
 
 
 
 
 
 def mergesort(T):
+  def sublist(T, l, r):
+    n = r - l
+    _T = [0]*(n+1)
+    for i in range(n):
+      _T[i] = T[l+i]
+    _T[-1] = inf
+
+    return _T
+
   def ms(T, l, r):
     if r - l <= 1:
       return
@@ -17,6 +27,10 @@ def mergesort(T):
     # wartości inf na końcach tablic są wartownikami, oznaczają koniec tablicy
     L = T[l:m] + [inf]
     R = T[m:r] + [inf]
+    # nie wiem czy slicing jest dozwolony, jeżeli nie to można dwie powyższe linijki zastąpić tymi poniżej
+    # poniższa metoda jest wolniejsza
+    #L = sublist(T, l, m)
+    #R = sublist(T, m, r)
 
     i = j = 0
     for k in range(l, r):
@@ -42,8 +56,11 @@ n = 10
 T = [ randint(1,10) for i in range(n) ]
 
 print("przed sortowaniem: T =", T) 
+start = time()
 T = mergesort(T)
+stop = time()
 print("po sortowaniu    : T =", T)
+print("czas             :", stop-start)
 
 for i in range(len(T)-1):
   if T[i] > T[i+1]:

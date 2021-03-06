@@ -1,5 +1,5 @@
 1. O(nlogn)
-- MergeSort
++ MergeSort
 - HeapSort
 - kopiec binarny
 - QuickSort
