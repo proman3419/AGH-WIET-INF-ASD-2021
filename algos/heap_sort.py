@@ -7,18 +7,18 @@
 # worst: 1
 
 
-def max_heapify(A, n, i):
-  max_i = i
-  l = 2*i + 1
-  r = 2*i + 2
+def max_heapify(A, n, pi): # pi - parent index
+  max_i = pi
+  l = 2*pi + 1
+  r = 2*pi + 2
 
   if l < n and A[l] > A[max_i]:
     max_i = l
   if r < n and A[r] > A[max_i]:
     max_i = r
 
-  if max_i != i:
-    A[i], A[max_i] = A[max_i], A[i]
+  if max_i != pi:
+    A[pi], A[max_i] = A[max_i], A[pi]
     max_heapify(A, n, max_i)
 
 
@@ -44,9 +44,9 @@ from time import time
 def test_sort():
   seed(1337)
   rr = (1, 10)
-  n = 10**2
+  n = 10**1
   sort_func = heap_sort
-  print_res = False
+  print_res = True
 
   tests = []
   tests.append([])
