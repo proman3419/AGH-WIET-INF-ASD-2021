@@ -1,9 +1,9 @@
 1. O(nlogn)
 + MergeSort
-- HeapSort
-- kopiec binarny
++ HeapSort
++ kopiec binarny
 - QuickSort
-- statystyki pozycyjne (?)
+- statystyki pozycyjne (min, i-ty min od poczatku, mediana, max, i-ty max od konca)
 
 2. O(n)
 - sortowanie przez zliczanie
@@ -21,7 +21,7 @@
 - kolejka
 - tablica asocjacyjna
 
-5.Drzewa przedziałowe
+5. Drzewa przedziałowe
 - rodzaje drzew przedziałowych, implementacja, zastosowania
 
 6. Reprezentacja grafów i elementarne algorytmy grafowe
