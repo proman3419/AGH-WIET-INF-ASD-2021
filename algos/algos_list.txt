@@ -2,7 +2,7 @@
 + MergeSort
 + HeapSort
 + kopiec binarny
-- QuickSort
++ QuickSort
 - statystyki pozycyjne (min, i-ty min od poczatku, mediana, max, i-ty max od konca)
 
 2. O(n)

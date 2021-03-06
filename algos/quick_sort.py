@@ -1,5 +1,31 @@
-# swap
-def swap(A, i, j): A[i], A[j] = A[j], A[i]
+# time complexity
+# best:  nlog(n)
+# avg:   nlog(n)
+# worst: n^2
+
+# space complexity
+# worst: log(n)
+
+
+def partition(A, l, r):
+  x = A[r] # pivot
+  i = l - 1
+  for j in range(l, r):
+    if A[j] < x:
+      i += 1
+      A[i], A[j] = A[j], A[i]
+
+  i += 1
+  A[i], A[r] = A[r], A[i]
+
+  return i
+
+
+def quick_sort(A, l, r):
+  if l < r:
+    pi = partition(A, l, r) # partition index
+    quick_sort(A, l, pi-1)
+    quick_sort(A, pi+1, r)
 
 
 # test_sort
@@ -8,8 +34,8 @@ from time import time
 def test_sort():
   seed(1337)
   rr = (1, 10)
-  n = 10**2
-  sort_func = change_it
+  n = 10**3
+  sort_func = quick_sort
   print_res = True
 
   tests = []
@@ -24,7 +50,7 @@ def test_sort():
 
     if print_res: print('input:   ', t)
     start = time()
-    sort_func(t)
+    sort_func(t, 0, len(t)-1)
     stop = time()
     if print_res: print('output:  ', t)
 
