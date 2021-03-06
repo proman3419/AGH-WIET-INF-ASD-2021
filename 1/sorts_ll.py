@@ -57,6 +57,27 @@ def insertion_sort(head):
   return new_head
 
 
+def get_min(curr):
+  curr_min = curr
+
+  while curr is not None:
+    if curr.val < curr_min.val:
+      curr_min = curr
+    curr = curr.next
+
+  return curr_min
+
+
+def inplace_selection_sort(head):
+  curr = head.next
+  while curr is not None:
+    min_node = get_min(curr)
+    curr.val, min_node.val = min_node.val, curr.val
+    curr = curr.next
+
+  return head
+
+
 head = Node()
 insert(head, 1)
 insert(head, 4)
@@ -67,6 +88,7 @@ insert(head, 2)
 insert(head, 5)
 insert(head, 10)
 
-head = selection_sort(head)
-head = insertion_sort(head)
+#head = selection_sort(head)
+#head = insertion_sort(head)
+head = inplace_selection_sort(head)
 display(head)
