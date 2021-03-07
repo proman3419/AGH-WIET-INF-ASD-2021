@@ -1,6 +1,6 @@
 # time complexity
-# best:  nlog(n)
-# avg:   nlog(n)
+# best:  n*log(n)
+# avg:   n*log(n)
 # worst: n^2
 
 # space complexity
