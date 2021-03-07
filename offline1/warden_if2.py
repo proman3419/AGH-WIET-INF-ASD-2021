@@ -65,22 +65,34 @@ def mergesort(T):
   
   
   
+# random test sort
+from random import randint, seed
+from time import time
+def test_sort():
+  rr = (-100, 100)
+  n = 10**6
+  m = 1
+  sort_func = mergesort
+  print_res = True
 
-seed(42)
+  for i in range(m):
+    t = [randint(rr[0], rr[1]) for _ in range(n)]
+    expected_res = sorted(t)
 
-n = 10
-T = [ randint(1,10) for i in range(n) ]
+    if print_res: print('input:   ', t)
+    start = time()
+    sort_func(t)
+    stop = time()
+    if print_res: print('output:  ', t)
 
-print("przed sortowaniem: T =", T) 
-start = time()
-T = mergesort(T)
-stop = time()
-print("po sortowaniu    : T =", T)
-print("czas             :", stop-start)
+    res = 'INCORRECT'
+    if t == expected_res:
+      res = 'CORRECT'
 
-for i in range(len(T)-1):
-  if T[i] > T[i+1]:
-    print("Błąd sortowania!")
-    exit()
-    
-print("OK")
+    print('result:  ', res)
+    print('time:    ', stop-start, '\n')
+
+    if res == 'INCORRECT':
+      break
+
+test_sort()
