@@ -41,6 +41,7 @@ def mergesort(T):
 
     # wartości inf na końcach tablic są wartownikami, oznaczają koniec tablicy
     # jeżeli inf jest niedozwolony można go zastąpić find_max(T) + 1
+    # najlepiej wywołać tą funkcję przed pierwszym wywołaniem ms i zapisać do zmiennej, żeby w każdym wywołaniu ms nie szukać jej na nowo
     L = T[l:m] + [inf]
     R = T[m:r] + [inf]
     # nie wiem czy slicing jest dozwolony, jeżeli nie to można dwie powyższe linijki zastąpić tymi poniżej

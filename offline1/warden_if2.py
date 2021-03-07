@@ -70,10 +70,10 @@ from random import randint, seed
 from time import time
 def test_sort():
   rr = (-100, 100)
-  n = 10**6
-  m = 1
+  n = 10**3
+  m = 100
   sort_func = mergesort
-  print_res = True
+  print_res = False
 
   for i in range(m):
     t = [randint(rr[0], rr[1]) for _ in range(n)]
