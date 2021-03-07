@@ -8,7 +8,7 @@
 2. O(n)
 + sortowanie przez zliczanie
 + sortowanie kubełkowe
-- sortowanie pozycyjne
++ sortowanie pozycyjne
 
 3. Elementarne struktury danych
 - lista
