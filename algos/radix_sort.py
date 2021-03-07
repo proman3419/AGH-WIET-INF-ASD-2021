@@ -30,7 +30,7 @@ def counting_sort(A, exp):
 
 def radix_sort(A, _max):
   exp = 1 # exp is 10^i where i is the current digit number
-  while _max/exp > 0:
+  while _max//exp > 0:
     counting_sort(A, exp) # digits {1, 2 ... 9}, 0 is added in the counting_sort function
     exp *= 10
 
@@ -39,7 +39,7 @@ def radix_sort(A, _max):
 from random import randint, seed
 from time import time
 def test_sort():
-  #seed(1337)
+  seed(1337)
   rr = (0, 10**3)
   n = 10**2
   sort_func = radix_sort
