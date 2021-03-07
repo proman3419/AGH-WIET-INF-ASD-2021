@@ -8,6 +8,9 @@
 # it can be lowered to k by creating the B array outside of the function
 # ^ Cormen's implementation
 
+# the algorithm assumes that values to be sorted lay in a specific [min, max] range
+# if the range is big it may be a good idea to choose a different algorithm
+
 
 # time complexity: n + m*n
 # space complexity: m

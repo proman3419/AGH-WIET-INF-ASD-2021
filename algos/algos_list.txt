@@ -6,8 +6,8 @@
 - statystyki pozycyjne (min, i-ty min od poczatku, mediana, max, i-ty max od konca)
 
 2. O(n)
-- sortowanie przez zliczanie
-- sortowanie kubełkowe
++ sortowanie przez zliczanie
++ sortowanie kubełkowe
 - sortowanie pozycyjne
 
 3. Elementarne struktury danych
