@@ -3,7 +3,7 @@
 + HeapSort
 + kopiec binarny
 + QuickSort
-- statystyki pozycyjne (min, i-ty min od poczatku, mediana, max, i-ty max od konca)
++ statystyki pozycyjne (min, i-ty min od poczatku, mediana, max, i-ty max od konca)
 
 2. O(n)
 + sortowanie przez zliczanie
