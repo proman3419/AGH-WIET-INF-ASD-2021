@@ -25,4 +25,48 @@ def min_max(A):
   return (_min, _max)
 
 
-print(min_max(A))
+#print(min_max(A))
+
+
+# returns i-th smallest element of A
+# assumes that all elements of A are distinct
+def randomized_partition(A, l, r):
+  x = A[r]
+  i = l - 1
+  for j in range(l, r):
+    if A[j] < x:
+      i += 1
+      A[i], A[j] = A[j], A[i]
+
+  i += 1
+  A[i], A[r] = A[r], A[i]
+
+  return i
+
+
+def randomized_select(A, l, r, i):
+  if l == r:
+    return A[l]
+
+  pi = randomized_partition(A, l, r) # partition index
+  k = pi - l + 1
+  if i == k: # partition index is the answer
+    return A[pi]
+  elif i < k:
+    return randomized_select(A, l, pi-1, i)
+  else:
+    return randomized_select(A, pi+1, r, i-k)
+
+
+#print(randomized_select(A, 0, len(A)-1, 9))
+
+
+def median(A):
+  n = len(A)
+  if n%2 == 1:
+    return randomized_select(A, 0, n-1, n//2)
+  else:
+    return (randomized_select(A, 0, n-1, n//2), randomized_select(A, 0, n-1, n//2+1))
+
+
+#print(median(A))
