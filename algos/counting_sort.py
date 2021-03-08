@@ -15,10 +15,7 @@
 # time complexity: n + m*n
 # space complexity: m
 def counting_sort1(A, _min, _max):
-  if _min*_max < 0:
-    m = abs(_min) + abs(_max) + 1
-  else:
-    m = _max - _min + 1
+  m = abs(_max - _min) + 1
   n = len(A)
   O = [0]*m # occurances
 
@@ -38,10 +35,7 @@ def counting_sort1(A, _min, _max):
 # time complexity: n + m-1 + n = 2*n + m - 1
 # space complexity: n + m
 def counting_sort2(A, _min, _max):
-  if _min*_max < 0:
-    m = abs(_min) + abs(_max) + 1
-  else:
-    m = _max - _min + 1
+  m = abs(_max - _min) + 1
   n = len(A)
   O = [0]*m # occurances
 
@@ -66,7 +60,7 @@ def test_sort():
   #seed(1337)
   rr = (-10000, 10000)
   n = 10**2
-  sort_func = counting_sort1
+  sort_func = counting_sort2
   print_res = True
 
   tests = []
