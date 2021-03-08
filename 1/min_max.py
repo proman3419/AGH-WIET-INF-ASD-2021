@@ -14,12 +14,12 @@ def min_max(t):
     if curr_max > _max: _max = curr_max
 
   if n%2 == 0:
-    if t[-1] <= _min:
+    if t[-1] < _min:
       _min = t[-1]
-    else:
+    elif t[-1] > _max:
       _max = t[-1]
 
   return (_min, _max)
 
 
-print(min_max([1, 2, 3, -100, 100]))
+print(min_max([1, 2, 3, -100, 0, 0]))
