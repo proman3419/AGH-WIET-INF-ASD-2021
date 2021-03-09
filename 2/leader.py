@@ -16,7 +16,7 @@ def leader(A):
     if A[i] == candidate:
       cnt += 1
 
-  return candidate if cnt >= n/2 else None
+  return cnt >= n/2
 
 
 A = [1, 3, 4, 3, 2, 1, 1] # None

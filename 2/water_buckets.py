@@ -1,25 +1,95 @@
-def sum_below(pts, y):
+class Point:
+  def __init__(self, x, y):
+    self.x = x
+    self.y = y
+
+
+class Rectangle:
+  def __init__(self, x1, y1, x2, y2):
+    self.P1 = Point(x1, y1)
+    self.P2 = Point(x2, y2)
+
+  def field(self, y=None):
+    if y == None:
+      return abs(self.P1.x-self.P2.x)*abs(self.P1.y-self.P2.y)
+    else:
+      return abs(self.P1.x-self.P2.x)*abs(y-self.P2.y)
+
+
+def sum_below(rects, y):
   _sum = 0
   cnt = 0
-  for p in pts:
-    if p[0][1] <= y:
-      _sum += (p[1][0]-p[0][0])*(p[0][1]-p[1][1])
+  for r in rects:
+    if r.P1.y <= y:
+      _sum += r.field()
       cnt += 1
+    elif r.P2.y < y:
+      _sum += r.field(y)
 
   return (_sum, cnt)
 
 
-P = 10**2
-pts = [((1, 10), (3, 8)), ((2, 10), (3, 6))]
+def min_max(rects):
+  _min = rects[0].P2.y
+  _max = rects[0].P1.y
+  n = len(rects)
 
-y_prev = -1
-y = pts[0][0][1]
-e = 0.1
-while abs(y - y_prev) > e:
-  res = sum_below(pts, y)
-  if res[0] < P:
-    y_prev, y = y, 1.5*y
-  else:
-    y_prev, y = y, 0.5*y
+  for i in range(1, n-1, 2):
+    if rects[i].P1.y < rects[i+1].P1.y:
+      curr_max = rects[i+1].P1.y
+    else:
+      curr_max = rects[i].P1.y
 
-print(res[1])
+    if rects[i].P2.y > rects[i+1].P2.y:
+      curr_min = rects[i+1].P2.y
+    else:
+      curr_min = rects[i].P2.y
+
+    if curr_min < _min: _min = curr_min
+    if curr_max > _max: _max = curr_max
+
+  if n%2 == 0:
+    if rects[-1].P2.y < _min:
+      _min = rects[-1].P2.y
+    elif rects[-1].P1.y > _max:
+      _max = rects[-1].P1.y
+
+  return (_min, _max)
+
+
+def find_rects_cnt(rects, A):
+  prev_A_cmp = 0 # -1 -> < A; 1 -> > A
+  prev_cnt = -1
+  y = rects[0].P1.y
+  _min, _max = min_max(rects)
+
+  while True:
+    res = sum_below(rects, y)
+    print(res, y)
+
+    if res[0] == A:
+      return res[1]
+
+    curr_A_cmp = -1 if res[0] < A else 1
+
+    if prev_A_cmp*curr_A_cmp == -1 and prev_cnt == res[1]:
+      return res[1]
+
+    if curr_A_cmp == -1:
+      y = (y + _max)/2
+    else:
+      y = (y + _min)/2
+
+    prev_A_cmp = curr_A_cmp
+    prev_cnt = res[1]
+
+
+A = 16
+# assumed that the first point is the upper-left one
+rects = [Rectangle(1, -1, 4, -2),
+         Rectangle(1, 3, 2, 1),
+         Rectangle(3, 5, 4, 1),
+         Rectangle(1, 5, 2, 4),
+         Rectangle(-4, 3, -1, 1)]
+
+print(find_rects_cnt(rects, A))
