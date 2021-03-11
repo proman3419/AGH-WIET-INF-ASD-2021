@@ -68,7 +68,7 @@ def find_rects_cnt(rects, A):
   _max_res = sum_below(rects, _max)
   if _max_res[0] <= A: return _max_res[1]
 
-  while y < _max - 0.1:
+  while y < _max - 10**(-6):
     res = sum_below(rects, y)
 
     curr_A_cmp = -1 if res[0] < A else 1
@@ -92,7 +92,7 @@ def find_rects_cnt(rects, A):
 # 3 <= A < 13 => 1
 # 13 <= A < 16 => 3
 # A >= 16 => 5
-A = 12
+A = 13
 # assumed that the first point is the upper-left one
 rects = [Rectangle(1, -1, 4, -2),
          Rectangle(1, 3, 2, 1),
