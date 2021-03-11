@@ -58,33 +58,41 @@ def min_max(rects):
 
 
 def find_rects_cnt(rects, A):
+  prev_A = -1
   prev_A_cmp = 0 # -1 -> < A; 1 -> > A
   prev_cnt = -1
   y = rects[0].P1.y
   _min, _max = min_max(rects)
 
-  while True:
-    res = sum_below(rects, y)
-    print(res, y)
+  # special case _max
+  _max_res = sum_below(rects, _max)
+  if _max_res[0] <= A: return _max_res[1]
 
-    if res[0] == A:
-      return res[1]
+  while y < _max - 0.1:
+    res = sum_below(rects, y)
 
     curr_A_cmp = -1 if res[0] < A else 1
 
-    if prev_A_cmp*curr_A_cmp == -1 and prev_cnt == res[1]:
-      return res[1]
+    if res[0] == A or prev_A == res[0] or (prev_A_cmp*curr_A_cmp == -1 and prev_cnt == res[1]):
+      break
 
-    if curr_A_cmp == -1:
+    if res[0] < A:
       y = (y + _max)/2
     else:
       y = (y + _min)/2
 
+    prev_A = res[0]
     prev_A_cmp = curr_A_cmp
     prev_cnt = res[1]
 
+  return res[1]
 
-A = 16
+
+# A < 3 => 0
+# 3 <= A < 13 => 1
+# 13 <= A < 16 => 3
+# A >= 16 => 5
+A = 12
 # assumed that the first point is the upper-left one
 rects = [Rectangle(1, -1, 4, -2),
          Rectangle(1, 3, 2, 1),
