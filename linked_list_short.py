@@ -22,6 +22,16 @@ def insert(head, val):
     curr.next.next = temp
 
 
+def array_to_list(A):
+  head = Node()
+  curr = head
+  for e in A:
+    curr.next = Node(e)
+    curr = curr.next
+
+  return head
+
+
 def display(head):
   curr = head
   while curr is not None:
@@ -33,4 +43,4 @@ def display(head):
 ##########################################################################
 
 
-head = Node()  
+head = array_to_list([])

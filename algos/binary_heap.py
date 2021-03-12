@@ -22,6 +22,7 @@ def build_max_heap(A, n):
 
   for i in range(last_parent, -1, -1):
     max_heapify(A, n, i)
+    
 
 # min-heap 
 # for every node other than root:
