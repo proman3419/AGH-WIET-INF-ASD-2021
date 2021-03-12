@@ -2,6 +2,7 @@
 def swap(A, i, j): A[i], A[j] = A[j], A[i]
 
 
+##########################################################################
 # test_sort
 from random import randint, seed
 from time import time
@@ -38,6 +39,7 @@ def test_sort():
 test_sort()
 
 
+##########################################################################
 # random test sort
 from random import randint, seed
 from time import time
