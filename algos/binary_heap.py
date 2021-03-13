@@ -1,3 +1,6 @@
+from math import log, ceil
+
+
 # max-heap
 # for every node other than root:
 # A[parent(i)] >= A[i]
@@ -17,12 +20,47 @@ def max_heapify(A, n, pi): # pi - parent index
     max_heapify(A, n, max_i)
 
 
-def build_max_heap(A, n):
+# n = len(A), passing it as parameter is useful in heap sort implementation
+def build_max_heap(A, n): 
   last_parent = n//2 - 1
 
   for i in range(last_parent, -1, -1):
     max_heapify(A, n, i)
-    
+
+
+def add_to_max_heap(A, val):
+  A.append(val)
+  n = len(A)
+  i = n - 1
+  pi = (i-1)//2 # pi - parent index
+
+  while pi >= 0:
+    max_heapify(A, n, pi)
+    pi = (pi-1)//2
+
+
+def display(A):
+  n = len(A)
+  steps = ceil(log(n, 2))
+
+  i = 0
+  for s in range(steps):
+    for j in range(2**s):
+      if i >= n:
+        break
+      print(A[i], end=' ')
+      i += 1
+    print()
+  print()
+
+
+A = [9, 7, 4, 3, 6, 5, 1, 2, 8, 11]
+display(A)
+build_max_heap(A, len(A))
+display(A)
+add_to_max_heap(A, 429)
+display(A)
+
 
 # min-heap 
 # for every node other than root:

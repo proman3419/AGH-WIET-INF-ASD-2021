@@ -28,6 +28,32 @@ def quick_sort(A, l, r):
     quick_sort(A, pi+1, r)
 
 
+# removed tail recursion
+def quick_sort2(A, l, r):
+  while l < r:
+    pi = partition(A, l, r) # partition index
+    quick_sort(A, l, pi-1)
+    l = pi + 1
+
+
+# improved quick_sort2
+# space complexity O(log(n))
+# recursive call is made only on the smaller part, the greater is handled
+# iteratively
+# in the worst scenario in each call both parts are the same length
+# so we have log(n) recursive calls
+def quick_sort3(A, l, r):
+  while l < r:
+    pi = partition(A, l, r) # partition index
+    
+    if pi - l < r - pi:
+      quick_sort3(A, l, pi-1)
+      l = pi + 1
+    else:
+      quick_sort3(A, pi+1, r)
+      r = pi - 1
+
+
 ##########################################################################
 # test_sort
 from random import randint, seed
@@ -36,7 +62,7 @@ def test_sort():
   seed(1337)
   rr = (1, 10)
   n = 10**3
-  sort_func = quick_sort
+  sort_func = quick_sort3
   print_res = True
 
   tests = []
