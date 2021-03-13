@@ -109,7 +109,7 @@ def list2tab(A):
 from random import randint, seed
 from time import time
 def test_sort():
-  rr = (-10**6, 10**6)
+  rr = (-10**3, 10**3)
   n = 10**5
   m = 10
   sort_func = qsort

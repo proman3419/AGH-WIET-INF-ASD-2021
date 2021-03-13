@@ -78,37 +78,38 @@ def find_series(curr):
   return (curr, _next)
 
 
+# same as merge_sort?
+# we can divide a list into sublists of length 1, each of them will be in sorted order
 def sort_natural_series(head):
   def rec(l_w):
-    if l_w is None or l_w.next is None:
-      return
+    while True:
+      if l_w is None or l_w.next is None:
+        return
 
-    prev = l_w
-    curr = l_w.next
-    while curr is not None:
-      s1_end, s1_next = find_series(curr)
-      # if there are no elements left it's impossible to create a non-empty s2
-      if s1_next is None:
-        break
-      s2_end, s2_next = find_series(s1_next)
+      prev = l_w
+      curr = l_w.next
+      while curr is not None:
+        s1_end, s1_next = find_series(curr)
+        # if there are no elements left it's impossible to create a non-empty s2
+        if s1_next is None:
+          break
+        s2_end, s2_next = find_series(s1_next)
 
-      curr = merge(curr, s1_next)
-      prev.next = curr
+        curr = merge(curr, s1_next)
+        prev.next = curr
 
-      # determine which element will be at the end of the new series
-      if s1_end.val >= s2_end.val:
-        s1_end.next = s2_next
-        prev = s1_end
-      else:
-        s2_end.next = s2_next
-        prev = s2_end
-      curr = s2_next
+        # determine which element will be at the end of the new series
+        if s1_end.val >= s2_end.val:
+          s1_end.next = s2_next
+          prev = s1_end
+        else:
+          s2_end.next = s2_next
+          prev = s2_end
+        curr = s2_next
 
-    # only one non-decreasing series => list is sorted
-    if prev == l_w and curr == l_w.next:
-      return
-
-    rec(l_w)
+      # only one non-decreasing series => list is sorted
+      if prev == l_w and curr == l_w.next:
+        return
 
   l_w = Node() # add left warden
   l_w.next = head
@@ -144,11 +145,11 @@ def list_to_array(A):
 from random import randint, seed
 from time import time
 def test_sort():
-  rr = (-100, 100)
-  n = 10**3
-  m = 100
+  rr = (-10**3, 10**3)
+  n = 10**5
+  m = 10
   sort_func = sort_natural_series
-  print_res = True
+  print_res = False
 
   for i in range(m):
     t = [randint(rr[0], rr[1]) for _ in range(n)]
