@@ -17,11 +17,11 @@ def list_tail_len(L):
 
 
 def add_wardens(L, tail):
-  l_warden = Node() # left
+  l_warden = Node()
   #l_warden.value = 'L'
   l_warden.next = L
 
-  tail.next = Node() # right
+  tail.next = Node()
   tail = tail.next
   #tail.value = 'R'
 
@@ -29,10 +29,10 @@ def add_wardens(L, tail):
 
 
 def remove_wardens(L, tail):
-  L = L.next # remove the left warden
+  L = L.next
   curr = L
 
-  while curr.next != tail: # remove the right warden
+  while curr.next != tail:
     curr = curr.next
   curr.next = None
 
@@ -109,9 +109,9 @@ def list2tab(A):
 from random import randint, seed
 from time import time
 def test_sort():
-  rr = (-10**3, 10**3)
+  rr = (-10**2, 10**2)
   n = 10**5
-  m = 10
+  m = 3
   sort_func = qsort
   print_res = False
 

@@ -81,6 +81,7 @@ def find_series(curr):
 # same as merge_sort?
 # we can divide a list into sublists of length 1, each of them will be in sorted order
 def sort_natural_series(head):
+  # replaced recursion with a while loop, yay!
   def rec(l_w):
     while True:
       if l_w is None or l_w.next is None:

@@ -1,11 +1,8 @@
-from random import randint, seed
-
-
 class Node:
   def __init__(self):
     self.next = None
     self.value = None
-    
+  
 
 def list_tail_len(L):
   if L is None:
@@ -89,9 +86,6 @@ def qsort( L ):
   return L
 
 
-
-
-
 def tab2list( A ):
   H = Node()
   C = H
@@ -109,31 +103,48 @@ def printlist( L ):
     L = L.next
   print("|")
 
-  
-  
-  
 
-seed(42)
+def list2tab(A):
+  if A is None:
+    return []
 
-n = 10
-T = [ randint(1,10) for i in range(10) ]
-L = tab2list( T )
+  res = []
+  while A is not None:
+    res.append(A.value)
+    A = A.next
 
-print("przed sortowaniem: L =", end=" ")
-printlist(L) 
-L = qsort(L)
-print("po sortowaniu    : L =", end=" ")
-printlist(L)
+  return res  
 
-if L == None:
-  print("List jest pusta, a nie powinna!")
-  exit(0)
 
-P = L
-while P.next != None:
-  if P.value > P.next.value:
-    print("Błąd sortowania")
-    exit(0)
-  P = P.next
-    
-print("OK")
+##########################################################################
+# random test sort
+from random import randint, seed
+from time import time
+def test_sort():
+  rr = (-10**2, 10**2)
+  n = 10**5
+  m = 3
+  sort_func = qsort
+  print_res = False
+
+  for i in range(m):
+    t = [randint(rr[0], rr[1]) for _ in range(n)]
+    expected_res = sorted(t)
+
+    if print_res: print('input:   ', t)
+    start = time()
+    t = list2tab(sort_func(tab2list(t)))
+    stop = time()
+    if print_res: print('output:  ', t)
+
+    res = 'INCORRECT'
+    if t == expected_res:
+      res = 'CORRECT'
+
+    print('result:  ', res)
+    print('time:    ', stop-start, '\n')
+
+    if res == 'INCORRECT':
+      break
+
+test_sort()
