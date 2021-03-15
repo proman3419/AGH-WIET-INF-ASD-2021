@@ -2,6 +2,17 @@
 def swap(A, i, j): A[i], A[j] = A[j], A[i]
 
 
+# gcd
+def gcd(a, b):
+  while b != 0:
+    a, b = b, a%b
+  return a
+
+# lcm
+def lcm(a, b):
+  return a//gcd(a, b)*b//gcd(a, b)
+
+
 ##########################################################################
 # test_sort
 from random import randint, seed
