@@ -75,9 +75,11 @@ def partition(l, r):
 
 
 def qsort( L ):
-  tail, _len = list_tail_len(L)
-  if _len < 2:
+  # jeżeli lista jest pusta lub jednoelementowa to jest posortowana
+  if L is None or L.next is None:
     return L
+
+  tail, _len = list_tail_len(L)
 
   L, tail = add_wardens(L, tail)
   partition(L, tail)
