@@ -1,5 +1,5 @@
 def hoares_partition(A, l, r):
-  x = A[r] # pivot
+  x = A[l] # pivot
   i = l - 1
   j = r + 1
 
@@ -9,7 +9,7 @@ def hoares_partition(A, l, r):
       i += 1
 
     j -= 1
-    while A[i] > x:
+    while A[j] > x:
       j -= 1
 
     if i >= j:
@@ -31,10 +31,10 @@ from random import randint, seed
 from time import time
 def test_sort():
   rr = (1, 10)
-  n = 10**1
+  n = 10**4
   m = 10
   sort_func = quick_sort
-  print_res = True
+  print_res = False
 
   for i in range(m):
     t = [randint(rr[0], rr[1]) for _ in range(n)]
