@@ -1,8 +1,8 @@
 def bin_search(A, x):
   n = len(A)
-  l = -1
-  r = n
-  while l < r:
+  l = 0
+  r = n - 1
+  while l <= r:
     c = (l+r)//2
     if A[c] < x:
       l = c + 1
@@ -18,4 +18,4 @@ def bin_search(A, x):
   return c
 
 
-print(bin_search([1, 3, 3, 3, 7], 7))
+print(bin_search([1, 3, 3, 7], 4))
