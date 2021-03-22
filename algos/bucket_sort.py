@@ -6,7 +6,7 @@
 # space complexity
 # worst: n
 
-# the algorithm assumes that values to be sorted lay in the [0, 1) range
+# the algorithm assumes that values to be sorted lay in the [0, 1) range and their distribution is uniform
 
 
 class Node:
