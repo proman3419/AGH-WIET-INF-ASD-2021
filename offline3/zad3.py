@@ -32,12 +32,12 @@ def magic_fives(A, l, r, k):
   # żeby indeks nie wyszedł poza tablicę oraz, żeby odpowiednio dobrać medianę w podciągu
   if n%5 != 0:
     insertion_sort(A, i, r)
-    m = (r-i+1)//2
+    m = l + (r-i+1)//2
     A[m_i], A[m] = A[m_i], A[m]
 
   # n//10 = n/5//2
   # median jest ceil(n/5), mediana median będzie środkowym elementem, dlatego //2
-  # dla parzystej ilości median raz będzie wybierana górna, raz dolna
+  # dla parzystej ilości median wybierana będzie górna
   return magic_fives(A, l, m_i, n//10)
 
 
