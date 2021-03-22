@@ -68,11 +68,11 @@ def sort_logn_unique_vals(A):
   for e in A:
     # log(log(n))
     res = bin_search(uniques, _n, e)
-    # log(n) razy
+    # log(n) razy (total)
     if res is None:
       insert(uniques, _n, e) # log(n)
       _n += 1
-    # n - log(n) razy
+    # n - log(n) razy (total)
     else:
       uniques[res].cnt += 1
 
