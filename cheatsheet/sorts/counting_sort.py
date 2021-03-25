@@ -1,5 +1,5 @@
 def counting_sort(A, _min, _max):
-  m = abs(_max - _min) + 1
+  m = _max - _min + 1
   n = len(A)
   O = [0]*m
 
@@ -14,4 +14,10 @@ def counting_sort(A, _min, _max):
     B[O[A[i]-_min]-1] = A[i]
     O[A[i]-_min] -= 1
 
-  return B
+  for i in range(n):
+    A[i] = B[i]
+
+  return A
+
+
+A = counting_sort(A, _min, _max)

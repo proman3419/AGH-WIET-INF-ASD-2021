@@ -28,3 +28,8 @@ def heap_sort(A):
     A[0], A[i] = A[i], A[0]
     n -= 1
     max_heapify(A, n, 0)
+
+  return A
+
+
+A = heap_sort(A)

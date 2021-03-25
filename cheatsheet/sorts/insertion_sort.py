@@ -9,3 +9,6 @@ def insertion_sort(A):
     A[j+1] = key
 
   return A
+
+
+A = insertion_sort(A)

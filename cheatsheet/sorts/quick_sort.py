@@ -22,3 +22,8 @@ def quick_sort(A, l, r):
     else:
       quick_sort(A, pi+1, r)
       r = pi - 1
+
+  return A
+
+
+A = quick_sort(A, l, n-1)

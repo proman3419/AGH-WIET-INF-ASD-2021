@@ -22,6 +22,8 @@ def build_min_heap(A, n):
   for i in range(last_parent, -1, -1):
     min_heapify(A, n, i)
 
+  return A
+
 
 def display(A):
   n = len(A)
@@ -36,3 +38,6 @@ def display(A):
       i += 1
     print()
   print()
+
+
+A = build_min_heap(A, n)

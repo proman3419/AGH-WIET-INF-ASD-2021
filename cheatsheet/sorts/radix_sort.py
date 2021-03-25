@@ -24,3 +24,8 @@ def radix_sort(A, _max):
   while _max//exp > 0:
     counting_sort(A, exp)
     exp *= 10
+
+  return A
+
+
+A = radix_sort(A, _max)

@@ -8,3 +8,6 @@ def selection_sort(A):
     A[i], A[min_i] = A[min_i], A[i]
 
   return A
+
+
+selection_sort(A)

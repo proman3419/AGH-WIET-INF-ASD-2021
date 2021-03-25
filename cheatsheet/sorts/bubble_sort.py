@@ -11,3 +11,6 @@ def bubble_sort(A):
       break
 
   return A
+
+
+bubble_sort(A)

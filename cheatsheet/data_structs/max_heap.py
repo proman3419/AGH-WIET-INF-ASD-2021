@@ -22,6 +22,8 @@ def build_max_heap(A, n):
   for i in range(last_parent, -1, -1):
     max_heapify(A, n, i)
 
+  return A
+
 
 def add_to_max_heap(A, val):
   A.append(val)
@@ -47,3 +49,6 @@ def display(A):
       i += 1
     print()
   print()
+
+
+A = build_max_heap(A, n)

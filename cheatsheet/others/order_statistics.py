@@ -50,9 +50,15 @@ def randomized_select(A, l, r, i):
     return randomized_select(A, pi+1, r, i-k)
 
 
+x = randomized_select(A, l, r, i)
+
+
 def median(A):
   n = len(A)
   if n%2 == 1:
     return randomized_select(A, 0, n-1, n//2)
   else:
     return (randomized_select(A, 0, n-1, n//2), randomized_select(A, 0, n-1, n//2+1))
+
+
+m = median(A)

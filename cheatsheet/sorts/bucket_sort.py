@@ -1,3 +1,6 @@
+from math import floor
+
+
 class Node:
   def __init__(self, val=None, next=None):
     self.val = val
@@ -18,7 +21,14 @@ def sort_add(head, val):
     new.next = curr
 
 
-def bucket_sort(A):
+def find_bucket(A, n, _min, _max, i):
+  _i = floor((A[i]-_min)/(_max-_min)*n)
+  if _i == n: _i -= 1
+  
+  return _i
+
+
+def bucket_sort(A, _min, _max):
   n = len(A)
   B = [0]*n
 
@@ -26,7 +36,7 @@ def bucket_sort(A):
     B[i] = Node()
 
   for i in range(n):
-    sort_add(B[int(n*A[i])], A[i])
+    sort_add(B[find_bucket(A, n, _min, _max, i)], A[i])
 
   i = 0
   for j in range(n):
@@ -35,3 +45,8 @@ def bucket_sort(A):
       A[i] = B[j].val
       B[j] = B[j].next
       i += 1
+
+  return A
+
+
+bucket_sort(A, _min, _max)

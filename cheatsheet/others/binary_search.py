@@ -18,4 +18,4 @@ def bin_search(A, x):
   return c
 
 
-print(bin_search([1, 3, 3, 7], 4))
+i = bin_search(A, x)
