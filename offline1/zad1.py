@@ -3,9 +3,6 @@ from math import inf
 from time import time
 
 
-
-
-
 def mergesort(T):
   def find_max(T):
     _max = T[0]
@@ -29,7 +26,7 @@ def mergesort(T):
     if n <= 1:
       return
 
-    # jeżeli mamy do posortowania dwie wartości to problem jest trywialny
+    # jezeli mamy do posortowania dwie wartosci to problem jest trywialny
     if n == 2:
       if T[l] > T[l+1]:
         T[l], T[l+1] = T[l+1], T[l]
@@ -39,32 +36,30 @@ def mergesort(T):
     ms(T, l, m)
     ms(T, m, r)
 
-    # wartości inf na końcach tablic są wartownikami, oznaczają koniec tablicy
-    # jeżeli inf jest niedozwolony można go zastąpić find_max(T) + 1
-    # najlepiej wywołać tą funkcję przed pierwszym wywołaniem ms i zapisać do zmiennej, żeby w każdym wywołaniu ms nie szukać jej na nowo
+    # wartosci inf na koncach tablic sa wartownikami, oznaczaja koniec tablicy
+    # jezeli inf jest niedozwolony mozna go zastapic find_max(T) + 1
+    # najlepiej wywołac ta funkcje przed pierwszym wywołaniem ms i zapisac do zmiennej, zeby w kazdym wywołaniu ms nie szukac jej na nowo
     L = T[l:m] + [inf]
     R = T[m:r] + [inf]
-    # nie wiem czy slicing jest dozwolony, jeżeli nie to można dwie powyższe linijki zastąpić tymi poniżej
-    # poniższa metoda jest wolniejsza
+    # nie wiem czy slicing jest dozwolony, jezeli nie to mozna dwie powyzsze linijki zastapic tymi ponizej
+    # ponizsza metoda jest wolniejsza
     #L = sublist(T, l, m)
     #R = sublist(T, m, r)
 
     i = j = 0
     for k in range(l, r):
-      # dzięki wartownikom nie trzeba sprawdzać czy wychodzi się poza tablice
-      # gdy dojdzie się do końca jednej tablicy poniższy if zapewni, że brane będą elementy z drugiej tablicy
+      # dzieki wartownikom nie trzeba sprawdzac czy wychodzi sie poza tablice
+      # gdy dojdzie sie do konca jednej tablicy ponizszy if zapewni, ze brane beda elementy z drugiej tablicy
       if L[i] < R[j]:
         T[k] = L[i]
         i += 1
       else:
         T[k] = R[j]
-        j += 1        
+        j += 1
 
   ms(T, 0, len(T))
 
   return T
-  
-  
   
 
 seed(42)
@@ -81,7 +76,7 @@ print("czas             :", stop-start)
 
 for i in range(len(T)-1):
   if T[i] > T[i+1]:
-    print("Błąd sortowania!")
+    print("Bład sortowania!")
     exit()
     
 print("OK")

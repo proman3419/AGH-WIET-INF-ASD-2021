@@ -114,47 +114,4 @@ def merge_sort(head):
   return l_w.next
 
 
-##########################################################################
-# random test sort linked list
-def list_to_array(A):
-  if A is None:
-    return []
-
-  res = []
-  while A is not None:
-    res.append(A.val)
-    A = A.next
-
-  return res
-
-
-from random import randint, seed
-from time import time
-def test_sort():
-  rr = (-10**3, 10**3)
-  n = 10**5
-  m = 10
-  sort_func = merge_sort
-  print_res = False
-
-  for i in range(m):
-    t = [randint(rr[0], rr[1]) for _ in range(n)]
-    expected_res = sorted(t)
-
-    if print_res: print('input:   ', t)
-    start = time()
-    t = list_to_array(sort_func(array_to_list(t)))
-    stop = time()
-    if print_res: print('output:  ', t)
-
-    res = 'INCORRECT'
-    if t == expected_res:
-      res = 'CORRECT'
-
-    print('result:  ', res)
-    print('time:    ', stop-start, '\n')
-
-    if res == 'INCORRECT':
-      break
-
-test_sort()
+head = merge_sort(head)

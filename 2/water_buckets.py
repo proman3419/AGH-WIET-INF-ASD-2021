@@ -64,12 +64,12 @@ def find_rects_cnt(rects, A):
   y = rects[0].P1.y
   _min, _max = min_max(rects)
 
-  # special case _max
+  # dodatkowy przypadek jezeli wypelnimy wszystkie
   _max_res = sum_below(rects, _max)
   if _max_res[0] <= A: return _max_res[1]
 
   # y < _max - 10**(-6)
-  # ^ loop condition don't know if needed
+  # ^ warunek dla petli ponizej, nw czy potrzebny
   while True:
     res = sum_below(rects, y)
 
@@ -95,7 +95,7 @@ def find_rects_cnt(rects, A):
 # 13 <= A < 16 => 3
 # A >= 16 => 5
 A = 12
-# assumed that the first point is the upper-left one
+# pierwszy punkt jest lewym gornym
 rects = [Rectangle(1, -1, 4, -2),
          Rectangle(1, 3, 2, 1),
          Rectangle(3, 5, 4, 1),

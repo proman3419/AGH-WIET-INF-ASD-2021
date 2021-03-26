@@ -34,7 +34,7 @@ def display(head):
 
 
 def reverse(head):
-  # omit the warden
+  # pomin wartownika
   curr = head.next
 
   if curr is None:

@@ -1,5 +1,5 @@
 def hoares_partition(A, l, r):
-  x = A[l] # pivot
+  x = A[l]
   i = l - 1
   j = r + 1
 
@@ -20,7 +20,7 @@ def hoares_partition(A, l, r):
 
 def quick_sort(A, l, r):
   if l < r:
-    pi = hoares_partition(A, l, r) # partition index
+    pi = hoares_partition(A, l, r)
     quick_sort(A, l, pi)
     quick_sort(A, pi+1, r)
 
