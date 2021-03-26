@@ -114,4 +114,5 @@ def merge_sort(head):
   return l_w.next
 
 
+head = None # bez wartownika
 head = merge_sort(head)

@@ -86,4 +86,5 @@ def quick_sort(L):
   return L
 
 
-quick_sort(L)
+L = None # bez wartownika
+L = quick_sort(L)

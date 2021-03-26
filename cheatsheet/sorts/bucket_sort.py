@@ -46,4 +46,4 @@ def bucket_sort(A, _min, _max):
   return A
 
 
-bucket_sort(A, _min, _max)
+A = bucket_sort(A, _min, _max)
