@@ -41,13 +41,12 @@ def randomized_select(A, l, r, i):
     return A[l]
 
   pi = randomized_partition(A, l, r)
-  k = pi - l + 1
-  if i == k:
+  if i == pi:
     return A[pi]
-  elif i < k:
+  elif i < pi:
     return randomized_select(A, l, pi-1, i)
   else:
-    return randomized_select(A, pi+1, r, i-k)
+    return randomized_select(A, pi+1, r, i)
 
 
 x = randomized_select(A, l, r, i)

@@ -1,5 +1,4 @@
-def counting_sort(A, exp):
-  n = len(A)
+def counting_sort(A, n, exp):
   O = [0]*10
 
   for i in range(n):
@@ -20,9 +19,10 @@ def counting_sort(A, exp):
 
 
 def radix_sort(A, _max):
+  n = len(A)
   exp = 1 # exp = 10^i, i to obecna cyfra
   while _max//exp > 0:
-    counting_sort(A, exp)
+    counting_sort(A, n, exp)
     exp *= 10
 
   return A

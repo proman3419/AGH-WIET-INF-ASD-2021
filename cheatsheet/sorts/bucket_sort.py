@@ -1,6 +1,3 @@
-from math import floor
-
-
 class Node:
   def __init__(self, val=None, next=None):
     self.val = val
@@ -22,7 +19,7 @@ def sort_add(head, val):
 
 
 def find_bucket(A, n, _min, _max, i):
-  _i = floor((A[i]-_min)/(_max-_min)*n)
+  _i = int((A[i]-_min)/(_max-_min)*n)
   if _i == n: _i -= 1
   
   return _i
