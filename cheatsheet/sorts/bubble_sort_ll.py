@@ -40,15 +40,6 @@ def swap(p, q, r):
   q.next = temp
 
 
-def get_ll_len(head):
-  _len = 0
-  while head is not None:
-    _len += 1
-    head = head.next
-
-  return _len
-
-
 def bubble_sort_ll(head):
   # jezeli lista jest pusta lub jednoelementowa to jest posortowana
   if head is None or head.next is None:
@@ -57,16 +48,17 @@ def bubble_sort_ll(head):
   warden = Node()
   warden.next = head
 
-  n = get_ll_len(head)
-
-  for i in range(n):
+  swp = True
+  while swp:
     p = warden
     q = warden.next
     r = q.next
+    swp = False
     while r is not None:
       if q.val > r.val:
         swap(p, q, r)
         q, r = r, q
+        swp = True
       p, q, r = p.next, q.next, r.next
 
   return warden.next
