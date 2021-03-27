@@ -4,6 +4,24 @@ class Node:
     self.next = next
 
 
+def add(head, val):
+  curr = head
+  while curr.next is not None:
+    curr = curr.next
+
+  curr.next = Node(val)
+
+
+def insert(head, val):
+  curr = head
+  if curr.next == None:
+    curr.next = Node(val)
+  else:
+    temp = curr.next
+    curr.next = Node(val)
+    curr.next.next = temp
+
+
 def array_to_list(A):
   head = Node()
   curr = head
