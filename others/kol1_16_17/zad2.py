@@ -25,15 +25,16 @@ def randomized_select(A, l, r, i):
     return randomized_select(A, pi+1, r, i)
 
 
+# O(3n)
 def SumBetween(T, _from, to, n):
   if n == 0:
     return 0
 
-  _from_val = randomized_select(T, 0, n-1, _from)
-  to_val = randomized_select(T, 0, n-1, to)
+  _from_val = randomized_select(T, 0, n-1, _from) # O(n) (oczekiwana zlozonosc)
+  to_val = randomized_select(T, 0, n-1, to) # O(n) (oczekiwana zlozonosc)
 
   _sum = 0
-  for i in range(n):
+  for i in range(n): # O(n)
     if _from_val <= T[i] <= to_val:
       _sum += T[i]
 

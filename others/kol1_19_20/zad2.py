@@ -25,14 +25,15 @@ def randomized_select(A, l, r, i):
     return randomized_select(A, pi+1, r, i)
 
 
+# O(3n)
 def section(T, p, q):
   n = len(T)
-  p_val = randomized_select(T, 0, n-1, p)
-  q_val = randomized_select(T, 0, n-1, q)
+  p_val = randomized_select(T, 0, n-1, p) # O(n) (oczekiwana zlozonosc)
+  q_val = randomized_select(T, 0, n-1, q) # O(n) (oczekiwana zlozonosc)
 
   res = [0]*(q-p+1)
   j = 0
-  for i in range(n):
+  for i in range(n): # O(n)
     if p_val <= T[i] <= q_val:
       res[j] = T[i]
       j += 1

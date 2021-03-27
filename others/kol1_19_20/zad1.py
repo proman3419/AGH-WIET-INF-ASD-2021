@@ -39,19 +39,20 @@ def radix_sort(A, n):
   counting_sort(A, n, 0)
 
 
+# O(nlogk + 10n + 2n + n) = O(13n + nlogk)
 def pretty_sort(T):
   n = len(T)
   digits = [0]*10
 
-  for i in range(n):
-    T[i] = cnt_digits(T[i], digits)
+  for i in range(n): # O(n)
+    T[i] = cnt_digits(T[i], digits) # O(logk) gdzie k jest max wartoscia w T
 
-    for j in range(10):
+    for j in range(10): # O(10)
       digits[j] = 0
 
-  radix_sort(T, n)
+  radix_sort(T, n) # O(2n)
 
-  for i in range(n):
+  for i in range(n): # O(n)
     T[i] = T[i][2]
 
 

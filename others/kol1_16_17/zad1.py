@@ -98,6 +98,7 @@ def min_max_ll(head):
   return (_min, _max)
 
 
+# O(2n)
 def Sort(list):
   list = list.next # usuwamy wartownika
 
@@ -105,8 +106,8 @@ def Sort(list):
   if list is None or list.next is None:
     return list
 
-  _min, _max = min_max_ll(list)
-  list = bucket_sort_ll(list, _min, _max)
+  _min, _max = min_max_ll(list) # O(n)
+  list = bucket_sort_ll(list, _min, _max) # O(n)
 
   return list
 
