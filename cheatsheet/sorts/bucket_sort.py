@@ -11,11 +11,11 @@ def insertion_sort(A):
   return A
 
 
-def find_bucket(A, n, _min, _max, i):
-  _i = int((A[i]-_min)/(_max-_min)*n)
-  if _i == n: _i -= 1
+def find_bucket(val, n, _min, _max):
+  i = int((val-_min)/(_max-_min)*n)
+  if i == n: i -= 1
   
-  return _i
+  return i
 
 
 def bucket_sort(A, _min, _max):
@@ -26,7 +26,7 @@ def bucket_sort(A, _min, _max):
     B[i] = []
 
   for i in range(n):
-    B[find_bucket(A, n, _min, _max, i)].append(A[i])
+    B[find_bucket(A[i], n, _min, _max)].append(A[i])
 
   for i in range(n):
     insertion_sort(B[i])

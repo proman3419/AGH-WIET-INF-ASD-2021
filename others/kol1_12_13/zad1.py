@@ -101,7 +101,7 @@ def partition(l, r):
     partition(r_pi, r)
 
 
-def quick_sort_ll(L):
+def QuickerSort(L):
   # jezeli lista jest pusta lub jednoelementowa to jest posortowana
   if L is None or L.next is None:
     return L

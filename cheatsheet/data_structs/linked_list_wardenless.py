@@ -17,6 +17,21 @@ def add(head, val):
   return head
 
 
+def insert(head, val):
+  if head is None:
+    head = Node(val)
+  else:
+    curr = head
+    if curr.next == None:
+      curr.next = Node(val)
+    else:
+      temp = curr.next
+      curr.next = Node(val)
+      curr.next.next = temp
+
+  return head
+
+
 def array_to_list(A):
   n = len(A)
   if n == 0:
