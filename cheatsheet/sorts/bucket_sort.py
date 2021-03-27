@@ -1,21 +1,14 @@
-class Node:
-  def __init__(self, val=None, next=None):
-    self.val = val
-    self.next = next
+def insertion_sort(A):
+  n = len(A)
+  for i in range(1, n):
+    key = A[i]
+    j = i - 1
+    while j >= 0 and A[j] > key:
+      A[j+1] = A[j]
+      j -= 1
+    A[j+1] = key
 
-
-def sort_add(head, val):
-  curr = head.next # pomin wartownika
-  if curr is None:
-    head.next = Node(val)
-  else:
-    prev = head
-    while curr is not None and curr.val < val:
-      prev, curr = curr, curr.next
-
-    new = Node(val)
-    prev.next = new
-    new.next = curr
+  return A
 
 
 def find_bucket(A, n, _min, _max, i):
@@ -30,17 +23,18 @@ def bucket_sort(A, _min, _max):
   B = [0]*n
 
   for i in range(n):
-    B[i] = Node()
+    B[i] = []
 
   for i in range(n):
-    sort_add(B[find_bucket(A, n, _min, _max, i)], A[i])
+    B[find_bucket(A, n, _min, _max, i)].append(A[i])
+
+  for i in range(n):
+    insertion_sort(B[i])
 
   i = 0
   for j in range(n):
-    B[j] = B[j].next # pomin wartownika
-    while B[j] is not None:
-      A[i] = B[j].val
-      B[j] = B[j].next
+    for k in range(len(B[j])):
+      A[i] = B[j][k]
       i += 1
 
   return A
