@@ -26,4 +26,5 @@ def quick_sort(A, l, r):
   return A
 
 
-A = quick_sort(A, l, n-1)
+A = [99, 22, 77, 14, 3, -8, -12, -16, -3, 0]
+print(quick_sort(A, 0, len(A)-1))

@@ -20,4 +20,5 @@ def counting_sort(A, _min, _max):
   return A
 
 
-A = counting_sort(A, _min, _max)
+A = [10, -2, 14, 7, 3, 8, 1]
+print(counting_sort(A, min(A), max(A)))

@@ -32,4 +32,4 @@ def heap_sort(A):
   return A
 
 
-A = heap_sort(A)
+print(heap_sort([11, -7, 8, 0, 9, 2, 1]))

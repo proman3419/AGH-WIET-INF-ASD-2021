@@ -10,4 +10,4 @@ def selection_sort(A):
   return A
 
 
-selection_sort(A)
+print(selection_sort([-2, 9, 3, 17, 4, -16, 5]))

@@ -46,4 +46,5 @@ def bucket_sort(A, _min, _max):
   return A
 
 
-A = bucket_sort(A, _min, _max)
+A = [0, 100, 20, 80, 30, 60, 40, 50, 50]
+print(bucket_sort(A, min(A), max(A)))

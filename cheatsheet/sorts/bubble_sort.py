@@ -13,4 +13,4 @@ def bubble_sort(A):
   return A
 
 
-bubble_sort(A)
+print(bubble_sort([15, -2, 1, 0, 6, 3]))

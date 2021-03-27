@@ -4,19 +4,6 @@ class Node:
     self.next = None
 
 
-def add(head, val):
-  if head is None:
-    head = Node(val)
-  else:
-    curr = head
-    while curr.next is not None:
-      curr = curr.next
-
-    curr.next = Node(val)
-
-  return head
-
-
 def array_to_list(A):
   n = len(A)
   if n == 0:
@@ -78,7 +65,7 @@ def find_series(curr):
   return (curr, _next)
 
 
-def merge_sort(head):
+def merge_sort_ll(head):
   l_w = Node() # lewy wartownik
   l_w.next = head
 
@@ -115,4 +102,5 @@ def merge_sort(head):
 
 
 head = None # bez wartownika
-head = merge_sort(head)
+head = array_to_list([13, 2, -9, -4, 0, -11, 14])
+display(merge_sort_ll(head))

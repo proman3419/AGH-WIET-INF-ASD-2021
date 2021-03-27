@@ -11,4 +11,4 @@ def insertion_sort(A):
   return A
 
 
-A = insertion_sort(A)
+print(insertion_sort([4, 12, 8, 3, -2, -5, 6]))

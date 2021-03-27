@@ -1,8 +1,37 @@
 class Node:
-  def __init__(self):
+  def __init__(self, val=None):
+    self.val = val
     self.next = None
-    self.value = None
-    
+
+
+def array_to_list(A):
+  n = len(A)
+  if n == 0:
+    return None
+
+  head = Node(A[0])
+  curr = head
+  for i in range(1, n):
+    curr.next = Node(A[i])
+    curr = curr.next
+
+  return head
+
+
+def display(head):
+  if head is None:
+    print('Empty')
+    return
+
+  curr = head
+  while curr is not None:
+    print(curr.val, end=' ')
+    curr = curr.next
+  print()
+
+
+##########################################################################
+
 
 def list_tail_len(L):
   if L is None:
@@ -47,12 +76,12 @@ def partition(l, r):
     return
 
   while j != r:
-    if j.value < l_pi.value:   # j < l_pi
+    if j.val < l_pi.val:   # j < l_pi
       i.next = j.next
       j.next = l.next
       l.next = j
       j = i.next
-    elif j.value > l_pi.value: # j > l_pi
+    elif j.val > l_pi.val: # j > l_pi
       i, j = i.next, j.next
     else:                      # j == l_pi
       # jezeli rozwazany element jest rowny lewemu pivotowi to wystarczy przesunac prawy pivot, i, j
@@ -72,7 +101,7 @@ def partition(l, r):
     partition(r_pi, r)
 
 
-def quick_sort(L):
+def quick_sort_ll(L):
   # jezeli lista jest pusta lub jednoelementowa to jest posortowana
   if L is None or L.next is None:
     return L
@@ -87,4 +116,5 @@ def quick_sort(L):
 
 
 L = None # bez wartownika
-L = quick_sort(L)
+L = array_to_list([7, 12, -2, 8, 9, -7, 15])
+display(quick_sort_ll(L))

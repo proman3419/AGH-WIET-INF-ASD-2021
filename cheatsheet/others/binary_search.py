@@ -18,4 +18,6 @@ def bin_search(A, x):
   return c
 
 
-i = bin_search(A, x)
+A = [1, 2, 7, 14, 23, 25]
+print(bin_search(A, 10))
+print(bin_search(A, 25))

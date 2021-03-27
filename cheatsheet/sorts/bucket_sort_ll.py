@@ -1,15 +1,36 @@
 class Node:
-  def __init__(self, val=None, next=None):
+  def __init__(self, val=None):
     self.val = val
-    self.next = next
+    self.next = None
+
+
+def array_to_list(A):
+  n = len(A)
+  if n == 0:
+    return None
+
+  head = Node(A[0])
+  curr = head
+  for i in range(1, n):
+    curr.next = Node(A[i])
+    curr = curr.next
+
+  return head
 
 
 def display(head):
+  if head is None:
+    print('Empty')
+    return
+
   curr = head
   while curr is not None:
     print(curr.val, end=' ')
     curr = curr.next
   print()
+
+
+##########################################################################
 
 
 def get_ll_len(head):
@@ -41,7 +62,7 @@ def find_bucket(val, n, _min, _max):
   return i
 
 
-def bucket_sort(head, _min, _max):
+def bucket_sort_ll(head, _min, _max):
   # jezeli lista jest pusta lub jednoelementowa to jest posortowana
   if head is None or head.next is None:
     return head
@@ -74,4 +95,6 @@ def bucket_sort(head, _min, _max):
 
 
 head = None # bez wartownika
-head = bucket_sort(head, _min, _max)
+A = [7, 2, -2, 4, -4, 10, 14]
+head = array_to_list(A)
+display(bucket_sort_ll(head, min(A), max(A)))

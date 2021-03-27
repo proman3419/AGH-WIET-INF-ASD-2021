@@ -33,4 +33,4 @@ def mergesort(A):
   return A
 
 
-A = mergesort(A)
+print(mergesort([4, -6, 1, 13, 9, 2, 20]))

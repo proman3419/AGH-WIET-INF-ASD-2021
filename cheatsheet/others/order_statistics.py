@@ -1,3 +1,6 @@
+A = [1, 6, 2, 3, 8, -2, -5, 0]
+
+
 def min_max(A):
   _min = _max = A[0]
   n = len(A)
@@ -22,6 +25,11 @@ def min_max(A):
   return (_min, _max)
 
 
+print(min_max(A))
+
+
+##########################################################################
+# randomized select
 def randomized_partition(A, l, r):
   x = A[r]
   i = l - 1
@@ -49,15 +57,17 @@ def randomized_select(A, l, r, i):
     return randomized_select(A, pi+1, r, i)
 
 
-x = randomized_select(A, l, r, i)
+print(randomized_select(A, 0, len(A)-1, 3))
 
 
+##########################################################################
+# median
 def median(A):
   n = len(A)
   if n%2 == 1:
     return randomized_select(A, 0, n-1, n//2)
   else:
-    return (randomized_select(A, 0, n-1, n//2), randomized_select(A, 0, n-1, n//2+1))
+    return (randomized_select(A, 0, n-1, n//2-1), randomized_select(A, 0, n-1, n//2))
 
 
-m = median(A)
+print(median(A))

@@ -51,4 +51,5 @@ def display(A):
   print()
 
 
-A = build_max_heap(A, n)
+A = [2, 6, 1, 0, 4, 9, 5]
+display(build_max_heap(A, len(A)))

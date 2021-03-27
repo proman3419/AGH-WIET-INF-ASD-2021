@@ -28,4 +28,5 @@ def radix_sort(A, _max):
   return A
 
 
-A = radix_sort(A, _max)
+A = [99, 100, 27, 14, 82, 70, 45, 14]
+print(radix_sort(A, max(A)))
