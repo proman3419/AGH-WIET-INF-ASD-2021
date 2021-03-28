@@ -18,22 +18,26 @@ def find_bucket(val, n, _min, _max):
   return i
 
 
+# 3n + n^2 -> O(n^2) - najgorszy przypadek
+# 4n -> O(n) - rozklad jednostajny
 def bucket_sort(A, _min, _max):
   n = len(A)
   B = [0]*n
 
-  for i in range(n):
+  for i in range(n): # O(n)
     B[i] = []
 
-  for i in range(n):
+  for i in range(n): # O(n)
     B[find_bucket(A[i], n, _min, _max)].append(A[i])
 
-  for i in range(n):
+  for i in range(n): # O(n)
     insertion_sort(B[i])
 
   i = 0
-  for j in range(n):
-    for k in range(len(B[j])):
+  # O(n^2) - najgorszy przypadek
+  # O(n) - rozklad jednostajny
+  for j in range(n): # O(n)
+    for k in range(len(B[j])): # O(len(B[j])) <= O(n)
       A[i] = B[j][k]
       i += 1
 

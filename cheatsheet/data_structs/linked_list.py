@@ -4,6 +4,7 @@ class Node:
     self.next = next
 
 
+# O(n)
 def add(head, val):
   curr = head
   while curr.next is not None:
@@ -12,6 +13,7 @@ def add(head, val):
   curr.next = Node(val)
 
 
+# O(1)
 def insert(head, val):
   curr = head
   if curr.next == None:
@@ -30,6 +32,17 @@ def array_to_list(A):
     curr = curr.next
 
   return head
+
+
+def list_to_array(head):
+  A = []
+  curr = head.next
+
+  while curr is not None:
+    A.append(curr.val)
+    curr = curr.next
+
+  return A
 
 
 def display(head):

@@ -1,9 +1,12 @@
 from math import inf
 
 
-def mergesort(A):
+# rekurencja wykona sie O(logn) razy
+# na kazdym etapie sortujemy lacznie n elementow, zatem:
+# O(nlogn)
+def merge_sort(A):
   def ms(A, l, r):
-    n = r - l
+    n = r - l + 1
     if n <= 1:
       return
 
@@ -13,14 +16,16 @@ def mergesort(A):
       return 
 
     m = (l+r)//2
-    ms(A, l, m)
-    ms(A, m, r)
+    ms(A, l, m) # rekurencja wykona sie O(logm) razy
+    ms(A, m, r) # rekurencja wykona sie O(logm) razy
 
-    L = A[l:m] + [inf] # inf -> wartownik
-    R = A[m:r] + [inf]
+    L = A[l:m] # O(m-l)
+    L.append(inf) # inf -> wartownik, zamortyzowany O(1)
+    R = A[m:r] # O(r-m)
+    R.append(inf) # zamortyzowany O(1)
 
     i = j = 0
-    for k in range(l, r):
+    for k in range(l, r): # O(r-l)
       if L[i] < R[j]:
         A[k] = L[i]
         i += 1
@@ -28,9 +33,9 @@ def mergesort(A):
         A[k] = R[j]
         j += 1        
 
-  ms(A, 0, len(A))
+  ms(A, 0, len(A)-1)
 
   return A
 
 
-print(mergesort([4, -6, 1, 13, 9, 2, 20]))
+print(merge_sort([4, -6, 1, 13, 9, 2, 20]))

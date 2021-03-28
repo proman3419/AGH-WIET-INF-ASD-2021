@@ -101,16 +101,20 @@ def partition(l, r):
     partition(r_pi, r)
 
 
+# zakladamy optymalny podzial za pomoca partition (co najmniej 1 elem w kazdym przedziale)
+# rekurencja lacznie wykonaja sie O(logn) razy
+# na kazdym etapie sortujemy lacznie n elementow, zatem:
+# n + 1 + nlogn + n = 2n + nlogn + 1 -> O(nlogn)
 def quick_sort_ll(L):
   # jezeli lista jest pusta lub jednoelementowa to jest posortowana
   if L is None or L.next is None:
     return L
 
-  tail, _len = list_tail_len(L)
+  tail, _len = list_tail_len(L) # O(n)
 
-  L, tail = add_wardens(L, tail)
-  partition(L, tail)
-  L = remove_wardens(L, tail)
+  L, tail = add_wardens(L, tail) # O(1)
+  partition(L, tail) # O(nlogn)
+  L = remove_wardens(L, tail) # O(n)
 
   return L
 

@@ -62,6 +62,8 @@ def find_bucket(val, n, _min, _max):
   return i
 
 
+# O(n + n^2 + n) = O(2n + n^2) <= O(n^2) - najgorszy przypadek
+# O(3n) <= O(n) - rozklad jednostajny
 def bucket_sort_ll(head, _min, _max):
   # jezeli lista jest pusta lub jednoelementowa to jest posortowana
   if head is None or head.next is None:
@@ -70,18 +72,20 @@ def bucket_sort_ll(head, _min, _max):
   n = get_ll_len(head)
   B = [0]*n
 
-  for i in range(n):
+  for i in range(n): # O(n)
     B[i] = Node()
 
+  # O(n^2) - najgorszy przypadek
+  # O(n) - rozklad jednostajny
   curr = head
-  for i in range(n):
+  for i in range(n): # O(n)
     _next = curr.next
     curr.next = None
-    sort_add(B[find_bucket(curr.val, n, _min, _max)], curr)
+    sort_add(B[find_bucket(curr.val, n, _min, _max)], curr) # O(len(b)) <= O(n), b - obecny bucket
     curr = _next
 
   head = curr = B[0]
-  for i in range(1, n):
+  for i in range(1, n): # O(n)
     if curr is None:
       continue
 

@@ -65,6 +65,9 @@ def find_series(curr):
   return (curr, _next)
 
 
+# glowna petla wykona sie O(logn) razy
+# na kazdym etapie sortujemy lacznie n elementow, zatem:
+# O(nlogn)
 def merge_sort_ll(head):
   l_w = Node() # lewy wartownik
   l_w.next = head

@@ -1,6 +1,7 @@
 from math import log, ceil
 
 
+# O(logn)
 def max_heapify(A, n, pi):
   max_i = pi
   l = 2*pi + 1
@@ -16,11 +17,12 @@ def max_heapify(A, n, pi):
     max_heapify(A, n, max_i)
 
 
+# O(nlogn)
 def build_max_heap(A, n): 
   last_parent = n//2 - 1
 
-  for i in range(last_parent, -1, -1):
-    max_heapify(A, n, i)
+  for i in range(last_parent, -1, -1): # O(n//2-1) <= O(n)
+    max_heapify(A, n, i) # O(logn)
 
   return A
 

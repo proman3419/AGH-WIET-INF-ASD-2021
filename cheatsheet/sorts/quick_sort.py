@@ -12,6 +12,10 @@ def partition(A, l, r):
   return i
 
 
+# zakladamy optymalny podzial za pomoca partition (co najmniej 1 elem w kazdym przedziale)
+# rekurencja i petla lacznie wykonaja sie O(logn) razy
+# na kazdym etapie sortujemy lacznie n elementow, zatem:
+# O(nlogn)
 def quick_sort(A, l, r):
   while l < r:
     pi = partition(A, l, r)
