@@ -47,11 +47,9 @@ def min_max(A, n):
   return (_min, _max)
 
 
-# O(n) + O(k(n+k)) = O(n + k(n+k))
-def sortString(A):
-  # n - len(A)
-  # k - max dlugosc stringu
-
+# k - max dlugosc stringu
+# n + n + k(n+k) = 2n + k(n+k) -> O(kn)
+def string_sort(A):
   n = len(A)
   if n <= 1:
     return A
@@ -62,7 +60,7 @@ def sortString(A):
   k = _max_len - _min_len + 1
   B = [[] for _ in range(k)] # B - buckets
   for i in range(n): # O(n)
-    B[len(A[i])-_min_len].append(A[i])
+    B[len(A[i])-_min_len].append(A[i]) # zamortyzowany O(1)
 
   # sortujemy od stringow o najdluzszej dlugosci
   radix_sort(B[-1], _max_len)
@@ -77,4 +75,4 @@ def sortString(A):
 
 A = ['aaaaaa', 'aab', 'ac', 'a', 'b', 'ab', 'zzzzzz', 'z', 'adsf']
 print(sorted(A))
-print(sortString(A))
+print(string_sort(A))
