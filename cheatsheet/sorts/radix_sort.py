@@ -21,7 +21,7 @@ def counting_sort(A, n, exp):
 
 
 # k = log(_max)
-# k(3n + b) -> O(kn)
+# k(3n + b) -> O(kn + kb)
 def radix_sort(A, _max):
   n = len(A)
   exp = 1 # exp = baza^i, i to obecna cyfra od tylu

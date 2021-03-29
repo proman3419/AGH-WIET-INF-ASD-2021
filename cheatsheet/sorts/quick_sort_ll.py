@@ -76,14 +76,14 @@ def partition(l, r):
     return
 
   while j != r:
-    if j.val < l_pi.val:   # j < l_pi
+    if j.val < l_pi.val:    # j < l_pi
       i.next = j.next
       j.next = l.next
       l.next = j
       j = i.next
-    elif j.val > l_pi.val: # j > l_pi
+    elif j.val > l_pi.val:  # j > l_pi
       i, j = i.next, j.next
-    else:                      # j == l_pi
+    else:                   # j == l_pi
       # jezeli rozwazany element jest rowny lewemu pivotowi to wystarczy przesunac prawy pivot, i, j
       # bez tego przypadku j.next wskazywalby na samego siebie dzieki linijce oznaczonej <-
       if l_pi.next == j:

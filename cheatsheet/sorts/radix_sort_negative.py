@@ -21,7 +21,7 @@ def counting_sort(A, n, exp):
 
 
 # k = log(_max-_min)
-# n + k(3n + b) + n = 2n + k(3n + b) -> O(kn)
+# n + k(3n + b) + n = 2n + k(3n + b) -> O(kn + kb)
 def radix_sort(A, _min, _max):
   n = len(A)
 

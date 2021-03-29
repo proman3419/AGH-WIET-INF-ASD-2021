@@ -94,6 +94,8 @@ def fixSortedList(L):
   return warden.next
 
 
+# zle dziala dla [50, 100, 55, 57]
+# trzeba robic na 3 wskaznikach i sprawdzac ktory node jest zly
 head = array_to_list([1, 2, 3, 4, -1, 5, 6])
 warden = Node()
 warden.next = head
