@@ -19,7 +19,7 @@ def lis(A, n):
     for j in range(i+1, n): # O(n)
       # jezeli:
       # - j-ty element moze stworzyc z najdluzszym podciagiem malejacym konczacym sie na A[i] podciag malejacy
-      # - nowy podciag bedzie dluzszy lub rowny obecnemu najdluzszemu podciagowi do i-tego indeksu
+      # - nowy podciag bedzie dluzszy lub rowny obecnemu najdluzszemu podciagowi konczacemu sie na A[i]
       if A[j] > A[i] and F[j] + 1 >= F[i]:
         # dopisujemy indeks elementu do podciagu
         P[i].append(j) # zamortyzowane O(1)
@@ -37,25 +37,27 @@ def lis(A, n):
   return (F, P, _max)
 
 
+# ciezko okreslic O
+def print_solution(A, P, _max, res, cnt, i, j):
+  # gdy doszlismy do konca podciagu to go printujemy, zwiekszamy licznik i go zwracamy
+  if j == _max:
+    for k in range(j):
+      print(res[k], end=' ')
+    print()
+
+    return cnt + 1
+
+  # dla wszystkich mozliwych kontynuacji podciagu
+  for k in range(len(P[i])):
+    res[j] = A[P[i][k]]
+    # kontynuujemy szukanie jego kolejnych elementow
+    cnt = print_solution(A, P, _max, res, cnt, P[i][k], j+1)
+
+  return cnt
+
+
 # conajmniej O(n^2)
 def printAllLIS(A):
-  def print_solution(A, P, _max, res, cnt, i, j):
-    # gdy doszlismy do konca podciagu to go printujemy, zwiekszamy licznik i go zwracamy
-    if j == _max:
-      for k in range(j):
-        print(res[k], end=' ')
-      print()
-
-      return cnt + 1
-
-    # dla wszystkich mozliwych kontynuacji podciagu
-    for k in range(len(P[i])):
-      res[j] = A[P[i][k]]
-      # kontynuujemy szukanie jego kolejnych elementow
-      cnt = print_solution(A, P, _max, res, cnt, P[i][k], j+1)
-
-    return cnt
-
   n = len(A)
   # jesli tablica jest pusta to konczymy
   if n == 0: return 0
@@ -73,7 +75,7 @@ def printAllLIS(A):
     if F[i] == _max:
       res[0] = A[i]
       # to printujemy go w odwrotnej kolejnosci otrzymujac podciag rosnacy
-      cnt = print_solution(A, P, _max, res, cnt, i, 1) # ciezko okreslic O
+      cnt += print_solution(A, P, _max, res, 0, i, 1) # ciezko okreslic O
   print()
 
   return cnt
