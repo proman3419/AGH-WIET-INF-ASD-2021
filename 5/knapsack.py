@@ -98,6 +98,7 @@ def knapsack2(P, W, max_w):
 
   # szukamy maksymalnego mozliwego zysku idac od maks zysku
   # jezeli waga sie zgadza to znalezlismy rozwiazanie
+  # rozwiazanie bedzie znajdowac sie w ostatnim wierszu (gdzie wszystkie przedmioty beda juz rozpatrzone)
   for p in range(max_p, -1, -1):
     if F[n-1][p] <= max_w:
       return (F, p, max_p)
