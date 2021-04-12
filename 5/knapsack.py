@@ -1,8 +1,8 @@
 from math import inf
 
 
-W = [4, 5, 12, 9, 1, 13, 5, 8, 7, 3, 6, 13, 23, 5, 34, 23, 12]
-P = [1, 2, 4, 5, 3, 4, 8, 4, 2, 1, 4, 10, 12, 4, 16, 19, 4]
+W = [4, 5, 12, 9, 10, 13, 5, 8, 7, 3, 6, 13, 23, 5, 34, 23, 12]
+P = [10, 2, 4, 5, 3, 4, 8, 4, 2, 10, 4, 10, 12, 4, 16, 19, 4]
 max_w = 40
 print_sol = [False, True]
 
@@ -62,11 +62,11 @@ def knapsack2(P, W, max_w):
   max_p = sum(P)
   n = len(W)
   if n == 0:
-    return (None, 0, -1, max_p)
+    return (None, 0, max_p)
 
   # tworzymy tablice, w ktorej:
   # wiersze - do ktorego przedmiotu juz rozwazylismy
-  # kolumny - jaki profit mamy
+  # kolumny - jaki profit mamy miec conajmniej
   # wartosc pola - minimalna waga dla danego profitu lub wiekszego
   F = [None]*n # O(n)
   for i in range(n): # O(n)
@@ -77,13 +77,13 @@ def knapsack2(P, W, max_w):
     F[i][0] = 0
 
   # dla pierwszego rzedu problem jest trywialny
-  for p in range(P[0]+1): # O(max_p+1-W[0]) <= O(max_p)
+  for p in range(1, P[0]+1): # O(max_p+1-W[0]) <= O(max_p)
     F[0][p] = W[0]
 
   for i in range(1, n): # O(n)
-    for p in range(max_p+1): # O(max_p)
+    for p in range(1, max_p+1): # O(max_p)
       # ustawiamy wage minimalna taka jak dla i-1 elementow
-      F[i][p] = F[i-1][p] 
+      F[i][p] = F[i-1][p]
 
       # jezeli aktualnie rozwazany profit jest mniejszy badz rowny aktualnemu zyskowi z elementu to
       # bierzemy minimalną wartość z aktualnego F[i][p] oraz z wagi aktualnego elementu
@@ -99,11 +99,10 @@ def knapsack2(P, W, max_w):
   # szukamy maksymalnego mozliwego zysku idac od maks zysku
   # jezeli waga sie zgadza to znalezlismy rozwiazanie
   for p in range(max_p, -1, -1):
-    for i in range(n):
-      if F[i][p] <= max_w:
-        return (F, p, i, max_p)
+    if F[n-1][p] <= max_w:
+      return (F, p, max_p)
 
-  return (None, 0, -1, max_p)
+  return (None, 0, max_p)
 
 
 def get_solution2(F, P, W, i, p):
@@ -123,8 +122,8 @@ def get_solution2(F, P, W, i, p):
 
 
 if print_sol[1]:
-  F, res, i, max_p = knapsack2(P, W, max_w)
+  F, res, max_p = knapsack2(P, W, max_w)
   print(res)
   if res != 0:
     # wywolujemy od elementu F[i][res], konczy on ciag, ktory jest rozwiazaniem
-    print(get_solution2(F, P, W, i, res))
+    print(get_solution2(F, P, W, len(W)-1, res))
