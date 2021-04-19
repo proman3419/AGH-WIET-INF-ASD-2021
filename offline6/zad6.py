@@ -8,6 +8,9 @@ def dist(p1, p2):
   return ((p1[1]-p2[1])**2 + (p1[2]-p2[2])**2)**(1/2)
 
 
+# zdecydowalem sie na zagniezdzone funkcje i zmienne nonlocal
+# dla zwiekszenia czytelnosci (nie trzeba przekazywac w kazdym wywolaniu
+# funkcji rekurencyjnych tablic)
 # O(n^2)
 def bitonicTSP( C ):
   n = len(C)
@@ -26,10 +29,9 @@ def bitonicTSP( C ):
 
   # generujemy tablice dystansow
   D = [[0 for _ in range(n)] for _ in range(n)] # O(n^2)
-  # porzebujemy tylko prawego, gornego trojkata poniewaz D[i][j] = D[j][i]
-  # oraz dla wszystkich rozpatrywanych przez nas sytuacji i <= j
+  # porzebujemy tylko prawego, gornego trojkata poniewaz dla wszystkich rozpatrywanych przez nas sytuacji i < j
   for i in range(n): # O(n)
-    for j in range(i, n): # O(n)
+    for j in range(i+1, n): # O(n)
       D[i][j] = dist(C[i], C[j])
 
   # F[i][j] - minimalny koszt sciezek 0 -> i, 0 -> j takich, ze lacznie te sciezki odwiedza kazde miasto ze zbioru {1, ..., j} dokladnie raz, i < j
@@ -41,6 +43,17 @@ def bitonicTSP( C ):
   # zadne inne miasto, dlatego mozemy wyrazic odleglosc jako zwykla euklidesowa
   F[0][1] = D[0][1]
 
+  # tablica miast przelomowych (czyli takich, na ktorych zmienia sie przynaleznosc miast do sciezki z jednej na druga).
+  # miasta pomiedzy dwoma miastami przelomowymi,
+  # (albo od poczatku do miasta przelomowego/od ostatniego miasta przelomowego do konca),
+  # naleza do tej samej sciezki.
+  # P[i] - indeks najblizszego miasta przelomowego dla sciezki konczacej sie w i, musi znajdowac sie przed miastem i.
+  # wystarczy zapamietywac dla i == j - 1 poniewaz wczesniej rozpatrzymy taki przypadek
+  # niz bedziemy musieli z tej informacji skorzystac.
+  # spamietywanie dla kazdego i, j jest nieefektywne
+  P = [-1]*n # O(n)
+
+  # funkcje ===================================================================
   # implementacja z wykladu z dodatkami koniecznymi do odzyskania sciezki rozwiazania
   # O(n)
   def tspf(i, j):
@@ -101,7 +114,6 @@ def bitonicTSP( C ):
     # P[i] przechowuje wczesniejsze miasto przelomowe, i jest tym, do ktorego dazylismy w obecnym wywolaniu
     return get_solution(l_len, s_len, P[i], i, not l_add)
 
-
   # O(n)
   def print_solution(l_len, s_len):
     nonlocal C, path
@@ -121,16 +133,7 @@ def bitonicTSP( C ):
       print(C[path[-i-1]][0], end=', ')
     # konczymy w miescie 0
     print(C[0][0])
-
-  # tablica miast przelomowych (czyli takich, na ktorych zmienia sie przynaleznosc miast do sciezki z jednej na druga).
-  # miasta pomiedzy dwoma miastami przelomowymi,
-  # (albo od poczatku do miasta przelomowego/od ostatniego miasta przelomowego do konca),
-  # naleza do tej samej sciezki.
-  # P[i] - indeks miasta przelomowego dla sciezki konczacej sie w i.
-  # wystarczy zapamietywac dla i == j - 1 poniewaz wczesniej rozpatrzymy taki przypadek
-  # niz bedziemy musieli z tej informacji skorzystac.
-  # spamietywanie dla kazdego i, j jest nieefektywne
-  P = [-1]*n # O(n)
+  # end funkcje ===============================================================
 
   min_res = inf
   min_i = -1
@@ -144,7 +147,7 @@ def bitonicTSP( C ):
       min_i = i
 
   # rozwiazanie (sciezka)
-  # bedzie sie skladalo z dwoch podsciezek, jednej krotszej i drugiej dluzszej
+  # bedzie sie skladalo z dwoch podsciezek, jednej krotszej i drugiej dluzszej.
   # rozne dlugosci wynikaja z faktu, ze jedna konczy sie w miescie i, druga w miescie j oraz i < j
   # z czego wynika, ze ta konczaca sie w j jest dluzsza.
   # dluzsza podsciezke bedziemy zapisywali od poczatku tablicy, krotsza od konca
@@ -159,6 +162,7 @@ def bitonicTSP( C ):
   # wyswietla rozwiazanie (sciezke)
   print_solution(l_len, s_len) # O(n)
 
+  # wyswietla rozwiazanie (dlugosc sciezki)
   print(min_res)
 
 
