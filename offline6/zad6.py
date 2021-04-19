@@ -1,13 +1,14 @@
 from math import *
 
 
-C = [["Wrocław", 0, 2]]
+C =  [["Wrocław", 0, 2], ["Warszawa", 4, 3], ["Gdańsk", 2, 4], ["Kraków", 3, 1]]
 
 
 def dist(p1, p2):
   return ((p1[1]-p2[1])**2 + (p1[2]-p2[2])**2)**(1/2)
 
 
+# O(n^2)
 def bitonicTSP( C ):
   n = len(C)
   # brak miast => dystans = 0, brak miast do wyswietlenia
@@ -24,7 +25,7 @@ def bitonicTSP( C ):
   C = sorted(C, key=lambda x: x[1])
 
   # generujemy tablice dystansow
-  D = [[0 for _ in range(n)] for _ in range(n)]
+  D = [[0 for _ in range(n)] for _ in range(n)] # O(n^2)
   # porzebujemy tylko prawego, gornego trojkata poniewaz D[i][j] = D[j][i]
   # oraz dla wszystkich rozpatrywanych przez nas sytuacji i <= j
   for i in range(n): # O(n)
@@ -129,7 +130,7 @@ def bitonicTSP( C ):
   # wystarczy zapamietywac dla i == j - 1 poniewaz wczesniej rozpatrzymy taki przypadek
   # niz bedziemy musieli z tej informacji skorzystac.
   # spamietywanie dla kazdego i, j jest nieefektywne
-  P = [-1]*n
+  P = [-1]*n # O(n)
 
   min_res = inf
   min_i = -1
