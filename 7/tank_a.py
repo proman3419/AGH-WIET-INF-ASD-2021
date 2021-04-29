@@ -1,45 +1,58 @@
+# algorytm
+# za kazdym razem jedziemy do najbardziej oddalonej stacji w kierunku t
+
+
+# dowod
+# zal, ze istnieje taka stacja i, ze wybierajac ja zmniejszymy ilosc skokow
+# j, k - stacje, ktore sa w sciezce
+# 0 < j < i < k
+
+# znajdujemy sie na stacji j, wybieramy stacje i na nastepna zamiast k.
+# mamy wiec wiekszy dystans do pokonania o k - i i taka sama ilosc skokow.
+# oznacza to, ze wybor takiego i nie jest optymalny.
+# nie mozemy wybrac i > k poniewaz nie starczy nam paliwa na dojechanie z j do takiego i
+
+
 # obliczyc minimalna ilosc tankowan, zeby dojechac do t
 def tank_a(L, S, P, n, t):
-  # jezeli mamy wiecej paliwa niz potrzebujemy lub idealnie na dotarcie to nie musimy tankowac
-  if L >= t:
-    return (0, [0, t])
-
-  pos = 0 # obecna pozycja
-  next_s = 0 # nastepna stacja do odwiedzenia
+  pos = -1
   cnt = 0
+  curr = (0, 0)
   path = []
+  while True:
+    path.append(curr[0])
 
-  # dopoki nie dojedziemy do ostatniej stacji lub nie osiagniemy celu
-  while next_s != n and pos < t:
-    curr_s = next_s
-    # szukamy nastepnej, najdalszej stacji, do ktorej mozemy dojechac
-    while curr_s < n-1 and S[curr_s+1] - pos <= L:
-      curr_s += 1
+    # jezeli mozna dojechac z obecnej stacji do celu
+    if t - curr[0] <= L:
+      path.append(t)
+      return (cnt + 1, path)
 
-    # jezeli mozemy do niej dojechac to do niej jedziemy
-    if S[curr_s] - pos <= L:
-      pos = S[curr_s]
-      cnt += 1
-      next_s = curr_s + 1
-      path.append(S[curr_s])
-    # jezeli nie to nie ma sensu rozpatrywac nastepnych stacji
-    else:
-      break
+    # jezeli rozwazylismy wszystkie stacje i nie moglismy dojechac do celu
+    if pos + 1 >= n:
+      return (-1, None)
+        
+    pos += 1
+    best = A[pos]
+    # nie da sie dojechac do nastepnej stacji
+    if best[0] - curr[0] > L:
+      return (-1, None)
 
-  # na tym etapie albo dojechalismy do ostatniej stacji i patrzymy, czy mozemy z niej dojechac do celu majac pelen bak
-  # albo (pos >= t) <=> (t - pos <= 0 <= L)
-  if t - pos <= L:
-    path.append(t)
-    return (cnt, path)
-  else:
-    return (-1, None)
+    i = pos + 1
+    while i < n and A[i][0] <= curr[0] + L:
+      pos = i
+      i += 1
+
+    # jedziemy do nastepnej stacji
+    curr = A[pos]
+    cnt += 1
 
 
 # zakladam, ze stacje sa w posortowanej kolejnosci
 S = [2, 7, 12, 15, 20] # odleglosci stacji od punktu 0
 P = [4, 3, 10, 1, 4] # koszty paliw na poszczegolnych stacjach
 n = len(S) # ilosc stacji
-L = 100 # pojemnosc baku
-t = 50 # pole, do ktorego chcemy dojechac
+L = 10 # pojemnosc baku
+t = 23 # pole, do ktorego chcemy dojechac
+A = list(zip(S, P)) # A[i][0] = S[i], A[i][1] = P[i]
 
 print(tank_a(L, S, P, n, t))
