@@ -21,7 +21,7 @@
 # z 1) i 2) nie istnieje takie i, ze koszt calkowity sciezki bylby mniejszy
 
 
-# obliczyc minimalny koszt tankowan, zeby dojechac do t, na kazdej stacji mozna tankowac ile sie chce
+# obliczyc minimalny koszt tankowan, zeby dojechac do t, na kazdej stacji mozna tankowac tylko do pelna
 def tank_b1(L, A, n, t):
   l = L # obecny stan paliwa
   pos = -1
