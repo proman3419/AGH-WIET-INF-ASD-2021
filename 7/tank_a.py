@@ -19,6 +19,7 @@ def tank_a(L, S, P, n, t):
   cnt = 0
   curr = (0, 0)
   path = []
+  
   while True:
     path.append(curr[0])
 

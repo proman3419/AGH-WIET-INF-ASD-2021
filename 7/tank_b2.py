@@ -32,16 +32,15 @@ def tank_b1(L, A, n, t):
   while True:
     path.append(curr[0])
 
-    # jezeli mozna dojechac z obecnej stacji do celu przy obecnym stanie paliwa
     if t - curr[0] <= l:
       #print(f'mozna dojechac bez dotankowania')
       path.append(t)
       return (cost, path)
     # jezeli mozna dotankowujac
     elif t - curr[0] <= L:
-      #print(f'mozna dojechac dotankowujac, dodatkowy koszt: {curr[1]*(t-curr[0])}')
+      #print(f'mozna dojechac dotankowujac, dodatkowy koszt: {curr[1]*(L-l)}')
       path.append(t)
-      return (cost + curr[1]*(t-curr[0]), path)
+      return (cost + curr[1]*(L-l), path)
 
     # jezeli rozwazylismy wszystkie stacje i nie moglismy dojechac do celu
     if pos + 1 >= n:
@@ -61,18 +60,17 @@ def tank_b1(L, A, n, t):
         pos = i
       i += 1
 
-    # jezeli na obecnej stacji jest tansze paliwo niz nastepnej najtanszej to tankujemy tutaj do pelna
+    # jezeli na obecnej stacji jest tansze paliwo niz nastepnej najtanszej to tankujemy
     if curr[1] < best[1]:
-      #print(f'tankujemy do pelna, dotankowano: {L - l}, dodatkowy koszt: {(L - l) * curr[1]}')
+      #print(f'dotankowano: {L - l}, dodatkowy koszt: {(L - l) * curr[1]}')
       cost += (L - l) * curr[1]
       l = L
 
     # jezeli nie mamy wystarczajaco paliwa, zeby dojechac do nastepnej stacji to tankujemy
-    l_after = l - (best[0] - curr[0])
-    if l_after < 0:
-      #print(f'deficyt: {abs(l_after)}, dodatkowy koszt: {abs(l_after) * curr[1]}')
-      cost += abs(l_after) * curr[1]
-      l = best[0] - curr[0]
+    if l < best[0] - curr[0]:
+      #print(f'dotankowano: {L - l}, dodatkowy koszt: {(L - l) * curr[1]}')
+      cost += (L - l) * curr[1]
+      l = L
 
     # jedziemy do nastepnej stacji
     l -= best[0] - curr[0]
@@ -88,3 +86,5 @@ t = 23 # pole, do ktorego chcemy dojechac
 A = list(zip(S, P)) # A[i][0] = S[i], A[i][1] = P[i]
 
 print(tank_b1(L, A, n, t))
+
+# opis algorytmu i dowod to kopiuj wklej z b1, moze kiedys napisze dla b2
