@@ -15,6 +15,7 @@
 # 'wracanie sie'
 
 
+# O(n)
 def dists_sum(A):
   n = len(A)
 
