@@ -1,7 +1,7 @@
 from queue import Queue
 
 
-def bfs(graph, s):
+def bfs_nl(graph, s):
   queue = Queue()
   visited = [False]*len(graph)
 
@@ -27,4 +27,4 @@ graph = [[1, 2],
          [6],
          [6]]
          
-bfs(graph, 2)
+bfs_nl(graph, 2)

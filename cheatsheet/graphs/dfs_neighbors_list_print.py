@@ -1,4 +1,4 @@
-def dfs(graph, s):
+def dfs_nl(graph, s):
   visited = [False]*len(graph)
 
   def dfs_visit(u):
@@ -25,4 +25,4 @@ graph = [[1, 2],
          [7],
          [7]]
 
-dfs(graph, 5)
+dfs_nl(graph, 0)
