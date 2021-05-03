@@ -1,5 +1,5 @@
 def find_lcs(A, B, n, m):
-  # F - najdluzszy wspolny podciag do i-tego indeksu w A oraz j-tego w B
+  # F[i][j] - najdluzszy wspolny podciag do i-tego indeksu w A oraz j-tego w B
   F = [[0 for _ in range(m+1)] for _ in range(n+1)]
 
   for i in range(1, n+1):
