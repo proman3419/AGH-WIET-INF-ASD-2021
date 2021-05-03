@@ -1,17 +1,3 @@
-def dfs(graph, s):
-  visited = [False]*len(graph)
-
-  def dfs_visit(u):
-    nonlocal graph, visited
-
-    visited[u] = True
-    for v in graph[u]:
-      if not visited[v]:
-        dfs_visit(v)
-
-  dfs_visit(s)
-
-
 def captain(M, T):
   n = len(M[0])
   m = len(M)

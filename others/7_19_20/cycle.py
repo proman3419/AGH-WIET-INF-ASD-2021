@@ -1,7 +1,7 @@
 from queue import Queue
 
 
-def bfs(graph, s):
+def has_cycle(graph, s):
   n = len(graph)
   queue = Queue()
   visited = [False]*n
@@ -34,4 +34,4 @@ graph = [[1, 2],
          [0, 2],
          [1, 0]]
 
-print(bfs(graph, 0))
+print(has_cycle(graph, 0))
