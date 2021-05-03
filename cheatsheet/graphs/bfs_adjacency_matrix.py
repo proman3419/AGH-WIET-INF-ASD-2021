@@ -2,8 +2,9 @@ from queue import Queue
 
 
 def bfs_am(graph, s):
+  n = len(graph)
   queue = Queue()
-  visited = [False]*len(graph)
+  visited = [False]*n
 
   queue.put(s)
   visited[s] = True
