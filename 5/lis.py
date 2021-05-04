@@ -88,7 +88,9 @@ def lis2(A):
 
 
 A = [1, 2, 3, -3, -2, 1]
+
 res = lis(A)
-print(res)
-print(get_solution(A, res[2], res[0]))
+sol = get_solution(A, res[2], res[0])
+print(f'{sol}\n{len(sol)}')
+
 #print(lis2(A))
