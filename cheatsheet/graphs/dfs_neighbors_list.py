@@ -1,14 +1,21 @@
 def dfs_nl(graph, s):
   visited = [False]*len(graph)
+  time = 0
 
   def dfs_visit(u):
-    nonlocal graph, visited
+    nonlocal graph, visited, time
+
+    time += 1 # czas odwiedzenia
 
     visited[u] = True
     for v in graph[u]:
       if not visited[v]:
+        #print(f'odwiedz: {v}')
         dfs_visit(v)
 
+    time += 1 # czas przetworzenia
+
+  #print(f'odwiedz: {s}')
   dfs_visit(s)
 
 
