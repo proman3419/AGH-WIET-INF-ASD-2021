@@ -1,4 +1,4 @@
-from queue import Queue
+from collections import deque
 
 
 class Vertex:
@@ -29,14 +29,14 @@ def display_graph(graph):
 
 def bfs_oop(graph, s):
   n = len(graph)
-  queue = Queue()
+  queue = deque()
 
   graph[s].distance = 0
   graph[s].visited = True
-  queue.put(s)
+  queue.append(s)
 
-  while not queue.empty():
-    u = queue.get()
+  while queue:
+    u = queue.popleft()
 
     # for v in range(n):
     #   if graph[u].neighbors[v] == 1 and not graph[v].visited:
@@ -45,7 +45,7 @@ def bfs_oop(graph, s):
         graph[v].visited = True
         graph[v].distance = graph[u].distance + 1
         graph[v].parent = u
-        queue.put(v)
+        queue.append(v)
 
 
 graph = [[1, 2],
