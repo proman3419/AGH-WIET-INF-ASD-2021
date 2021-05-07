@@ -9,7 +9,6 @@ class Vertex:
     self.process_time = -1
     self.scc = -1
     
-
   def display(self):
     print(f'vertex {self.id} ================================================')
     print(f'neighbors: {self.neighbors}')
@@ -20,10 +19,6 @@ class Vertex:
     print(f'process_time: {self.process_time}')
     print(f'scc: {self.scc}')
     print()
-
-
-  def __lt__(self, other):
-    return self.process_time > other.process_time
     
 
 def display_graph(graph):

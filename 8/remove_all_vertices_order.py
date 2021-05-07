@@ -17,14 +17,14 @@ class Vertex:
     print(f'visit_time: {self.visit_time}')
     print(f'process_time: {self.process_time}')
     print()
-    
+
 
 def display_graph(graph):
   for i in range(len(graph)):
     graph[i].display()
 
 
-def dfs_oop(graph):
+def remove_all_vertices_order_util(graph):
   time = 0
 
   def dfs_visit(u):
@@ -35,8 +35,6 @@ def dfs_oop(graph):
     graph[u].visit_time = time
     graph[u].visited = True
 
-    # for v in range(n):
-    #   if graph[u].neighbors[v] == 1 and not graph[v].visited:
     for v in graph[u].neighbors:
       if not graph[v].visited:
         graph[v].parent = u
@@ -51,6 +49,16 @@ def dfs_oop(graph):
       dfs_visit(u)
 
 
+def remove_all_vertices_order(graph):
+  remove_all_vertices_order_util(graph)
+  
+  graph.sort(key=lambda x: x.process_time)
+  
+  print('order:', end=' ')
+  for v in graph:
+    print(f'{v.id}', end=' ')
+
+
 graph = [[1, 2],
          [0, 3],
          [0, 3, 4],
@@ -62,18 +70,6 @@ graph = [[1, 2],
          [7],
          [7]]
 
-# graph = [[0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
-#          [1, 0, 0, 1, 0, 0, 0, 0, 0, 0],
-#          [1, 0, 0, 1, 1, 0, 0, 0, 0, 0],
-#          [0, 1, 1, 0, 0, 1, 0, 0, 0, 0],
-#          [0, 0, 1, 0, 0, 0, 1, 0, 0, 0],
-#          [0, 0, 0, 1, 0, 0, 0, 1, 0, 0],
-#          [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-#          [0, 0, 0, 0, 0, 1, 0, 0, 1, 1],
-#          [0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
-#          [0, 0, 0, 0, 0, 0, 0, 1, 0, 0]]
-
 graph = [Vertex(graph[i], i) for i in range(len(graph))]
 
-dfs_oop(graph)
-display_graph(graph)
+remove_all_vertices_order(graph)

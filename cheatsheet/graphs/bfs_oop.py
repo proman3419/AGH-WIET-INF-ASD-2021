@@ -10,7 +10,6 @@ class Vertex:
     self.distance = -1
     #self.visit_time = -1
     #self.process_time = -1
-    
 
   def display(self):
     print(f'vertex {self.id} ================================================')

@@ -8,7 +8,6 @@ class Vertex:
     self.visit_time = -1
     self.process_time = -1
     
-
   def display(self):
     print(f'vertex {self.id} ================================================')
     print(f'neighbors: {self.neighbors}')
