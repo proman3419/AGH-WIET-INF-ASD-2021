@@ -1,17 +1,17 @@
-from queue import Queue
+from collections import deque
 
 
 def bfs(graph, s):
   n = len(graph)
-  queue = Queue()
+  queue = deque()
   visited = [False]*len(graph)
 
   # print(f'odwiedz: {s}\n')
-  queue.put(s)
+  queue.append(s)
   visited[s] = True
 
-  while not queue.empty():
-    u = queue.get()
+  while queue:
+    u = queue.popleft()
     # print(f'rodzic: {u}')
     # for v in range(n):     
     #   if graph[u][v] == 1 and not visited[v]:
@@ -19,7 +19,7 @@ def bfs(graph, s):
       if not visited[v]:
         # print(f'odwiedz: {v}')
         visited[v] = True
-        queue.put(v)
+        queue.append(v)
     # print()
 
 
@@ -44,5 +44,5 @@ graph = [[1, 2],
 #          [0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
 #          [0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
 #          [0, 0, 0, 0, 0, 0, 1, 0, 0, 0]]
-         
+
 bfs(graph, 2)
