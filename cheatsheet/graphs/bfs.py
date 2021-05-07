@@ -4,7 +4,7 @@ from collections import deque
 def bfs(graph, s):
   n = len(graph)
   queue = deque()
-  visited = [False]*len(graph)
+  visited = [False]*n
 
   # print(f'odwiedz: {s}\n')
   queue.append(s)
