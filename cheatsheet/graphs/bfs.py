@@ -5,10 +5,13 @@ def bfs(graph, s):
   n = len(graph)
   queue = deque()
   visited = [False]*n
+  # parents = [None]*n
+  # distances = [-1]*n
 
   # print(f'odwiedz: {s}\n')
-  queue.append(s)
+  # distances[s] = 0
   visited[s] = True
+  queue.append(s)
 
   while queue:
     u = queue.popleft()
@@ -18,6 +21,8 @@ def bfs(graph, s):
     for v in graph[u]:
       if not visited[v]:
         # print(f'odwiedz: {v}')
+        # parents[v] = u
+        # distances[v] = distances[u] + 1
         visited[v] = True
         queue.append(v)
     # print()
@@ -45,4 +50,4 @@ graph = [[1, 2],
 #          [0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
 #          [0, 0, 0, 0, 0, 0, 1, 0, 0, 0]]
 
-bfs(graph, 2)
+bfs(graph, 0)
