@@ -66,19 +66,20 @@ def scc(graph):
   scc_util(graph)
 
   # sortujemy malejaco po czasie przetworzenia
-  graph = sorted(graph)
+  # tworzymy kopie wierzcholkow zawierajaca (id, process_time)
+  # sortujac po oryginale reprezentacja macierzowa stracilaby na znaczeniu
+  to_sort = [(v.id, v.process_time) for v in graph]
+  to_sort.sort(key=lambda x: x[1], reverse=True)
 
   # resetujemy flagi odwiedzenia
   for i in range(len(graph)):
     graph[i].visited = False
 
-  display_graph(graph)
-
   scc_id = 0
   # ponowne wykonanie dfs po grafie z odwroconymi krawedziami
-  for i in range(len(graph)):
-    if not graph[i].visited:
-      scc_util_reverse(graph, i, scc_id)
+  for e in to_sort:
+    if not graph[e[0]].visited:
+      scc_util_reverse(graph, e[0], scc_id)
       scc_id += 1
 
 
