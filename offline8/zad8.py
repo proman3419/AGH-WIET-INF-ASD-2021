@@ -68,11 +68,15 @@ def euler( G ):
     for j in range(n): # O(n)
       degrees[i] += G[i][j]
 
-    # jezeli ktorys z wierzcholkow nie posiada parzystego stopnia to graf nie posiada cyklu Eulera      
-    if degrees[i]%2 == 1:
+    # jezeli ktorys z wierzcholkow nie posiada parzystego stopnia  lub
+    # graf nie jest spojny
+    # to graf nie posiada cyklu Eulera
+    if degrees[i]%2 == 1 or degrees[i] == 0:
       return None
 
   cycle = dfs(G, degrees) # O(n^2)
+
+  # print(cycle)
 
   return cycle
   
@@ -97,6 +101,12 @@ G = [[0,1,1,0,0,0],
 
 # [0, 4, 5, 3, 4, 2, 0, 3, 1, 0]
 # G = [[0, 1, 1, 1, 1, 0], [1, 0, 0, 1, 0, 0], [1, 0, 0, 0, 1, 0], [1, 1, 0, 0, 1, 1], [1, 0, 1, 1, 0, 1], [0, 0, 0, 1, 1, 0]]
+
+# None
+# G = [[0, 1, 1, 0], [1, 0, 1, 0], [1, 1, 0, 0], [0, 0, 0, 0]]
+
+# None
+# G = []
 # end testy ===================================================================
 
 GG = deepcopy( G )
