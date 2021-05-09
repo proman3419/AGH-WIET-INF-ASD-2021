@@ -17,6 +17,7 @@ def dfs(graph, degrees):
   cycle = []
 
   def dfs_visit(u):
+    # uzywam zmiennych nonlocal dla przejrzystosci kodu
     nonlocal graph, n, degrees, visited, last_considered, cycle
 
     for v in range(last_considered[u]+1, n):
@@ -27,7 +28,7 @@ def dfs(graph, degrees):
 
       # jezeli krawedz istnieje i nie zostala odwiedzona
       if graph[u][v] == 1 and visited[u][v] == 0:
-        # zaznaczamy, ze odwiedzilismy ja
+        # zaznaczamy, ze ja odwiedzilismy
         visited[u][v] = visited[v][u] = 1
         # dla obu wierzcholkow stopien zmniejszy sie o 1 bo nie bedziemy juz rozpatrywali krawedzi u <-> v
         degrees[u] -= 1
@@ -40,8 +41,8 @@ def dfs(graph, degrees):
       cycle.append(u) # zamortyzowane O(1)
 
   # na tym etapie pewnym jest, ze graf posiada cykl Eulera (przypadek przeciwny odrzucilismy w glownej funkcji).
-  # wystarczy wywolac dfsa z jednego wierzcholka, poniewaz nie ma znaczenia
-  # w ktorym miejscu cyklu zaczniemy i tak odwiedzimy wszystkie krawedzie.
+  # wystarczy wywolac dfs_visit() z jednego wierzcholka, poniewaz nie ma znaczenia,
+  # w ktorym miejscu cyklu zaczniemy, i tak odwiedzimy wszystkie krawedzie
 
   # dfs_visit(0) zakonczy sie kiedy odwiedzone zostana wszystkie krawedzie.
   # dla kazdego wierzcholka (n) sprawdzimy wszystkie mozliwe krawedzie (n - 1).
@@ -68,8 +69,8 @@ def euler( G ):
     for j in range(n): # O(n)
       degrees[i] += G[i][j]
 
-    # jezeli ktorys z wierzcholkow nie posiada parzystego stopnia  lub
-    # graf nie jest spojny
+    # jezeli ktorys z wierzcholkow nie posiada parzystego stopnia
+    # lub graf nie jest spojny,
     # to graf nie posiada cyklu Eulera
     if degrees[i]%2 == 1 or degrees[i] == 0:
       return None
@@ -101,6 +102,9 @@ G = [[0,1,1,0,0,0],
 
 # [0, 4, 5, 3, 4, 2, 0, 3, 1, 0]
 # G = [[0, 1, 1, 1, 1, 0], [1, 0, 0, 1, 0, 0], [1, 0, 0, 0, 1, 0], [1, 1, 0, 0, 1, 1], [1, 0, 1, 1, 0, 1], [0, 0, 0, 1, 1, 0]]
+
+# [0, 4, 5, 2, 4, 1, 5, 3, 2, 1, 0]
+# G = [[0, 1, 0, 0, 1, 0], [1, 0, 1, 0, 1, 1], [0, 1, 0, 1, 1, 1], [0, 0, 1, 0, 0, 1], [1, 1, 1, 0, 0, 1], [0, 1, 1, 1, 1, 0]]
 
 # None
 # G = [[0, 1, 1, 0], [1, 0, 1, 0], [1, 1, 0, 0], [0, 0, 0, 0]]

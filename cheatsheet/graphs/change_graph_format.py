@@ -33,6 +33,8 @@ graph = [[1, 4],
          [10],
          [8]]
 
+
+
 print(nl_to_am(graph))
 #print(am_to_nl(graph))
 #print(am_to_nl(nl_to_am(graph)))

@@ -8,19 +8,19 @@ def bfs(graph, s):
   # parents = [None]*n
   # distances = [-1]*n
 
-  # print(f'odwiedz: {s}\n')
+  # print(f'visit: {s}\n')
   # distances[s] = 0
   visited[s] = True
   queue.append(s)
 
   while queue:
     u = queue.popleft()
-    # print(f'rodzic: {u}')
+    # print(f'parent: {u}')
     # for v in range(n):     
     #   if graph[u][v] == 1 and not visited[v]:
     for v in graph[u]:
       if not visited[v]:
-        # print(f'odwiedz: {v}')
+        # print(f'visit: {v}')
         # parents[v] = u
         # distances[v] = distances[u] + 1
         visited[v] = True
