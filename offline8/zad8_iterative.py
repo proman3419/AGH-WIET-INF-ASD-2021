@@ -110,16 +110,16 @@ def check_if_connected(graph):
 def check_if_has_euler(graph):
   # pusty graf
   if len(graph) == 0:
-    # print('empty')
+    print('empty')
     return False
 
   # jezeli graf nie ma wszystkich wierzcholkow parzystego stopnia
   if not check_if_even_degrees(graph): # O(n^2)
-    # print('not all degrees are even')
+    print('not all degrees are even')
     return False
   # lub nie jest spojny
   if not check_if_connected(graph): # O(n^2)
-    # print('not connected')
+    print('not connected')
     return False
   # to nie posiada cyklu Eulera
 
@@ -147,6 +147,35 @@ G = [[0,1,1,0,0,0],
      [0,1,0,0,0,1],
      [0,0,1,0,0,1],
      [0,1,1,1,1,0]]
+
+# testy =======================================================================
+# [0, 5, 4, 1, 5, 2, 0, 4, 3, 1, 0]
+# G = [[0, 1, 1, 0, 1, 1], [1, 0, 0, 1, 1, 1], [1, 0, 0, 0, 0, 1], [0, 1, 0, 0, 1, 0], [1, 1, 0, 1, 0, 1], [1, 1, 1, 0, 1, 0]]
+
+# [0, 4, 5, 6, 2, 5, 1, 6, 7, 3, 2, 1, 0]
+# G = [[0, 1, 0, 0, 1, 0, 0, 0], [1, 0, 1, 0, 0, 1, 1, 0], [0, 1, 0, 1, 0, 1, 1, 0], [0, 0, 1, 0, 0, 0, 0, 1], [1, 0, 0, 0, 0, 1, 0, 0], [0, 1, 1, 0, 1, 0, 1, 0], [0, 1, 1, 0, 0, 1, 0, 1], [0, 0, 0, 1, 0, 0, 1, 0]]
+
+# [0, 4, 5, 3, 4, 2, 0, 3, 1, 0]
+# G = [[0, 1, 1, 1, 1, 0], [1, 0, 0, 1, 0, 0], [1, 0, 0, 0, 1, 0], [1, 1, 0, 0, 1, 1], [1, 0, 1, 1, 0, 1], [0, 0, 0, 1, 1, 0]]
+
+# [0, 4, 5, 2, 4, 1, 5, 3, 2, 1, 0]
+# G = [[0, 1, 0, 0, 1, 0], [1, 0, 1, 0, 1, 1], [0, 1, 0, 1, 1, 1], [0, 0, 1, 0, 0, 1], [1, 1, 1, 0, 0, 1], [0, 1, 1, 1, 1, 0]]
+
+# not connected
+# G = [[0, 1, 1, 0], [1, 0, 1, 0], [1, 1, 0, 0], [0, 0, 0, 0]]
+
+# empty
+# G = []
+
+# n = 1001
+# G = [[0 if i == j else 1 for i in range(n)] for j in range(n)]
+
+# not all degrees even
+# G = [[0, 1, 1, 1], [1, 0, 0, 0], [1, 0, 0, 0], [1, 0, 0, 0]]
+
+# not connected
+# G = [[0, 1, 1, 0, 0, 0, 0, 0], [1, 0, 0, 1, 0, 0, 0, 0], [1, 0, 0, 1, 0, 0, 0, 0], [0, 1, 1, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 1, 1, 0], [0, 0, 0, 0, 1, 0, 0, 1], [0, 0, 0, 0, 1, 0, 0, 1], [0, 0, 0, 0, 0, 1, 1, 0]]
+# end testy ===================================================================
 
 GG = deepcopy( G )
 cycle = euler( G )
