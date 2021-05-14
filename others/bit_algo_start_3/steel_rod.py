@@ -10,11 +10,11 @@ def best_sell(profits):
       F[i] = max(F[i], F[i-j] + profits[j])
 
   print(F)
-  return F[-1]
+  return F[n-1]
 
 
 # profits[i] - zysk ze sprzedazy kawalka o dlugosci i
 # profits[0] = 0, zeby problem mial sens
-profits = [0, 13, 27, 35, 42, 51, 57]
+profits = [0, 7, 22, 35, 42, 51, 57]
 
 print(best_sell(profits))
