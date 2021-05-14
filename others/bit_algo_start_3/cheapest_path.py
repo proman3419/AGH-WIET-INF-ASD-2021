@@ -5,7 +5,7 @@ def find_cheapest_path(A):
   m = len(A)
   n = len(A[0])
 
-  # F[i][j] - najtanszy koszt dotarcia do pola A[i][j]
+  # F[i][j] - najtanszy koszt dotarcia do pola (i, j)
   F = [[inf for _ in range(n)] for _ in range(m)]
   F[0][0] = A[0][0]
 
