@@ -8,13 +8,11 @@ def topologic_sort_util(graph, s, visited, res, m):
     visited[u] = True
     for v in graph[u]:
       if not visited[v]:
-        #print(f'odwiedz: {v}')
         dfs_visit(v)
 
     res[m] = u
     m -= 1
 
-  #print(f'odwiedz: {s}')
   dfs_visit(s)
 
   return m
