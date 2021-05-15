@@ -9,7 +9,6 @@ def best_sell(profits):
     for j in range(i):
       F[i] = max(F[i], F[i-j] + profits[j])
 
-  print(F)
   return F[n-1]
 
 
