@@ -128,3 +128,9 @@ from random import randint
 N = int(input())
 rr = (1, 10)
 T = [[randint(rr[0], rr[1]) for _ in range(N)] for _ in range(N)]
+
+
+# staircase nested loop
+for l in range(2, n):
+  for i in range(n-l):
+    print(i, i+l)
