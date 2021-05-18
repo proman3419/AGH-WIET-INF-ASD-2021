@@ -66,6 +66,7 @@ def cnt_prime_factors(n):
 def sieve(n):
   n += 1 # zeby w rangeu nie dodawac
   A = [True]*n
+  A[0] = A[1] = False
 
   i = 2
   while i*i < n:
