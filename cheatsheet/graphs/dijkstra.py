@@ -2,8 +2,7 @@ from queue import PriorityQueue
 from math import inf
 
 
-def get_path(parents, v):
-  path = []
+def get_path(distances, parents, v):
   def get_path_rec(v):
     nonlocal parents, path
 
@@ -13,6 +12,10 @@ def get_path(parents, v):
     get_path_rec(parents[v])
     path.append(v)
 
+  if distances[v] == inf:
+    return None
+
+  path = []
   get_path_rec(v)
 
   return path
@@ -35,7 +38,6 @@ def djikstra(graph, s):
       for v, weight in graph[u]:
       # for v in range(n):
       #   if graph[u][v] > 0:
-        # relaxation
         curr_dist = distances[u] + weight
         # curr_dist = distances[u] + graph[u][v]
         if curr_dist < distances[v]:
@@ -45,7 +47,7 @@ def djikstra(graph, s):
 
       processed[u] = True
 
-  # print(get_path(parents, n-1))
+  # print(get_path(distances, parents, n-1))
 
   return distances
 
