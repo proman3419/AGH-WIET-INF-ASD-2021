@@ -7,7 +7,7 @@ def get_path(parents, v):
   def get_path_rec(v):
     nonlocal parents, path
 
-    if v == None or parents[v] == None:
+    if v == None:
       return
 
     get_path_rec(parents[v])
@@ -32,7 +32,6 @@ def djikstra(graph, s):
     u = queue.get()[1]
 
     if not processed[u]:
-
       for v, weight in graph[u]:
       # for v in range(n):
       #   if graph[u][v] > 0:
