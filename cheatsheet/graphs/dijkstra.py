@@ -2,11 +2,28 @@ from queue import PriorityQueue
 from math import inf
 
 
+def get_path(parents, v):
+  path = []
+  def get_path_rec(v):
+    nonlocal parents, path
+
+    if v == None or parents[v] == None:
+      return
+
+    get_path_rec(parents[v])
+    path.append(v)
+
+  get_path_rec(v)
+
+  return path
+
+
 def djikstra(graph, s):
   n = len(graph)
   queue = PriorityQueue()
   processed = [False]*n
   distances = [inf]*n
+  # parents = [None]*n
 
   distances[s] = 0
   queue.put((distances[s], s))
@@ -15,22 +32,21 @@ def djikstra(graph, s):
     u = queue.get()[1]
 
     if not processed[u]:
+
       for v, weight in graph[u]:
+      # for v in range(n):
+      #   if graph[u][v] > 0:
         # relaxation
         curr_dist = distances[u] + weight
+        # curr_dist = distances[u] + graph[u][v]
         if curr_dist < distances[v]:
+          # parents[v] = u
           distances[v] = curr_dist
           queue.put((distances[v], v))
 
-      # for v in range(n):
-      #   if graph[u][v] > 0:
-      #     # relaxation
-      #     curr_dist = distances[u] + graph[u][v]
-      #     if curr_dist < distances[v]:
-      #       distances[v] = curr_dist
-      #       queue.put((distances[v], v))
-
       processed[u] = True
+
+  # print(get_path(parents, n-1))
 
   return distances
 
