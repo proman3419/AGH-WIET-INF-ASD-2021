@@ -21,7 +21,7 @@ def get_path(distances, parents, v):
   return path
 
 
-def djikstra(graph, s):
+def dijkstra(graph, s):
   n = len(graph)
   queue = PriorityQueue()
   processed = [False]*n
@@ -83,4 +83,4 @@ graph = [[(1, 2), (2, 4)],
 # rr = (1, n)
 # graph = [[0 if i == j else randint(rr[0], rr[1]) for i in range(n)] for j in range(n)]
 
-print(djikstra(graph, 0))
+print(dijkstra(graph, 0))

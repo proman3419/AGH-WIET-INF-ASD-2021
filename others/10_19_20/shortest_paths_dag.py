@@ -2,7 +2,7 @@ from queue import PriorityQueue
 from math import inf
 
 
-def djikstra(graph, s):
+def dijkstra(graph, s):
   n = len(graph)
   queue = PriorityQueue()
   processed = [False]*n
@@ -46,7 +46,7 @@ def print_path(distances, parents, v):
 
 
 def find_shortest_paths_dag(graph, s):
-  distances, parents = djikstra(graph, s)
+  distances, parents = dijkstra(graph, s)
 
   for v in range(len(graph)):
     print(f'vertex {v}: distance = {distances[v]}, path =', end=' ')

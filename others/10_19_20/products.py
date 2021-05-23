@@ -21,7 +21,7 @@ def get_path(distances, parents, v):
   return path
 
 
-def djikstra(graph, s, e):
+def dijkstra(graph, s, e):
   n = len(graph)
   queue = PriorityQueue()
   processed = [False]*n
@@ -52,7 +52,7 @@ def djikstra(graph, s, e):
 
 
 def find_path_min_product(graph, u, v):
-  return djikstra(graph, u, v)
+  return dijkstra(graph, u, v)
 
 
 # ([0, 1, 2, 4, 3, 5], 12)
