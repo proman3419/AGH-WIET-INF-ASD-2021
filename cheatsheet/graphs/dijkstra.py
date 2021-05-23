@@ -15,20 +15,20 @@ def djikstra(graph, s):
     u = queue.get()[1]
 
     if not processed[u]:
-      # for v, weight in graph[u]:
-      #   # relaxation
-      #   curr_dist = distances[u] + weight
-      #   if curr_dist < distances[v]:
-      #     distances[v] = curr_dist
-      #     queue.put((distances[v], v))
+      for v, weight in graph[u]:
+        # relaxation
+        curr_dist = distances[u] + weight
+        if curr_dist < distances[v]:
+          distances[v] = curr_dist
+          queue.put((distances[v], v))
 
-      for v in range(n):
-        if graph[u][v] > 0:
-          # relaxation
-          curr_dist = distances[u] + graph[u][v]
-          if curr_dist < distances[v]:
-            distances[v] = curr_dist
-            queue.put((distances[v], v))
+      # for v in range(n):
+      #   if graph[u][v] > 0:
+      #     # relaxation
+      #     curr_dist = distances[u] + graph[u][v]
+      #     if curr_dist < distances[v]:
+      #       distances[v] = curr_dist
+      #       queue.put((distances[v], v))
 
       processed[u] = True
 
