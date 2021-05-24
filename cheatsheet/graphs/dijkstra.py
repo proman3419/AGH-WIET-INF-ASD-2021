@@ -3,22 +3,19 @@ from math import inf
 
 
 def get_path(distances, parents, v):
-  def get_path_rec(v):
-    nonlocal parents, path
-
-    if v == None:
-      return
-
-    get_path_rec(parents[v])
-    path.append(v)
-
   if distances[v] == inf:
     return None
 
-  path = []
-  get_path_rec(v)
+  if parents[v] is None:
+    return []
 
-  return path
+  path = []
+
+  while v is not None:
+    path.append(v)
+    v = parents[v]
+
+  return path[::-1]
 
 
 def dijkstra(graph, s):
