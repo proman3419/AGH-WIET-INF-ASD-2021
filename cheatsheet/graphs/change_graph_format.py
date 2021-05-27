@@ -40,7 +40,7 @@ def am_to_nl_w(am):
 
   for i in range(n):
     for j in range(n):
-      if am[i][j] > 0:
+      if am[i][j] != 0:
         nl[i].append((j, am[i][j]))
 
   return nl
