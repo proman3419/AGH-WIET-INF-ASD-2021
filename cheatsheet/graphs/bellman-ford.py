@@ -1,6 +1,22 @@
 from math import inf
 
 
+def get_path(distances, parents, v):
+  if distances[v] == inf:
+    return None
+
+  if parents[v] is None:
+    return []
+
+  path = []
+
+  while v is not None:
+    path.append(v)
+    v = parents[v]
+
+  return path[::-1]
+
+
 # True - posiada ujemny cykl
 # False - nie
 def verification(graph, distances):
@@ -37,6 +53,7 @@ def bellman_ford(graph, s):
           distances[v] = curr_dist
           parents[v] = u
 
+  # print(get_path(distances, parents, n-1))
   # print(verification(graph, distances))
 
   return distances
