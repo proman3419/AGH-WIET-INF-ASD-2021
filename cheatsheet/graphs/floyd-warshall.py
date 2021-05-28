@@ -17,9 +17,9 @@ def floyd_warshall(graph):
   for k in range(n):
     for v in range(n):
       for u in range(n):
-        curr = distances[u][k] + distances[k][v]
-        if distances[u][v] > curr:
-          distances[u][v] = curr
+        curr_dist = distances[u][k] + distances[k][v]
+        if distances[u][v] > curr_dist:
+          distances[u][v] = curr_dist
 
   return distances
 
