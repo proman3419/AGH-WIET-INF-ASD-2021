@@ -47,19 +47,19 @@ def dijkstra(graph, s, e):
   return distances[e]
 
 
-def islands(graph, A, B):
-  return dijkstra(graph, A, B)
+def islands(G, A, B):
+  return dijkstra(G, A, B)
 
 
-graph = [[0, 5, 1, 8, 0, 0, 0],
-         [5, 0, 0, 1, 0, 8, 0],
-         [1, 0, 0, 8, 0, 0, 8],
-         [8, 1, 8, 0, 5, 0, 1],
-         [0, 0, 0, 5, 0, 1, 0],
-         [0, 8, 0, 0, 1, 0, 5],
-         [0, 0, 8, 1, 0, 5, 0]]
+G = [[0, 5, 1, 8, 0, 0, 0],
+     [5, 0, 0, 1, 0, 8, 0],
+     [1, 0, 0, 8, 0, 0, 8],
+     [8, 1, 8, 0, 5, 0, 1],
+     [0, 0, 0, 5, 0, 1, 0],
+     [0, 8, 0, 0, 1, 0, 5],
+     [0, 0, 8, 1, 0, 5, 0]]
 
 A = 5
 B = 2
 
-print(islands(graph, A, B))
+print(islands(G, A, B))
