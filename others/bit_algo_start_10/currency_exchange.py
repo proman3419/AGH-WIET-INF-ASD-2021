@@ -58,7 +58,6 @@ def currency_exchange(T, A, B):
   print(f'1: {path}')
   print(f'2: {has_negative_cycle}')
 
-
 # 1: None
 # 2: True
 T = [(0, 1, 4.49),
@@ -98,7 +97,6 @@ T = [(0, 1, 1),
      (5, 3, 0.125)]
 
 # currency_exchange(T, 0, 5)
-
 
 # {0: PLN, 1: EUR, 2: USD, 3: CHF, 4: GBP}
 # 1: [4, 0, 1, 3]
