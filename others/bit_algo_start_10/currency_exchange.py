@@ -34,7 +34,7 @@ def bellman_ford(graph, s, e, max_v):
 
   distances[s] = 0
 
-  for i in range(max_v):
+  for i in range(max_v-1):
     for u, v, w in graph:
       # zamieniamy na na log, zeby operowac na +/- zamiast *//
       curr_dist = distances[u] + log(w)

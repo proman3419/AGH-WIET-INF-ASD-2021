@@ -36,7 +36,7 @@ def bellman_ford(graph, vertices_w, s):
 
   distances[s] = 0
 
-  for i in range(n):
+  for i in range(n-1):
     for u in range(n):
       for v, w in graph[u]:
         curr_dist = distances[u] + w + vertices_w[u] + vertices_w[v]
