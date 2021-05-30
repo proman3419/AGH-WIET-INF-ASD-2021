@@ -1,4 +1,3 @@
-from queue import PriorityQueue
 from math import inf
 
 
@@ -15,51 +14,98 @@ def get_path(distances, parents, v):
     path.append(v)
     v = parents[v]
 
-  return path
+  return path[::-1]
 
 
-def dijkstra(graph, s, e):
+# True - posiada ujemny cykl
+# False - nie
+def verification(graph, distances):
   n = len(graph)
-  queue = PriorityQueue()
-  processed = [False]*n
-  distances = [inf]*n
-  parents = [None]*n
+  for u in range(n):
+    # for v, w in graph[u]:
+    #   if distances[v] > distances[u] + w:
+    #     return True
+    for v in range(n):
+      if graph[u][v] != 0:
+        if distances[v] > distances[u] + graph[u][v]:
+          return True
+
+  return False
+
+
+def bellman_ford(graph, s, e, max_v):
+  distances = [inf]*(max_v+1)
+  parents = [None]*(max_v+1)
+  prev_ws = [inf]*(max_v+1)
 
   distances[s] = 0
-  queue.put((distances[s], s))
 
-  while not queue.empty():
-    u = queue.get()[1]
+  for u, v, w in graph:
+    curr_dist = inf
+    if w != 0:
+      curr_dist = distances[u] + w
 
-    if not processed[u]:
-      for v in range(n):
-        if graph[v][u] > 0:
-          if parents[u] is None or graph[v][u] > graph[u][parents[u]]:
-            curr_dist = distances[u] + graph[v][u]
+      if curr_dist < distances[v] and prev_ws[u] != w:
+        distances[v] = curr_dist
+        parents[v] = u
+        prev_ws[v] = w
 
-            if curr_dist < distances[v]:
-              parents[v] = u
-              distances[v] = curr_dist
-              queue.put((distances[v], v))
-
-      processed[u] = True
-
-  return get_path(distances, parents, e)
-
-
-def decreasing_edges_path(graph, x, y):
-  return dijkstra(graph, y, x)
+  return (get_path(distances, parents, e), distances[e])
 
 
 # zal graf nieskierowany
-graph = [[0, 10, 5, 0, 0, 0],
-         [10, 0, 1, 3, 2, 0],
-         [5, 1, 0, 6, 4, 0],
-         [0, 3, 6, 0, 3, 2],
-         [0, 2, 4, 3, 0, 1],
-         [0, 0, 0, 2, 1, 0]]
+def decreasing_edges_path(graph, x, y):
+  graph.sort(key=lambda x: x[2], reverse=True)
+  max_v = max(max(e[0], e[1]) for e in graph)
 
-x = 0
-y = len(graph) - 1
+  return bellman_ford(graph, x, y, max_v)
 
-print(decreasing_edges_path(graph, x, y))
+
+graph = [[0, 1, 10],
+         [0, 2, 5],
+         [1, 0, 10],
+         [1, 2, 1],
+         [1, 3, 3],
+         [1, 4, 2],
+         [2, 0, 5],
+         [2, 1, 1],
+         [2, 3, 6],
+         [2, 4, 4],
+         [3, 1, 3],
+         [3, 2, 6],
+         [3, 4, 3],
+         [3, 5, 2],
+         [4, 1, 2],
+         [4, 2, 4],
+         [4, 3, 3],
+         [4, 5, 1],
+         [5, 3, 2],
+         [5, 4, 1]]
+
+# print(decreasing_edges_path(graph, 0, 3))
+
+# ([0, 3, 2], 7)
+graph = [[0, 1, 10],
+         [1, 2, 10],
+         [0, 3, 4],
+         [3, 2, 3]]
+
+# print(decreasing_edges_path(graph, 0, 2))
+
+# ([0, 1, 6, 5, 4, 3, 2], 39)
+graph = [[0, 1, 9],
+         [1, 0, 9],
+         [1, 2, 10],
+         [1, 6, 8],
+         [2, 1, 10],
+         [2, 3, 4],
+         [3, 2, 4],
+         [3, 4, 5],
+         [4, 3, 5],
+         [4, 5, 6],
+         [5, 4, 6],
+         [5, 6, 7],
+         [6, 2, 8],
+         [6, 5, 7]]
+
+print(decreasing_edges_path(graph, 0, 2))
