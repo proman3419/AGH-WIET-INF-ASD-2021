@@ -19,16 +19,12 @@ def get_path(distances, parents, v):
 
 # True - posiada ujemny cykl
 # False - nie
-def verification(graph, distances):
+def verification(graph, distances, vertices_w):
   n = len(graph)
   for u in range(n):
     for v, w in graph[u]:
-      if distances[v] > distances[u] + w:
+      if distances[v] > distances[u] + w + vertices_w[u] + vertices_w[v]:
         return True
-    # for v in range(n):
-    #   if graph[u][v] != 0:
-    #     if distances[v] > distances[u] + graph[u][v]:
-    #       return True
 
   return False
 
@@ -49,6 +45,9 @@ def bellman_ford(graph, vertices_w, s):
           distances[v] = curr_dist
           parents[v] = u
 
+  if verification(graph, distances, vertices_w):
+    return None
+
   return distances
 
 
@@ -56,23 +55,24 @@ def shortest_paths(graph, vertices_w, s):
   return bellman_ford(graph, vertices_w, s)
 
 
-# [0, 8, 6, 24, 27, 14]
+# [0, -2, 14, 6, 1, 2]
 graph = [[[5, 8], [2, 10]],
          [[3, 2]],
-         [[1, 1]],
-         [[2, -2]],
-         [[1, -4], [3, -1]],
+         [[1, -1]],
+         [[2, 2]],
+         [[1, -4], [3, 1]],
          [[4, 1]]]
 
-vertices_w = [-1, 4, -3, 10, 5, 7]
+vertices_w = [1, -4, 3, 10, 5, -7]
 
-# print(shortest_paths(graph, vertices_w, 0))
+print(shortest_paths(graph, vertices_w, 0))
 
+# None
 graph = [[[1, 2]],
          [[2, -1]],
          [[3, -1]],
-         [[1, 1]]]
+         [[1, -7]]]
 
 vertices_w = [0, 1, 2, 1]
 
-print(shortest_paths(graph, vertices_w, 0))
+# print(shortest_paths(graph, vertices_w, 0))
