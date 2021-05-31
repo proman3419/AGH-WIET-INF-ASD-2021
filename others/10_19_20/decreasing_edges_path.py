@@ -22,9 +22,6 @@ def get_path(distances, parents, v):
 def verification(graph, distances):
   n = len(graph)
   for u in range(n):
-    # for v, w in graph[u]:
-    #   if distances[v] > distances[u] + w:
-    #     return True
     for v in range(n):
       if graph[u][v] != 0:
         if distances[v] > distances[u] + graph[u][v]:
@@ -41,14 +38,12 @@ def bellman_ford(graph, s, e, max_v):
   distances[s] = 0
 
   for u, v, w in graph:
-    curr_dist = inf
-    if w != 0:
-      curr_dist = distances[u] + w
+    curr_dist = distances[u] + w
 
-      if curr_dist < distances[v] and prev_ws[u] != w:
-        distances[v] = curr_dist
-        parents[v] = u
-        prev_ws[v] = w
+    if curr_dist < distances[v] and prev_ws[u] != w:
+      distances[v] = curr_dist
+      parents[v] = u
+      prev_ws[v] = w
 
   return (get_path(distances, parents, e), distances[e])
 
@@ -61,6 +56,7 @@ def decreasing_edges_path(graph, x, y):
   return bellman_ford(graph, x, y, max_v)
 
 
+# ([0, 2, 4, 3], 12)
 graph = [[0, 1, 10],
          [0, 2, 5],
          [1, 0, 10],
@@ -108,4 +104,24 @@ graph = [[0, 1, 9],
          [6, 2, 8],
          [6, 5, 7]]
 
-print(decreasing_edges_path(graph, 0, 2))
+# print(decreasing_edges_path(graph, 0, 2))
+
+# ([0, 2, 3, 4, 5], 10)
+graph = [[0, 1, 2],
+         [0, 2, 4],
+         [1, 0, 2],
+         [1, 2, 10],
+         [1, 4, 12],
+         [1, 5, 100],
+         [2, 0, 4],
+         [2, 1, 10],
+         [2, 3, 3],
+         [3, 2, 3],
+         [3, 4, 2],
+         [4, 3, 2],
+         [4, 1, 12],
+         [4, 5, 1],
+         [5, 1, 100],
+         [5, 4, 1]]
+
+print(decreasing_edges_path(graph, 0, 5))
