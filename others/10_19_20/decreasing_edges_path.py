@@ -17,19 +17,6 @@ def get_path(distances, parents, v):
   return path[::-1]
 
 
-# True - posiada ujemny cykl
-# False - nie
-def verification(graph, distances):
-  n = len(graph)
-  for u in range(n):
-    for v in range(n):
-      if graph[u][v] != 0:
-        if distances[v] > distances[u] + graph[u][v]:
-          return True
-
-  return False
-
-
 def bellman_ford(graph, s, e, max_v):
   distances = [inf]*(max_v+1)
   parents = [None]*(max_v+1)
