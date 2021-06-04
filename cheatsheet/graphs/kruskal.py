@@ -27,6 +27,7 @@ def union(x, y):
       y.rank += 1
 
 
+# O(E*log(E))
 def kruskal(graph, V):
   graph.sort(key=lambda x: x[2])
   vertices = [Node(i) for i in range(V)]
