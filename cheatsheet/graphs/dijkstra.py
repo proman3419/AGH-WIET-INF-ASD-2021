@@ -17,6 +17,7 @@ def get_path(distances, parents, v):
 
   return path[::-1]
 
+# ==============================================================================
 
 # O(V + E*log(V))
 def dijkstra_nl(graph, s):
@@ -47,6 +48,19 @@ def dijkstra_nl(graph, s):
 
   return distances
 
+
+# [[(neighbor, weight), ...], ...]
+# [0, 2, 3, 8, 6, 9]
+graph_nl = [[(1, 2), (2, 4)],
+            [(2, 1), (3, 7)],
+            [(4, 3)],
+            [(5, 1)],
+            [(3, 2), (5, 5)],
+            []]
+
+print(dijkstra_nl(graph_nl, 0))
+
+# ==============================================================================
 
 def get_min_v(distances, processed, n):
   _min = inf
@@ -89,17 +103,8 @@ def dijkstra_am(graph, s):
   return distances
 
 
-# [0, 2, 3, 8, 6, 9]
-# [[(neighbor, weight), ...], ...]
-graph_nl = [[(1, 2), (2, 4)],
-            [(2, 1), (3, 7)],
-            [(4, 3)],
-            [(5, 1)],
-            [(3, 2), (5, 5)],
-            []]
-
-# [0, 2, 3, 8, 6, 9]
 # 0 - brak krawedzi, >= 1 - waga krawedzi
+# [0, 2, 3, 8, 6, 9]
 graph_am = [[0, 2, 4, 0, 0, 0],
             [0, 0, 1, 7, 0, 0],
             [0, 0, 0, 0, 3, 0],
@@ -108,17 +113,18 @@ graph_am = [[0, 2, 4, 0, 0, 0],
             [0, 0, 0, 0, 0, 0]]
 
 # [0, 4, 4, 2, 1, 4]
-graph_am = [[0, 5, 4, 2, 1, 6],
-            [1, 0, 6, 3, 4, 2],
-            [2, 9, 0, 4, 3, 5],
-            [9, 2, 7, 0, 6, 2],
-            [8, 6, 4, 7, 0, 8],
-            [2, 1, 3, 7, 3, 0]]
+# graph_am = [[0, 5, 4, 2, 1, 6],
+#             [1, 0, 6, 3, 4, 2],
+#             [2, 9, 0, 4, 3, 5],
+#             [9, 2, 7, 0, 6, 2],
+#             [8, 6, 4, 7, 0, 8],
+#             [2, 1, 3, 7, 3, 0]]
 
 # from random import randint
 # n = 2000
 # rr = (1, n)
 # graph_am = [[0 if i == j else randint(rr[0], rr[1]) for i in range(n)] for j in range(n)]
 
-print(dijkstra_nl(graph_nl, 0))
 print(dijkstra_am(graph_am, 0))
+
+# ==============================================================================
