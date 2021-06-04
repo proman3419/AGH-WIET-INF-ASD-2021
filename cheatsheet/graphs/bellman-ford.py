@@ -75,7 +75,7 @@ print(bellman_ford_am(graph_am, 0))
 # ==============================================================================
 
 # czy posiada ujemny cykl
-def verification_ml(graph, distances):
+def verification_nl(graph, distances):
   n = len(graph)
   for u in range(n):
     for v, w in graph[u]:
@@ -86,7 +86,7 @@ def verification_ml(graph, distances):
 
 
 # O(V*E)
-def bellman_ford_ml(graph, s):
+def bellman_ford_nl(graph, s):
   n = len(graph)
   distances = [inf]*n
   parents = [None]*n
@@ -102,7 +102,7 @@ def bellman_ford_ml(graph, s):
           distances[v] = curr_dist
           parents[v] = u
 
-  if verification_ml(graph, distances):
+  if verification_nl(graph, distances):
     return None
 
   # print(get_path(distances, parents, n-1))
@@ -111,7 +111,7 @@ def bellman_ford_ml(graph, s):
 
 
 # [0, 5, 5, 7, 9, 8]
-graph_ml = [[[5, 8], [2, 10]],
+graph_nl = [[[5, 8], [2, 10]],
             [[3, 2]],
             [[1, 1]],
             [[2, -2]],
@@ -119,15 +119,15 @@ graph_ml = [[[5, 8], [2, 10]],
             [[4, 1]]]
 
 # None
-# graph_ml = [[[1, -1], [2, -1]], 
+# graph_nl = [[[1, -1], [2, -1]], 
 #             [[0, -1]],
 #             [[0, 1]]]
 
 # None
-# graph_ml = [[[1, -4]],
+# graph_nl = [[[1, -4]],
 #             [[2, -5]],
 #             [[0, -2]],
 #             [[4, 2]],
 #             [[2, 1]]]
 
-print(bellman_ford_ml(graph_ml, 0))
+print(bellman_ford_nl(graph_nl, 0))
