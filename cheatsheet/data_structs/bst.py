@@ -54,9 +54,9 @@ def print_breadth_first(tree):
         _children.append(node.left)
       if node.right is not None:
         _children.append(node.right)
-      print()
-
-      children = _children 
+        
+    print()
+    children = _children 
 
 
 def find_precursor(tree, key):
@@ -125,3 +125,5 @@ tree = add(tree, 30)
 tree = add(tree, 28)
 tree = add(tree, 35)
 tree = add(tree, 40)
+
+print_breadth_first(tree)
