@@ -91,9 +91,7 @@ def find_edge_connectivity(graph):
   for s in range(n):
     for e in range(s+1, n):
       copy_graph(graph, _graph, n)
-      curr_k = ford_fulkerson(_graph, s, e)
-      if curr_k != 0:
-        k = min(k, curr_k)
+      k = min(k, ford_fulkerson(_graph, s, e))
 
   return k
 
