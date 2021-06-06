@@ -54,7 +54,7 @@ def print_breadth_first(tree):
         _children.append(node.left)
       if node.right is not None:
         _children.append(node.right)
-        
+
     print()
     children = _children 
 
@@ -66,8 +66,8 @@ def find_precursor(tree, key):
     return None
 
   # w lewo i max w prawo
-  if node.left is not None and node.left.right is not None:
-    node = node.left.right
+  if node.left is not None:
+    node = node.left
     while node.right is not None:
       node = node.right
 
@@ -92,8 +92,8 @@ def find_successor(tree, key):
     return None
 
   # w prawo i max w lewo
-  if node.right is not None and node.right.left is not None:
-    node = node.right.left
+  if node.right is not None:
+    node = node.right
     while node.left is not None:
       node = node.left
 
