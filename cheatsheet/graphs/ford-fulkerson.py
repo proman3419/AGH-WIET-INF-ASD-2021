@@ -16,9 +16,13 @@ def bfs(graph, s, e, parents):
       if graph[u][v] > 0 and not visited[v]:
         visited[v] = True
         parents[v] = u
+
+        if v == e:
+          return True
+
         queue.append(v)
 
-  return visited[e]
+  return False
 
 
 # O(V*E^2)
@@ -54,7 +58,7 @@ graph = [[0, 16, 13, 0, 0, 0],
          [0, 0, 0, 7, 0, 4],
          [0, 0, 0, 0, 0, 0]]
 
-# print(ford_fulkerson(graph, 0, 5))
+print(ford_fulkerson(graph, 0, 5))
 
 # 5
 graph = [[0, 8, 3, 0, 0, 0],
@@ -64,7 +68,7 @@ graph = [[0, 8, 3, 0, 0, 0],
          [0, 0, 0, 0, 0, 5],
          [0, 0, 0, 0, 0, 0]]
 
-# print(ford_fulkerson(graph, 0, 5))
+print(ford_fulkerson(graph, 0, 5))
 
 # 19
 graph = [[0, 10, 10, 0, 0, 0],
