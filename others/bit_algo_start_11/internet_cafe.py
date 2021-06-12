@@ -22,9 +22,10 @@ def bfs(graph, s, e, parents):
 
 
 # O(V*E^2)
-def ford_fulkerson(graph, src, sink):
+def ford_fulkerson(graph, src, sink, A, K):
   parents = [None]*len(graph)
   max_flow = 0
+  pc_app_disposal = [None]*K
 
   while bfs(graph, src, sink, parents):
     curr_flow = inf
@@ -32,6 +33,8 @@ def ford_fulkerson(graph, src, sink):
     v = sink
     while v != src:
       curr_flow = min(curr_flow, graph[parents[v]][v])
+      if A <= v < A+K:
+        pc_app_disposal[v-A] = parents[v]
       v = parents[v]
 
     max_flow += curr_flow
@@ -43,8 +46,7 @@ def ford_fulkerson(graph, src, sink):
       graph[v][u] += curr_flow
       v = parents[v]
 
-  return max_flow
-
+  return pc_app_disposal
 
 def create_graph(Z, K, A, C):
   n = K + A + 2 # 2 na SZ i SU
@@ -66,16 +68,32 @@ def create_graph(Z, K, A, C):
   return graph
 
 
+def verify(pc_app_disposal, Z, K):
+  for i in range(K):
+    if pc_app_disposal[i] is not None:
+      Z[pc_app_disposal[i]] -= 1
+
+  for e in Z:
+    if e > 0:
+      return False
+
+  return True
+
+
 def internet_cafe(Z, K, A, C):
   graph = create_graph(Z, K, A, C)
+  pc_app_disposal = ford_fulkerson(graph, -2, -1, A, K)
 
-  return ford_fulkerson(graph, -2, -1) == sum(Z)
+  if verify(pc_app_disposal, Z, K):
+    return pc_app_disposal
+  else:
+    return None
 
 
 Z = [2, 1, 1] # Z[i] zapotrzebowanie na ita aplikacje
 K = 4 # ilosc komputerow
 A = 3 # ilosc aplikacji
-C = [[0], [2, 1], [3]] # lista kompatybilnosci aplikacji z komputerami
+C = [[0, 1], [2], [3]] # lista kompatybilnosci aplikacji z komputerami
 
-# False
+# [0, 0, 1, 2]
 print(internet_cafe(Z, K, A, C))
