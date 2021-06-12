@@ -58,12 +58,12 @@ def create_graph(Z, K, A, C):
   # - Komputery -> A..A+K
 
   for i in range(A):
-    graph[-2][i] = graph[i][-2] = Z[i]
+    graph[-2][i] = Z[i]
     for j in C[i]:
-      graph[i][A+j] = graph[A+j][i] = 1
+      graph[i][A+j] = 1
 
   for i in range(A, A+K):
-    graph[-1][i] = graph[i][-1] = 1
+    graph[i][-1] = 1
 
   return graph
 
@@ -90,10 +90,44 @@ def internet_cafe(Z, K, A, C):
     return None
 
 
-Z = [2, 1, 1] # Z[i] zapotrzebowanie na ita aplikacje
-K = 4 # ilosc komputerow
-A = 3 # ilosc aplikacji
-C = [[0, 1], [2], [3]] # lista kompatybilnosci aplikacji z komputerami
-
 # [0, 0, 1, 2]
+Z = [2, 1, 1] # Z[i] - zapotrzebowanie na ita aplikacje
+C = [[0, 1], [2], [3]] # C[i][j] - ita aplikacja moze byc zainstalowana na jtym komputerze
+A = len(C) # ilosc aplikacji
+K = 4 # ilosc komputerow
+# print(internet_cafe(Z, K, A, C))
+
+# None
+Z = [0, 1, 2, 1, 0, 0]
+C = [[0, 1], [3], [0, 1, 2, 3], [3], [3], [0]]
+A = len(C)
+K = 4
+# print(internet_cafe(Z, K, A, C))
+
+# [1, 2, 2, 3]
+Z = [0, 1, 2, 1, 0, 0]
+C = [[0, 1], [0, 3], [0, 1, 2, 3], [3], [1, 3], [0]]
+A = len(C)
+K = 4
+# print(internet_cafe(Z, K, A, C))
+
+# [1, 2, 2, 3, 5, 5]
+Z = [0, 1, 2, 1, 0, 2]
+C = [[0, 1], [0, 3], [0, 1, 2, 3], [3], [1, 3], [0, 4, 5]]
+A = len(C)
+K = 6
 print(internet_cafe(Z, K, A, C))
+
+# None
+Z = [0, 1, 2, 1, 0, 2]
+C = [[0, 1], [3], [0, 1, 2, 3], [3], [3], [0, 4, 5]]
+A = len(C)
+K = 6
+# print(internet_cafe(Z, K, A, C))
+
+# None
+Z = [0, 1, 2, 1, 0, 1]
+C = [[0, 1], [3], [0, 1, 2, 3], [3], [3], [0]]
+A = len(C)
+K = 4
+# print(internet_cafe(Z, K, A, C))
