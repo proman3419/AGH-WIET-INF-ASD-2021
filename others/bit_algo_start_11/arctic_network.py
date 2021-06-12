@@ -5,12 +5,19 @@ def distance(p1, p2):
   return ((p1[0]-p2[0])**2 + (p1[1]-p2[1])**2)**(1/2)
 
 
-def generate_graph(coords):
+def generate_graph(coords, is_transmitter):
   n = len(coords)
+  k = 0
   graph = []
+
   for i in range(n):
     for j in range(i+1, n):
-      dist = distance(coords[i], coords[j])
+      # scalamy transmitery w 1
+      if is_transmitter[i] and is_transmitter[j]:
+        dist = 0
+      else:
+        dist = distance(coords[i], coords[j])
+
       graph.append([i, j, dist])
       graph.append([j, i, dist])
 
@@ -69,16 +76,27 @@ def kruskal(graph, V):
   for u, v, w in result:
     max_dist = max(max_dist, w)
 
+  print(result)
+
   return max_dist
 
 
-def arctic_network(coords):
-  graph = generate_graph(coords)
+def arctic_network(coords, transmitters):
+  is_transmitter = [False]*len(coords)
+  for t in transmitters:
+    is_transmitter[t] = True
+
+  graph = generate_graph(coords, is_transmitter)
 
   return ceil(kruskal(graph, len(coords)))
 
 
 # 5
 coords = [(0, 1), (1, 3), (4, 2), (6, 6), (0, 5), (7, 5)]
+transmitters = []
+print(arctic_network(coords, transmitters))
 
-print(arctic_network(coords))
+# 4
+coords = [(0, 1), (1, 3), (4, 2), (6, 6), (0, 5), (7, 5)]
+transmitters = [5, 3, 2]
+print(arctic_network(coords, transmitters))
