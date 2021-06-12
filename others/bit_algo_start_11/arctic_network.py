@@ -72,13 +72,7 @@ def kruskal(graph, V):
       result.append([u, v, w])
       union(x, y)
 
-  max_dist = 0
-  for u, v, w in result:
-    max_dist = max(max_dist, w)
-
-  print(result)
-
-  return max_dist
+  return result[-1][2]
 
 
 def arctic_network(coords, transmitters):
