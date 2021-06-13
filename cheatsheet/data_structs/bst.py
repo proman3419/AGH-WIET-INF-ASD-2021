@@ -44,6 +44,16 @@ def print_node(node):
     print('right: None')
 
 
+def print_nodes(tree):
+  if tree is None:
+    return
+
+  print_nodes(tree.left)
+  print_node(tree)
+  print()
+  print_nodes(tree.right)
+
+
 def print_depth_first(tree):
   if tree is None:
     return
