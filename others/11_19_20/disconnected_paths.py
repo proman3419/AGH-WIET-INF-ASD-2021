@@ -57,7 +57,19 @@ def ford_fulkerson(graph, src, sink):
 
 def disconnected_paths(graph, s, t):
   # ford-fulkerson z zaznaczaniem odwiedzonych wierzcholkow.
-  # mozna tez usuwac krawedzie z odwiedzanych wierzcholkow
+  # mozna tez usuwac krawedzie z odwiedzanych wierzcholkow.
+
+  # jednak nie dziala, kontprzyklad:  
+  # ._____._____._____.
+  # |\_._/ \___/_\_._/|
+  # \_____.___/   \_._/
+
+  # poprawnym rozwiazaniem jest rozdzielenie kazdego wierzcholka na dwa:
+  # jeden wejsciowy i drugi wyjsciowy i poprzepinac krawedzie wej do wej, wyj do wyj
+  # i polaczyc wierzch wej z wyj krawedzia o wadze 1.
+  # nastepnie puszczamy forda fulkersona, ktory znajdzie szukane sciezki.
+  # przez kazdy wierzcholek przejdzie sie tylko raz poniewaz krawedzie pomiedzy wej i wyj beda bottleneckowac
+
   return ford_fulkerson(graph, s, t)
 
 
