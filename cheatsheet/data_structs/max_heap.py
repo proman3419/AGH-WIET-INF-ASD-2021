@@ -1,4 +1,4 @@
-from math import log, ceil
+from math import log, floor
 
 
 # O(logn)
@@ -40,7 +40,7 @@ def add_to_max_heap(A, val):
 
 def display(A):
   n = len(A)
-  steps = ceil(log(n, 2))
+  steps = floor(log(n, 2)) + 1
 
   i = 0
   for s in range(steps):
@@ -53,5 +53,5 @@ def display(A):
   print()
 
 
-A = [2, 6, 1, 0, 4, 9, 5]
+A = [2, 6, 1, 0, 4, 9, 5, 10]
 display(build_max_heap(A, len(A)))
