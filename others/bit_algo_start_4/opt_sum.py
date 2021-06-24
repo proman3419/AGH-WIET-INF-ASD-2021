@@ -17,15 +17,18 @@ def opt_sum(A):
   for i in range(1, n):
     subsums[i] = subsums[i-1] + A[i]
 
-  for r in F:
-    print(r)
+  def rec(i, j):
+    nonlocal A, F, subsums
 
-  for l in range(2, n):
-    for i in range(n-l):
-      j = i + l
-      for k in range(i+1, j):
-        print(F[i][k], F[k][j], abs(subsums[j]-subsums[i]+A[i]))
-        F[i][j] = min(max(F[i][k], F[k][j]), abs(subsums[j]-subsums[i]+A[i]))
+    if F[i][j] == inf:
+      a = rec(i + 1, j)
+      b = rec(i, j - 1)
+      _sum = subsums[j] - subsums[i] + A[i]
+      F[i][j] = max(abs(_sum), min(a, b))
+
+    return F[i][j]
+
+  rec(0, n-1)
 
   return F[0][-1]
 
