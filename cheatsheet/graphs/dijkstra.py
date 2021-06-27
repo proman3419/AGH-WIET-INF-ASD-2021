@@ -128,3 +128,44 @@ graph_am = [[0, 2, 4, 0, 0, 0],
 print(dijkstra_am(graph_am, 0))
 
 # ==============================================================================
+
+# O(V + (V^2)*log(V))
+def dijkstra_am_pq(graph, s):
+  n = len(graph)
+  queue = PriorityQueue()
+  processed = [False]*n
+  distances = [inf]*n
+  # parents = [None]*n
+
+  distances[s] = 0
+  queue.put((distances[s], s))
+
+  while not queue.empty():
+    u = queue.get()[1]
+
+    if not processed[u]:
+      for v in range(n):
+        if graph[u][v] > 0:
+          curr_dist = distances[u] + graph[u][v]
+
+          if curr_dist < distances[v]:
+            # parents[v] = u
+            distances[v] = curr_dist
+            queue.put((distances[v], v))
+
+      processed[u] = True
+
+  # print(get_path(distances, parents, n-1))
+
+  return distances
+
+
+# [0, 2, 3, 8, 6, 9]
+graph_am = [[0, 2, 4, 0, 0, 0],
+            [0, 0, 1, 7, 0, 0],
+            [0, 0, 0, 0, 3, 0],
+            [0, 0, 0, 0, 0, 1],
+            [0, 0, 0, 2, 0, 5],
+            [0, 0, 0, 0, 0, 0]]
+
+print(dijkstra_am_pq(graph_am, 0))
