@@ -18,6 +18,7 @@ def topologic_sort_util(graph, s, visited, res, m):
   return m
 
 
+# O(V + E)
 def topologic_sort(graph):
   n = len(graph)
   visited = [False]*n
