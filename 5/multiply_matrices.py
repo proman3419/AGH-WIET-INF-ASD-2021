@@ -3,7 +3,7 @@ from math import inf
 
 def multiply_matrices(A):
   n = len(A)
-  # F[i][j] - min koszt wymnozenia macierzy od i do j-1
+  # F[i][j] - min koszt wymnozenia macierzy od i do j
   F = [[0 for _ in range(n)] for _ in range(n)]
 
   for l in range(2, n):
