@@ -3,7 +3,7 @@ from collections import deque
 
 
 # O(nt)
-def tanagram2(x, y, t):
+def tanagram_2(x, y, t):
   n = len(x)
   used = [0]*n
 

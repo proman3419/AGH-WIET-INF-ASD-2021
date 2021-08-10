@@ -58,7 +58,7 @@ if print_sol[0]:
     print(get_solution(F, P, W, len(W)-1, max_w))
 
 
-def knapsack2(P, W, max_w):
+def knapsack_2(P, W, max_w):
   max_p = sum(P)
   n = len(W)
   if n == 0:
@@ -106,7 +106,7 @@ def knapsack2(P, W, max_w):
   return (None, 0, max_p)
 
 
-def get_solution2(F, P, W, i, p):
+def get_solution_2(F, P, W, i, p):
   # jezeli rozpatrzylismy wszystkie elementy poza ostatnim
   if i == 0:
     # jezeli profit nam na to pozwala to bierzemy element
