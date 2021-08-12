@@ -18,8 +18,15 @@ def dfs(graph):
   cycle = []
 
   # na tym etapie pewnym jest, ze graf posiada cykl Eulera (przypadek przeciwny odrzucilismy w glownej funkcji).
-  # nie ma znaczenia, w ktorym miejscu cyklu zaczniemy, i tak odwiedzimy wszystkie krawedzie
-  stack = [0]
+  # dla grafow niespojnych musimy znalezc wierzcholek, z ktorego zaczniemy
+  for u in range(n):
+    edges_cnt = 0
+    for v in range(n):
+      edges_cnt += graph[u][v]
+      
+    if edges_cnt != 0:
+      stack = [u]
+      break
 
   # petla dfs_visit zakonczy sie kiedy odwiedzone zostana wszystkie krawedzie.
   # dla kazdego wierzcholka (n) sprawdzimy wszystkie mozliwe krawedzie (n).
@@ -96,17 +103,6 @@ def bfs(graph, s):
 
 
 # O(n^2)
-def check_if_connected(graph):
-  visited = bfs(graph, 0) # O(n^2)
-
-  for v in visited: # O(n)
-    if not v:
-      return False
-
-  return True
-
-
-# O(n^2)
 def check_if_has_euler(graph):
   # pusty graf
   if len(graph) == 0:
@@ -116,10 +112,6 @@ def check_if_has_euler(graph):
   # jezeli graf nie ma wszystkich wierzcholkow parzystego stopnia
   if not check_if_even_degrees(graph): # O(n^2)
     # print('not all degrees are even')
-    return False
-  # lub nie jest spojny
-  if not check_if_connected(graph): # O(n^2)
-    # print('not connected')
     return False
   # to nie posiada cyklu Eulera
 
