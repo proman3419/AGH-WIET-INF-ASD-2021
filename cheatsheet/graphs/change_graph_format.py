@@ -46,6 +46,7 @@ def am_to_nl_w(am):
   return nl
 
 
+# examples
 graph = [[1, 4],
          [2, 3],
          [0, 7],
@@ -58,12 +59,6 @@ graph = [[1, 4],
          [10],
          [8]]
 
-# graph = []
-
-# print(nl_to_am(graph))
-# print(am_to_nl(graph))
-# print(am_to_nl(nl_to_am(graph)))
-
 graph_w = [[(1, 2), (2, 4)],
            [(2, 1), (3, 7)],
            [(4, 3)],
@@ -71,8 +66,11 @@ graph_w = [[(1, 2), (2, 4)],
            [(3, 2), (5, 5)],
            []]
 
-# graph_w = []
+# ==============================================================================
 
-print(nl_to_am_w(graph_w))
-# print(am_to_nl_w(graph_w))
-# print(am_to_nl_w(nl_to_am_w(graph_w)))
+graph = []
+
+# print(nl_to_am(graph))
+# print(am_to_nl(graph))
+# print(nl_to_am_w(graph))
+# print(am_to_nl_w(graph))
