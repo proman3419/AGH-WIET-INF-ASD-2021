@@ -59,7 +59,6 @@ def dfs_nl(graph):
     # nonlocal parents, visit_times, process_times
 
     time += 1
-    # czas odwiedzenia
     # visit_times[u] = time
     visited[u] = True
 
@@ -69,7 +68,6 @@ def dfs_nl(graph):
         dfs_visit(v)
 
     time += 1
-    # czas przetworzenia
     # process_times[u] = time
 
   for u in range(n):
