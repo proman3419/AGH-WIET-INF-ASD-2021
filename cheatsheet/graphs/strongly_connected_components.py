@@ -140,6 +140,7 @@ def scc_nl(graph):
   return sccs
 
 
+# [0, 0, 0, 2, 2, 2, 2, 1, 1, 1, 1]
 graph_nl = [[1, 4],
             [2, 3],
             [0, 7],
