@@ -1,100 +1,60 @@
-class Vertex:
-  def __init__(self, neighbors, _id):
-    self.neighbors = neighbors
-    self.id = _id
-    self.parent = None
-    self.visited = False
-    #self.distance = -1
-    self.visit_time = -1
-    self.process_time = -1
-    self.scc = -1
-    
-  def display(self):
-    print(f'vertex {self.id} ================================================')
-    print(f'neighbors: {self.neighbors}')
-    print(f'parent: {self.parent}')
-    print(f'visited: {self.visited}')
-    #print(f'distance: {self.distance}')
-    print(f'visit_time: {self.visit_time}')
-    print(f'process_time: {self.process_time}')
-    print(f'scc: {self.scc}')
-    print()
-    
-
-def display_graph(graph):
-  for i in range(len(graph)):
-    graph[i].display()
-
-
-def scc_util(graph):
+# O(V^2)
+def scc_am_util(graph):
   n = len(graph)
+  visited = [False]*n
   time = 0
+  process_times = [-1]*n
 
   def dfs_visit(u):
-    nonlocal graph, time, n
+    nonlocal graph, visited, time, n
+    nonlocal process_times
 
     time += 1
-    # czas odwiedzenia
-    graph[u].visit_time = time
-    graph[u].visited = True
+    visited[u] = True
 
     for v in range(n):
-      if graph[u].neighbors[v] == 1 and not graph[v].visited:
-        graph[v].parent = u
+      if graph[u][v] == 1 and not visited[v]:
         dfs_visit(v)
 
     time += 1
-    # czas przetworzenia
-    graph[u].process_time = time
+    process_times[u] = time
 
-  for u in range(len(graph)):
-    if not graph[u].visited:
+  for u in range(n):
+    if not visited[u]:
       dfs_visit(u)
 
+  return process_times
 
-def scc_util_reverse(graph, u, scc_id):
-  graph[u].visited = True
-  graph[u].scc = scc_id
+
+def scc_am_util_reverse(graph, visited, sccs, u, scc_id):
+  visited[u] = True
+  sccs[u] = scc_id
 
   for v in range(len(graph)):
-    if graph[v].neighbors[u] == 1 and not graph[v].visited:
-      scc_util_reverse(graph, v, scc_id)
+    if graph[v][u] == 1 and not visited[v]:
+      scc_am_util_reverse(graph, visited, sccs, v, scc_id)
 
 
-def scc(graph):
-  # wykonujemy dfs
-  scc_util(graph)
+# O(V^2)
+def scc_am(graph):
+  n = len(graph)
+  process_times = scc_am_util(graph)
 
-  # sortujemy malejaco po czasie przetworzenia
-  # tworzymy kopie wierzcholkow zawierajaca (id, process_time)
-  # sortujac po oryginale reprezentacja macierzowa stracilaby na znaczeniu
-  to_sort = [(v.id, v.process_time) for v in graph]
+  to_sort = [(i, process_times[i]) for i in range(n)]
   to_sort.sort(key=lambda x: x[1], reverse=True)
 
-  # resetujemy flagi odwiedzenia
-  for i in range(len(graph)):
-    graph[i].visited = False
-
+  visited = [False]*n
+  sccs = [-1]*n
   scc_id = 0
-  # ponowne wykonanie dfs po grafie z odwroconymi krawedziami
   for e in to_sort:
-    if not graph[e[0]].visited:
-      scc_util_reverse(graph, e[0], scc_id)
+    if not visited[e[0]]:
+      scc_am_util_reverse(graph, visited, sccs, e[0], scc_id)
       scc_id += 1
 
+  return sccs
 
-# graph = [[1, 4],
-#          [2, 3],
-#          [0, 7],
-#          [4],
-#          [5],
-#          [3, 6],
-#          [3],
-#          [9],
-#          [7, 6],
-#          [10],
-#          [8]]
 
+# [0, 0, 0, 2, 2, 2, 2, 1, 1, 1, 1]
 graph = [[0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0],
          [0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0],
          [1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
@@ -107,7 +67,89 @@ graph = [[0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0],
          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
          [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]]
 
-graph = [Vertex(graph[i], i) for i in range(len(graph))]
+print(scc_am(graph))
 
-scc(graph)
-display_graph(graph)
+# ==============================================================================
+
+# O(V + E)
+def scc_nl_util(graph):
+  n = len(graph)
+  visited = [False]*n
+  time = 0
+  process_times = [-1]*n
+
+  def dfs_visit(u):
+    nonlocal graph, visited, time, n
+    nonlocal process_times
+
+    time += 1
+    visited[u] = True
+
+    for v in graph[u]:
+      if not visited[v]:
+        dfs_visit(v)
+
+    time += 1
+    process_times[u] = time
+
+  for u in range(n):
+    if not visited[u]:
+      dfs_visit(u)
+
+  return process_times
+
+
+def generate_reversed_graph_nl(graph):
+  n = len(graph)
+  _graph = [[] for _ in range(n)]
+
+  for u in range(n):
+    for v in graph[u]: 
+      _graph[v].append(u)
+
+  return _graph
+
+
+def scc_nl_util_reverse(graph, visited, sccs, u, scc_id):
+  visited[u] = True
+  sccs[u] = scc_id
+
+  for v in graph[u]:
+    if not visited[v]:
+      scc_nl_util_reverse(graph, visited, sccs, v, scc_id)
+
+
+# O(V + E)
+def scc_nl(graph):
+  n = len(graph)
+  process_times = scc_nl_util(graph)
+
+  to_sort = [(i, process_times[i]) for i in range(n)]
+  to_sort.sort(key=lambda x: x[1], reverse=True)
+
+  r_graph = generate_reversed_graph_nl(graph)
+
+  visited = [False]*n
+  sccs = [-1]*n
+  scc_id = 0
+  for e in to_sort:
+    if not visited[e[0]]:
+      scc_nl_util_reverse(r_graph, visited, sccs, e[0], scc_id)
+      scc_id += 1
+
+  return sccs
+
+
+graph_nl = [[1, 4],
+            [2, 3],
+            [0, 7],
+            [4],
+            [5],
+            [3, 6],
+            [3],
+            [9],
+            [7, 6],
+            [10],
+            [8]]
+
+print(scc_nl(graph_nl))
