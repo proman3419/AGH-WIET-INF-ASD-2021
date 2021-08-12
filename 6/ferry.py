@@ -5,7 +5,7 @@ def ferry(A, L):
   F = [[['_' for _ in range(L+1)] for _ in range(L+1)] for _ in range(n)]
 
   if A[0] > L:
-    return 0
+    return (-1, -1, -1, [])
 
   F[0][L-A[0]][L] = 'L'
   F[0][L][L-A[0]] = 'R'
@@ -38,9 +38,11 @@ def get_solution(F, A, i, l, r):
 
 
 # 7
+# ['L', 'L', 'R', 'L', 'R', 'R', 'R']
 A = [10, 4, 7, 6, 5, 4, 2]; L = 20
 
 # 4
+# ['R', 'R', 'L', 'L']
 A = [4, 3, 12, 1, 9]; L = 13
 
 max_i, max_l, max_r, F = ferry(A, L)
