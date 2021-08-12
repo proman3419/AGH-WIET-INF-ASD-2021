@@ -9,13 +9,10 @@ def find_max_path(G, V):
   F = [-inf]*n
   F[0] = V[0] # zakladam, ze korzen to wierzcholek 0
 
-  op_cnt = 0
-
   def rec(i):
-    nonlocal G, V, F, n, op_cnt
+    nonlocal G, V, F, n
 
     for j in range(n):
-      op_cnt += 1
       if G[i][j] == 1:
         F[j] = max(F[j], F[i] + V[j])
         G[i][j] = G[j][i] = 0
