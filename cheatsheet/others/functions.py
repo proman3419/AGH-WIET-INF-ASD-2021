@@ -135,3 +135,19 @@ T = [[randint(rr[0], rr[1]) for _ in range(N)] for _ in range(N)]
 for l in range(2, n):
   for i in range(n-l):
     print(i, i+l)
+
+
+# iterate diagonally
+for k in range(n):
+  for j in range(k+1):
+    i = k - j
+    print(i, j)
+  print()
+
+for k in range(n-2, -1, -1):
+  for j in range(k+1):
+    i = k - j
+    _i = n - j - 1
+    _j = n - i - 1
+    print(_i, _j)
+  print()
