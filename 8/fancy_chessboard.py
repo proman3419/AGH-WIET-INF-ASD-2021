@@ -1,5 +1,12 @@
 from queue import PriorityQueue
+from collections import deque
 from math import inf
+
+
+s = (0, 0)
+directions = [(-1, -1), (0, -1), (1, -1),
+              (-1,  0),          (1,  0),
+              (-1,  1), (0,  1), (1,  1)]
 
 
 def get_path(distances, parents, v):
@@ -26,12 +33,6 @@ def kings_path(graph):
   distances = [[inf for _ in range(n)] for _ in range(n)]
   parents = [[None for _ in range(n)] for _ in range(n)]
 
-  directions = [(-1, -1), (0, -1), (1, -1),
-                (-1,  0),          (1,  0),
-                (-1,  1), (0,  1), (1,  1)]
-
-  s = (0, 0)
-
   distances[s[0]][s[1]] = graph[s[0]][s[1]]
   queue.put((distances[s[0]][s[0]], s))
 
@@ -46,11 +47,47 @@ def kings_path(graph):
           curr_dist = distances[u[0]][u[1]] + graph[v[0]][v[1]]
 
           if curr_dist < distances[v[0]][v[1]]:
-            parents[v[0]][v[1]] = (u[0], u[1])
             distances[v[0]][v[1]] = curr_dist
+            parents[v[0]][v[1]] = (u[0], u[1])
+
             queue.put((distances[v[0]][v[1]], (v[0], v[1])))
 
       processed[u[0]][u[1]] = True
+
+  print(get_path(distances, parents, (n-1, n-1)))
+
+  return distances[-1][-1]
+
+
+# W = max_w - min_w, w naszym przypadku jest to 5 - 1 = 5 wiec traktujemy jako stala i pomijamy
+# O(W*V^2)
+def kings_path_2(graph):
+  n = len(graph)
+  queue = deque()
+  visited = [[False for _ in range(n)] for _ in range(n)]
+  distances = [[inf for _ in range(n)] for _ in range(n)]
+  parents = [[None for _ in range(n)] for _ in range(n)]
+
+  distances[s[0]][s[1]] = graph[s[0]][s[1]]
+  visited[s[0]][s[1]] = True
+  queue.append((1, s))
+
+  while queue:
+    w, u = queue.popleft()
+
+    if w > 1:
+      queue.append((w-1, u)) 
+      continue
+
+    for d in directions:
+      v = (u[0]+d[0], u[1]+d[1])
+
+      if 0 <= v[0] < n and 0 <= v[1] < n and not visited[v[0]][v[1]]:
+        distances[v[0]][v[1]] = distances[u[0]][u[1]] + graph[v[0]][v[1]]
+        parents[v[0]][v[1]] = (u[0], u[1])
+        visited[v[0]][v[1]] = True
+
+        queue.append((graph[v[0]][v[1]], v))
 
   print(get_path(distances, parents, (n-1, n-1)))
 
@@ -83,3 +120,4 @@ A = [[0, 3, 2],
      [2, 5, 0]]
 
 print(kings_path(A))
+print(kings_path_2(A))
