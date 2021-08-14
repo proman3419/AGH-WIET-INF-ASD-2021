@@ -10,7 +10,7 @@ def knapsack_3d(V, W, H, max_w, max_h):
 
   for i in range(1, n):
     for w in range(1, max_w+1):
-      for h in range(H[0], max_h+1):
+      for h in range(1, max_h+1):
         F[i][w][h] = F[i-1][w][h] # nie bierzemy
 
         if w >= W[i] and h >= H[i]:
@@ -36,8 +36,8 @@ W = [5, 5, 6]
 H = [5, 6, 10]
 max_w = 10; max_h = 10
 
-# 35
-# [1, 2, 3, 6]
+# 49
+# [1, 2, 5, 6]
 V = [10, 10, 14, 6, 12, 20, 5]
 W = [15, 7, 8, 4, 1, 2, 5]
 H = [15, 3, 6, 5, 15, 19, 2]
