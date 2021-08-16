@@ -2,7 +2,7 @@ from math import inf
 
 
 # sprawdzenie czy poczatek i koniec wystepuja
-def check_borders(S):
+def check_borders(A, S):
   borders_appear = [False, False]
   for e in A:
     if e[0] == S[0]: borders_appear[0] = True
@@ -51,7 +51,7 @@ def map_pt(p, pts):
 def check_if_possible(A, S):
   n = len(A)
 
-  if check_borders(S):
+  if check_borders(A, S):
     return False
 
   pts = generate_pts(A)
@@ -73,5 +73,11 @@ def check_if_possible(A, S):
 
 # True
 A = [(0, 3), (3, 7), (4, 3), (-2, 0)]; S = (0, 7)
+
+# True
+A = [(4, 6), (7, 9), (3, 4), (6, 8), (9, 10), (4, 7), (8, 10)]; S = (3, 10)
+
+# False
+A = [(4, 6), (7, 9), (2, 4), (6, 8), (9, 10), (4, 7)]; S = (3, 9)
 
 print(check_if_possible(A, S))
