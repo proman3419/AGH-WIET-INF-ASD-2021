@@ -1,8 +1,9 @@
 # algorytm
-# sprawdzamy ceny na wszystkich stacjach, do ktorych mozemy dojechac.
-# po znalezieniu najtanszej, poronujemy cenzy z ta na obecnej.
-# jezeli na obecna jest tansza to tankujemy do pelna po czym, w obu
-# przypadkach, jedziemy do nastepnej najtanszej
+# sprawdzamy ceny na wszystkich stacjach, do ktorych mozemy dojechac (na pelnym baku).
+# po znalezieniu najtanszej, porownujemy cene z ta na obecnej.
+# jezeli obecna jest tansza to tankujemy do pelna,
+# jezeli nie jest to tankujemy tyle, zeby dojechac do najtanszej.
+# nastepnie w obu przypadkach, jedziemy do nastepnej najtanszej
 
 
 # dowod
@@ -67,7 +68,8 @@ def tank_b1(L, A, n, t):
       cost += (L - l) * curr[1]
       l = L
 
-    # jezeli nie mamy wystarczajaco paliwa, zeby dojechac do nastepnej stacji to tankujemy
+    # jezeli nie mamy wystarczajaco paliwa, zeby dojechac do nastepnej stacji to tankujemy tak,
+    # zeby dojechac do najtanszej, ktora jest w zasiegu
     l_after = l - (best[0] - curr[0])
     if l_after < 0:
       #print(f'deficyt: {abs(l_after)}, dodatkowy koszt: {abs(l_after) * curr[1]}')
