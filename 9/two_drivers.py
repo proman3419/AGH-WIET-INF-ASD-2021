@@ -59,7 +59,7 @@ def dijkstra_nl(graph, x, y):
   return get_path(distances, parents, y, n)
 
 
-  # O(V + E*log(V))
+# O(V + E*log(V))
 def two_drivers(G, x, y):
   prev_v, path = dijkstra_nl(G, x, y)
   s_person = 'A' if prev_v < len(G) else 'B'
