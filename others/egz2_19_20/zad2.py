@@ -36,33 +36,34 @@ def union(x, y):
 
 
 # O(E*log(E))
-def kruskal(graph, V, A):
-  graph.sort(key=lambda x: x[2])
+def kruskal(graph, V, A, e_i, main_edge_w):
   vertices = [Node(i) for i in range(V)]
   result = []
 
   i = 0
   e_cnt = 0
-  min_diff = 0
-  max_diff = 0
+  min_t_diff = 0
+  max_t_diff = 0
   while e_cnt < V - 1:
-    u, v, w, sgn = graph[i]
+    u, v, w = graph[i]
     i += 1
     x = find(vertices[u])
     y = find(vertices[v])
 
+    t_diff = main_edge_w - w
+
     if x != y:
-      if sgn:
-        if w > max_diff:
-          max_diff = w
-      elif -1*w < min_diff:
-        min_diff = -1*w
+      if t_diff >= 0:
+        if t_diff > max_t_diff:
+          max_t_diff = t_diff
+      elif t_diff < min_t_diff:
+        min_t_diff = t_diff
 
       e_cnt += 1
-      result.append([u, v, w])
+      result.append([u, v, t_diff])
       union(x, y)
 
-  return max_diff - min_diff
+  return max_t_diff - min_t_diff
 
 
 def generate_edges_graph(A, V):
@@ -76,30 +77,21 @@ def generate_edges_graph(A, V):
   return edges
 
 
-def generate_time_diffs_graph(edges, e_i):
-  n = len(edges)
-  td_graph = []
-
-  for i in range(n):
-    td_graph.append([edges[i][0], edges[e_i][1], abs(edges[i][2]-edges[e_i][2]),edges[i][2]-edges[e_i][2] >= 0])
-
-  return td_graph
-
-
-# O(E*log(E))
+# O(V^2*E*log(E))
 def highway(A):
   V = len(A)
   edges = generate_edges_graph(A, V)
+  _edges = [e for e in edges]
 
-  min_diff = inf
+  min_t_diff = inf
   for i in range(len(edges)):
-    td_graph = generate_time_diffs_graph(edges, i)
-    curr_diff = kruskal(td_graph, V, A)
+    _edges.sort(key=lambda e: abs(edges[i][2]-e[2]))
+    t_diff = kruskal(_edges, V, A, i, edges[i][2])
 
-    if curr_diff < min_diff:
-      min_diff = curr_diff
+    if t_diff < min_t_diff:
+      min_t_diff = t_diff
 
-  return min_diff
+  return min_t_diff
         
 
 runtests( highway ) 
