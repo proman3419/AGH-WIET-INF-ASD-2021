@@ -78,6 +78,8 @@ def copy_graph(graph, _graph, n):
       _graph[i][j] = graph[i][j]
 
 
+# If the algorithm doesn't work check the previous version
+# O(V^2*E^2)
 def find_edge_connectivity(graph):
   n = len(graph)
 
@@ -88,8 +90,9 @@ def find_edge_connectivity(graph):
   _graph = [[0 for _ in range(n)] for _ in range(n)]
 
   k = inf
-  for s in range(n):
-    for e in range(s+1, n):
+  s = 0
+  for e in range(n):
+    if e != s:
       copy_graph(graph, _graph, n)
       k = min(k, ford_fulkerson(_graph, s, e))
 
