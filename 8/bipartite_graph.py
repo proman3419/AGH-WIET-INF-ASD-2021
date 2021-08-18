@@ -15,7 +15,7 @@ def is_bipartite(graph, s):
       # jezeli zostal juz odwiedzony
       if visited[v] is not None:
         # i ma ten sam kolor co jego rodzic to znaczy, ze
-        # 2 kolory sa niewystarczjace do pokolorowania jego wierzcholkow
+        # 2 kolory sa niewystarczajace do pokolorowania jego wierzcholkow
         # czyli nie jest dwudzielny
         if visited[v] == color:
           bipartite_flag = False
@@ -25,7 +25,9 @@ def is_bipartite(graph, s):
       else:
         dfs_visit(v, (color+1)%2)
 
-  dfs_visit(s, 0)
+  for v in range(len(graph)):
+    if visited[v] is None:
+      dfs_visit(v, 0)
 
   return bipartite_flag
 
@@ -52,6 +54,17 @@ def is_bipartite(graph, s):
 # graph = [[], [], []]
 
 # False
-graph = [[1, 3, 5], [0, 5], [4], [4, 0], [3, 2], [1, 0]]
+# graph = [[1, 3, 5], [0, 5], [4], [4, 0], [3, 2], [1, 0]]
+
+# True
+# graph = [[],
+#          [2],
+#          [1]]
+
+# False
+graph = [[],
+         [2, 3],
+         [1, 3],
+         [1, 2]]
 
 print(is_bipartite(graph, 0))
