@@ -40,9 +40,9 @@ def tank_b1(L, A, n, t):
       return (cost, path)
     # jezeli mozna dotankowujac
     elif t - curr[0] <= L:
-      #print(f'mozna dojechac dotankowujac, dodatkowy koszt: {curr[1]*(t-curr[0])}')
+      #print(f'mozna dojechac dotankowujac, dodatkowy koszt: {curr[1]*(t-curr[0]-l)}')
       path.append(t)
-      return (cost + curr[1]*(t-curr[0]), path)
+      return (cost + curr[1]*(t-curr[0]-l), path)
 
     # jezeli rozwazylismy wszystkie stacje i nie moglismy dojechac do celu
     if pos + 1 >= n:
@@ -82,11 +82,31 @@ def tank_b1(L, A, n, t):
 
 
 # zakladam, ze stacje sa w posortowanej kolejnosci
+
+# (23, [0, 7, 15, 23])
 S = [2, 7, 12, 15, 20] # odleglosci stacji od punktu 0
 P = [4, 3, 10, 1, 4] # koszty paliw na poszczegolnych stacjach
-n = len(S) # ilosc stacji
 L = 10 # pojemnosc baku
 t = 23 # pole, do ktorego chcemy dojechac
-A = list(zip(S, P)) # A[i][0] = S[i], A[i][1] = P[i]
 
+# (18, [0, 3, 6, 9])
+S = [2, 3, 6]
+P = [4, 3, 3]
+L = 3
+t = 9
+
+# (1, [0, 2, 20])
+S = [2, 4, 8, 9, 15, 18]
+P = [1, 1, 1, 1, 1, 2]
+L = 19
+t = 20
+
+# # (-1, None)
+S = [2, 4, 8, 9, 15, 18]
+P = [1, 1, 1, 1, 1, 2]
+L = 4
+t = 20
+
+n = len(S) # ilosc stacji
+A = list(zip(S, P)) # A[i][0] = S[i], A[i][1] = P[i]
 print(tank_b1(L, A, n, t))

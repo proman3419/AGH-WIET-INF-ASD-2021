@@ -22,7 +22,7 @@
 
 
 # obliczyc minimalny koszt tankowan, zeby dojechac do t, na kazdej stacji mozna tankowac tylko do pelna
-def tank_b1(L, A, n, t):
+def tank_b2(L, A, n, t):
   l = L # obecny stan paliwa
   pos = -1
   cost = 0
@@ -78,13 +78,33 @@ def tank_b1(L, A, n, t):
 
 
 # zakladam, ze stacje sa w posortowanej kolejnosci
+
+# (29, [0, 7, 15, 23]
 S = [2, 7, 12, 15, 20] # odleglosci stacji od punktu 0
 P = [4, 3, 10, 1, 4] # koszty paliw na poszczegolnych stacjach
-n = len(S) # ilosc stacji
 L = 10 # pojemnosc baku
 t = 23 # pole, do ktorego chcemy dojechac
-A = list(zip(S, P)) # A[i][0] = S[i], A[i][1] = P[i]
 
-print(tank_b1(L, A, n, t))
+# (18, [0, 3, 6, 9])
+S = [2, 3, 6]
+P = [4, 3, 3]
+L = 3
+t = 9
+
+# (2, [0, 2, 20])
+S = [2, 4, 8, 9, 15, 18]
+P = [1, 1, 1, 1, 1, 2]
+L = 19
+t = 20
+
+# (-1, None)
+S = [2, 4, 8, 9, 15, 18]
+P = [1, 1, 1, 1, 1, 2]
+L = 4
+t = 20
+
+n = len(S) # ilosc stacji
+A = list(zip(S, P)) # A[i][0] = S[i], A[i][1] = P[i]
+print(tank_b2(L, A, n, t))
 
 # opis algorytmu i dowod to kopiuj wklej z b1, moze kiedys napisze dla b2
