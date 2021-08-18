@@ -2,7 +2,7 @@ from math import inf
 
 
 # sprawdzenie czy poczatek i koniec wystepuja
-def check_borders(S):
+def check_borders(A, S):
   borders_appear = [False, False]
   for e in A:
     if e[0] == S[0]: borders_appear[0] = True
@@ -51,7 +51,7 @@ def map_pt(p, pts):
 def find_min_cost(A, S, C):
   n = len(A)
 
-  if check_borders(S):
+  if check_borders(A, S):
     return inf
 
   pts = generate_pts(A)

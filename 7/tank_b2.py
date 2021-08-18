@@ -1,7 +1,7 @@
 # algorytm
-# sprawdzamy ceny na wszystkich stacjach, do ktorych mozemy dojechac.
-# po znalezieniu najtanszej, poronujemy cenzy z ta na obecnej.
-# jezeli na obecna jest tansza to tankujemy do pelna po czym, w obu
+# sprawdzamy ceny na wszystkich stacjach, do ktorych mozemy dojechac (na pelnym baku).
+# po znalezieniu najtanszej, poronujemy cene z ta na obecnej.
+# jezeli obecna jest tansza to tankujemy do pelna po czym, w obu
 # przypadkach, jedziemy do nastepnej najtanszej
 
 
