@@ -12,7 +12,7 @@ def color_bipartite_am(graph, s):
       if not bipartite_flag:
         return
 
-      if graph[u][v] != 0:
+      if graph[u][v] == 1:
         if visited[v] is not None:
           if visited[v] == color:
             bipartite_flag = False
