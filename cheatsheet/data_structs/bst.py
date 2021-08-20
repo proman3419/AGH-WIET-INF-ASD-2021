@@ -1,3 +1,6 @@
+# szacowanie zlozonosci dla drzewa zbalansowanego
+
+
 class BSTNode:
   def __init__(self, key):
     self.key = key
@@ -6,6 +9,7 @@ class BSTNode:
     self.parent = None
 
 
+# O(logn)
 def add(tree, key, parent=None):
   if tree is None:
     tree = BSTNode(key)
@@ -18,6 +22,7 @@ def add(tree, key, parent=None):
   return tree
 
 
+# O(logn)
 def find(tree, key):
   while tree is not None:
     if tree.key == key:
@@ -83,6 +88,7 @@ def print_breadth_first(tree):
     children = _children 
 
 
+# O(logn)
 def find_precursor(tree, key) -> BSTNode:
   node = find(tree, key)
 
@@ -109,6 +115,7 @@ def find_precursor(tree, key) -> BSTNode:
     return parent
 
 
+# O(logn)
 def find_successor(tree, key) -> BSTNode:
   node = find(tree, key)
 
@@ -135,6 +142,7 @@ def find_successor(tree, key) -> BSTNode:
     return parent
 
 
+# O(logn)
 def remove(tree, key):
   node = find(tree, key)
 
