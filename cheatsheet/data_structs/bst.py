@@ -35,57 +35,57 @@ def find(tree, key):
   return None
 
 
-def print_node(node):
-  print(f'key: {node.key}')
+# O(logn)
+def remove(tree, key):
+  node = find(tree, key)
 
-  if node.left is not None:
-    print(f'left: {node.left.key}')
+  if node is None:
+    return tree
+
+  parent = node.parent
+
+  # node jest lisciem
+  if node.left is None and node.right is None:
+    if parent is None:
+      return None
+    else:
+      if parent.left == node:
+        parent.left = None
+      else:
+        parent.right = None
+
+  # node ma 2 dzieci
+  elif node.left is not None and node.right is not None:
+    prec = find_precursor(tree, node.key)
+    node.key = prec.key
+    remove(prec, prec.key)
+
+  # node ma 1 dziecko
   else:
-    print('left: None')
+    # None or BSTNode -> BSTNode
+    # BSTNode or None -> BSTNode
+    # BSTNode1 or BSTNode2 -> BSTNode1
+    if parent is None:
+      return node.left or node.right
 
-  if node.right is not None:
-    print(f'right: {node.right.key}')
-  else:
-    print('right: None')
+    if node == parent.left:
+      parent.left = node.left or node.right
+    else:
+      parent.right = node.left or node.right
 
-
-def print_nodes(tree):
-  if tree is None:
-    return
-
-  print_nodes(tree.left)
-  print_node(tree)
-  print()
-  print_nodes(tree.right)
+  return tree
 
 
-def print_depth_first(tree):
-  if tree is None:
-    return
+def array_to_bst(A):
+  if len(A) == 0:
+    return None
 
-  print_depth_first(tree.left)
-  print(tree.key)
-  print_depth_first(tree.right)
+  tree = BSTNode(A[0])
 
+  for i in range(1, len(A)):
+    tree = add(tree, A[i])
 
-def print_breadth_first(tree):
-  if tree is None:
-    print('Empty')
-    return
-
-  children = [tree]
-  while len(children) > 0:
-    _children = []
-    
-    for node in children:
-      print(node.key, end=' ')
-      if node.left is not None:
-        _children.append(node.left)
-      if node.right is not None:
-        _children.append(node.right)
-
-    print()
-    children = _children 
+  return tree
 
 
 # O(logn)
@@ -142,61 +142,61 @@ def find_successor(tree, key) -> BSTNode:
     return parent
 
 
-# O(logn)
-def remove(tree, key):
-  node = find(tree, key)
+def print_node(node):
+  print(f'key: {node.key}')
 
-  if node is None:
-    return tree
-
-  parent = node.parent
-
-  # node jest lisciem
-  if node.left is None and node.right is None:
-    if parent is None:
-      return None
-    else:
-      if parent.left == node:
-        parent.left = None
-      else:
-        parent.right = None
-
-  # node ma 2 dzieci
-  elif node.left is not None and node.right is not None:
-    prec = find_precursor(tree, node.key)
-    node.key = prec.key
-    remove(prec, prec.key)
-
-  # node ma 1 dziecko
+  if node.left is not None:
+    print(f'left: {node.left.key}')
   else:
-    # None or BSTNode -> BSTNode
-    # BSTNode or None -> BSTNode
-    # BSTNode1 or BSTNode2 -> BSTNode1
-    if parent is None:
-      return node.left or node.right
+    print('left: None')
 
-    if node == parent.left:
-      parent.left = node.left or node.right
-    else:
-      parent.right = node.left or node.right
-
-  return tree
+  if node.right is not None:
+    print(f'right: {node.right.key}')
+  else:
+    print('right: None')
 
 
-tree = BSTNode(20)
+def print_nodes(tree):
+  if tree is None:
+    return
 
-tree = add(tree, 10)
-tree = add(tree, 27)
+  print_nodes(tree.left)
+  print_node(tree)
+  print()
+  print_nodes(tree.right)
 
-tree = add(tree, 5)
-tree = add(tree, 15)
-tree = add(tree, 13)
 
-tree = add(tree, 22)
-tree = add(tree, 30)
-tree = add(tree, 28)
-tree = add(tree, 35)
-tree = add(tree, 40)
+def print_depth_first(tree):
+  if tree is None:
+    return
+
+  print_depth_first(tree.left)
+  print(tree.key)
+  print_depth_first(tree.right)
+
+
+def print_breadth_first(tree):
+  if tree is None:
+    print('Empty')
+    return
+
+  children = [tree]
+  while len(children) > 0:
+    _children = []
+    
+    for node in children:
+      print(node.key, end=' ')
+      if node.left is not None:
+        _children.append(node.left)
+      if node.right is not None:
+        _children.append(node.right)
+
+    print()
+    children = _children 
+
+
+A = [20, 10, 27, 5, 15, 13, 22, 30, 28, 35, 40]
+tree = array_to_bst(A)
 
 print_breadth_first(tree)
 
