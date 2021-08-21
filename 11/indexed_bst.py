@@ -7,7 +7,7 @@ class BSTNode:
     self.left = None
     self.right = None
     self.parent = None
-    self.children_cnt = 0
+    self.nodes_cnt = 1
 
 
 # O(logn)
@@ -16,7 +16,7 @@ def add(tree, key, parent=None):
     tree = BSTNode(key)
     tree.parent = parent
   else:
-    tree.children_cnt += 1
+    tree.nodes_cnt += 1
     if key < tree.key:
       tree.left = add(tree.left, key, tree)
     elif key > tree.key:
@@ -147,7 +147,7 @@ def find_successor(tree, key) -> BSTNode:
 
 def print_node(node):
   print(f'key: {node.key}')
-  print(f'children_cnt: {node.children_cnt}')
+  print(f'nodes_cnt: {node.nodes_cnt}')
 
   if node.left is not None:
     print(f'left: {node.left.key}')
@@ -170,49 +170,50 @@ def print_nodes(tree):
   print_nodes(tree.right)
 
 
-# O(nlogn)
+# O(logn)
 def find_ith_node(tree, i):
-  n = tree.children_cnt
+  n = tree.nodes_cnt
 
-  if i > n:
+  if i >= n:
     return None
 
-  while True:
-    prev = find_precursor(tree, tree.key)
+  j = 0 if tree.left is None else tree.left.nodes_cnt # indeks roota
+  curr = tree
 
-    if prev is None:
-      break
+  while j != i:
+    if j < i:
+      curr = curr.right
+      l_ns = 0 if curr.left is None else curr.left.nodes_cnt
+      j = j + l_ns + 1
+    else:
+      curr = curr.left
+      r_ns = 0 if curr.right is None else curr.right.nodes_cnt
+      j = j - r_ns - 1
 
-    tree = prev
-
-  # tree jest teraz najmniejszym elementem
-
-  for j in range(i):
-    tree = find_successor(tree, tree.key)
-
-  return tree.key
+  return curr.key
 
 
+# O(logn)
 def find_node_order(tree, node):
   if node is None:
     return None
 
-  prev_node = None
-  curr_node = node
+  prev = None
+  curr = node
   i = 0
 
   while True:
     # jezeli nie przyszlismy z lewej (wtedy liczylibysmy te same nody)
-    if prev_node is None or curr_node.left != prev_node:
-      if curr_node.left is not None:
-        i += curr_node.left.children_cnt + 1
+    if prev is None or curr.left != prev:
+      if curr.left is not None:
+        i += curr.left.nodes_cnt
 
-    if curr_node.parent is None: # doszlismy do roota
+    if curr.parent is None: # doszlismy do roota
       break
 
-    prev_node, curr_node = curr_node, curr_node.parent
+    prev, curr = curr, curr.parent
 
-    if curr_node.right == prev_node: # parent jest mniejszy
+    if curr.right == prev: # parent jest mniejszy
       i += 1
 
   return i
@@ -238,3 +239,5 @@ for i in range(len(A)):
   if i != res_2:
     print('find_node_order failed')
     break
+else:
+  print('OK')
