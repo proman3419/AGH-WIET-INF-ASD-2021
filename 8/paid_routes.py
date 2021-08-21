@@ -52,12 +52,29 @@ def dijkstra_am(graph, s, t):
 
       processed[u] = True
 
-    u = get_min_v(distances, processed, n)    
+    u = get_min_v(distances, processed, n)   
 
   return get_path(distances, parents, t)
 
 
+# nadpisujemy graf tak, zeby platne drogi mialy wage n**2 + 1 czyli
+# wiecej niz jakbysmy przeszli wszystkimi darmowymi krawedziami dla grafu pelnego,
+# dzieki temu darmowe beda priorytetyzowane
+def modify_graph(graph):
+  n = len(graph)
+  m = n**2 + 1
+
+  for u in range(n):
+    for v in range(n):
+      if graph[u][v] == 2:
+        graph[u][v] = m
+
+  return graph
+
+
 def paid_routes(graph, s, t):
+  graph = modify_graph(graph)
+
   return dijkstra_am(graph, s, t)
 
 
@@ -70,6 +87,23 @@ graph = [[0, 2, 1, 0, 0],
          [0, 0, 0, 0, 1],
          [0, 0, 0, 0, 0],
          [0, 0, 0, 1, 0]]
+s = 0; t = 3
+
+# [0, 2, 3, 1]
+graph = [[0, 2, 1, 0],
+         [2, 0, 0, 1],
+         [1, 0, 0, 1],
+         [0, 1, 1, 0]]
+s = 0; t = 1
+
+# [0, 6, 5, 3]
+graph = [[0, 1, 0, 0, 2, 0, 1], 
+         [1, 0, 2, 0, 0, 0, 0], 
+         [0, 2, 0, 2, 0, 0, 0], 
+         [0, 0, 2, 0, 2, 1, 0], 
+         [2, 0, 0, 2, 0, 0, 0], 
+         [0, 0, 0, 1, 0, 0, 2], 
+         [1, 0, 0, 0, 0, 2, 0]]
 s = 0; t = 3
 
 print(paid_routes(graph, s, t))
