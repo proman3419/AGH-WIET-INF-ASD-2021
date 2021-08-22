@@ -25,60 +25,6 @@ def add(tree, key, parent=None):
   return tree
 
 
-# O(logn)
-def find(tree, key):
-  while tree is not None:
-    if tree.key == key:
-      return tree
-    elif key < tree.key:
-      tree = tree.left
-    else:
-      tree = tree.right
-
-  return None
-
-
-# O(logn)
-def remove(tree, key):
-  node = find(tree, key)
-
-  if node is None:
-    return tree
-
-  parent = node.parent
-
-  # node jest lisciem
-  if node.left is None and node.right is None:
-    if parent is None:
-      return None
-    else:
-      if parent.left == node:
-        parent.left = None
-      else:
-        parent.right = None
-
-  # node ma 2 dzieci
-  elif node.left is not None and node.right is not None:
-    prec = find_precursor(tree, node.key)
-    node.key = prec.key
-    remove(prec, prec.key)
-
-  # node ma 1 dziecko
-  else:
-    # None or BSTNode -> BSTNode
-    # BSTNode or None -> BSTNode
-    # BSTNode1 or BSTNode2 -> BSTNode1
-    if parent is None:
-      return node.left or node.right
-
-    if node == parent.left:
-      parent.left = node.left or node.right
-    else:
-      parent.right = node.left or node.right
-
-  return tree
-
-
 def array_to_bst(A):
   if len(A) == 0:
     return None
@@ -92,82 +38,16 @@ def array_to_bst(A):
 
 
 # O(logn)
-def find_precursor(tree, key) -> BSTNode:
-  node = find(tree, key)
+def find(tree, key):
+  while tree is not None:
+    if tree.key == key:
+      return tree
+    elif key < tree.key:
+      tree = tree.left
+    else:
+      tree = tree.right
 
-  if node is None:
-    return None
-
-  # w lewo i max w prawo
-  if node.left is not None:
-    node = node.left
-    while node.right is not None:
-      node = node.right
-
-    return node
-
-  # do gory dopoki obecny nie jest prawym dzieckiem lub nie ma rodzica
-  parent = node.parent
-  while parent is not None and parent.right != node:
-    node = parent
-    parent = node.parent
-
-  if parent is None:
-    return None
-  else:
-    return parent
-
-
-# O(logn)
-def find_successor(tree, key) -> BSTNode:
-  node = find(tree, key)
-
-  if node is None:
-    return None
-
-  # w prawo i max w lewo
-  if node.right is not None:
-    node = node.right
-    while node.left is not None:
-      node = node.left
-
-    return node
-
-  # do gory dopoki obecny nie jest lewym dzieckiem lub nie ma rodzica
-  parent = node.parent
-  while parent is not None and parent.left != node:
-    node = parent
-    parent = node.parent
-
-  if parent is None:
-    return None
-  else:
-    return parent
-
-
-def print_node(node):
-  print(f'key: {node.key}')
-  print(f'nodes_cnt: {node.nodes_cnt}')
-
-  if node.left is not None:
-    print(f'left: {node.left.key}')
-  else:
-    print('left: None')
-
-  if node.right is not None:
-    print(f'right: {node.right.key}')
-  else:
-    print('right: None')
-
-
-def print_nodes(tree):
-  if tree is None:
-    return
-
-  print_nodes(tree.left)
-  print_node(tree)
-  print()
-  print_nodes(tree.right)
+  return None
 
 
 # O(logn)

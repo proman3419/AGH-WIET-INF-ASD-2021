@@ -22,6 +22,18 @@ def add(tree, key, parent=None):
   return tree
 
 
+def array_to_bst(A):
+  if len(A) == 0:
+    return None
+
+  tree = BSTNode(A[0])
+
+  for i in range(1, len(A)):
+    tree = add(tree, A[i])
+
+  return tree
+  
+
 # O(logn)
 def find(tree, key):
   while tree is not None:
@@ -72,18 +84,6 @@ def remove(tree, key):
       parent.left = node.left or node.right
     else:
       parent.right = node.left or node.right
-
-  return tree
-
-
-def array_to_bst(A):
-  if len(A) == 0:
-    return None
-
-  tree = BSTNode(A[0])
-
-  for i in range(1, len(A)):
-    tree = add(tree, A[i])
 
   return tree
 
