@@ -3,6 +3,10 @@ from collections import deque
 from math import inf
 
 
+# V = n^2 gdzie n = liczba wierszy = liczba kolumn
+# W = max_w - min_w
+# D = 8
+# obie zmienne traktujemy jako stale w naszym przypadku
 s = (0, 0)
 directions = [(-1, -1), (0, -1), (1, -1),
               (-1,  0),          (1,  0),
@@ -25,7 +29,7 @@ def get_path(distances, parents, v):
   return path[::-1]
 
 
-# O(V + (V^2)*log(V))
+# O(V + (W*D*V)*log(V))
 def kings_path(graph):
   n = len(graph)
   queue = PriorityQueue()
@@ -59,8 +63,7 @@ def kings_path(graph):
   return distances[-1][-1]
 
 
-# W = max_w - min_w, w naszym przypadku jest to 5 - 1 = 5 wiec traktujemy jako stala i pomijamy
-# O(W*V^2)
+# O(W*D*V)
 def kings_path_2(graph):
   n = len(graph)
   queue = deque()
