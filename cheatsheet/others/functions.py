@@ -1,3 +1,12 @@
+# constants
+directions_8 = [(-1, -1), (0, -1), (1, -1),
+                (-1,  0),          (1,  0),
+                (-1,  1), (0,  1), (1,  1)]
+
+directions_4 = [          (0, -1), 
+                (-1,  0),          (1,  0),
+                          (0,  1)         ]
+
 # is_prime
 def is_prime(n):
   if n < 2: return False
