@@ -5,4 +5,6 @@
 # 4. puszczamy BFS/DFS z pierwszego wierzcholka w posortowanej kolejnosci, 
 # jezeli odwiedzimy wszystkie wierzcholki to jest to DP
 
+# mozna pominac kroki 2 i 3 i w kroku 4 puscic BFS/DFS z dowolnego wierzcholka sss o id 0
+
 # O(V^2)
