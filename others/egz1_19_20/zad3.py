@@ -2,8 +2,8 @@ from zad3testy import runtests
 import math
 
 
-# a^x oraz ln(e, a) sa funkcjami rosnacymi czyli
-# dla x1 > x2: a^x1 > a^x2 oraz ln(e1, a) > ln(e2, a).
+# a^x oraz log(e, a) sa funkcjami rosnacymi czyli
+# dla x1 > x2: a^x1 > a^x2 oraz log(e1, a) > log(e2, a).
 # x jest rozlozone rownomiernie wiec bucket sort bedzie w czasie liniowym
 
 
