@@ -24,6 +24,7 @@ def find_longest_palindrome(s):
 
   print_solution(s, F)
 
+
 # kajak
 # s = 'romkajakan'
 
