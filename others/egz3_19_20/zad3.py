@@ -30,74 +30,21 @@ def merge(head1, head2):
   return l_w.next
 
 
-def find_series(curr):
-  while curr.next is not None and curr.next.val >= curr.val:
-    curr = curr.next
-  _next = curr.next
-  curr.next = None
-
-  return (curr, _next)
-
-
-def merge_sort(head):
-  l_w = Node() # lewy wartownik
-  l_w.next = head
-
-  while True:
-    if l_w is None or l_w.next is None:
-      return l_w.next
-
-    prev = l_w
-    curr = l_w.next
-    while curr is not None:
-      s1_end, s1_next = find_series(curr)
-      # jezeli nie zostal juz zaden element, nie da sie stworzyc niepuste s2
-      if s1_next is None:
-        break
-      s2_end, s2_next = find_series(s1_next)
-
-      curr = merge(curr, s1_next)
-      prev.next = curr
-
-      # ustal, ktory element bedzie na koncu nowego ciagu
-      if s1_end.val >= s2_end.val:
-        s1_end.next = s2_next
-        prev = s1_end
-      else:
-        s2_end.next = s2_next
-        prev = s2_end
-      curr = s2_next
-
-    # tylko jeden niemalejacy ciag => lista posortowana
-    if prev == l_w and curr == l_w.next:
-      break
-
-  return l_w.next
-
-
 def tasks(T):
-  for i in range(len(T)-1):
-    curr = T[i]
-    while curr.next is not None:
-      curr = curr.next
+  n = len(T)
 
-    curr.next = T[i+1]
+  while n > 1:
+    m = 0
+    for i in range(0, n-1, 2):
+      T[m] = merge(T[i], T[i+1])
+      m += 1
 
-  return merge_sort(T[0])
+    if n%2 == 1:
+      T[m] = T[n-1]
+      m += 1
+    n = m
 
-
-# to rozwiazanie jest lepsze, gdyby dzialalo :D (nie przechodzi 4. testu, zapetla sie)
-# def tasks(T):
-#   n = len(T)
-#   i = 0
-#   while 2**i < n:
-#     j = 0
-#     while j + 2**i < n:
-#       merge(T[j], T[j+2**i])
-#       j += 2**i + 1
-#     i += 1
-
-#   return T[0]
+  return T[0]
 
 
 runtests( tasks )
