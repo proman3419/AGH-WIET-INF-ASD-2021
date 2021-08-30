@@ -1,80 +1,72 @@
-# algorytm
-# sprawdzamy ceny na wszystkich stacjach, do ktorych mozemy dojechac (na pelnym baku).
-# po znalezieniu najtanszej, poronujemy cene z ta na obecnej.
-# jezeli obecna jest tansza to tankujemy do pelna po czym, w obu
-# przypadkach, jedziemy do nastepnej najtanszej
+from math import inf
 
 
-# dowod
-# zal, ze istnieje stacja i taka, ze jezeli wezmiemy ja do sciezki to 
-# koszt calkowity zmaleje.
-# j, k - stacje, ktore znajduja sie w sciezce
-# 0 < j < i < k
+def bin_search(A, x):
+  n = len(A)
+  l = 0
+  r = n - 1
+  while l <= r:
+    c = (l+r)//2
+    if A[c] < x:
+      l = c + 1
+    elif A[c] > x:
+      r = c - 1
+    else:
+      while c > 0 and A[c-1] == x:
+        c -= 1
+      break
 
-# koszt zmniejszylby sie wtw
-# 1) P[i] < P[k], lub
-# 2) tankujac w i w nastepnym kroku bedziemy mogli dojechac dalej niz k + L
+  if A[c] != x:
+    return None
+  return c
 
-# 1) falsz poniewaz z zal algo P[k] = min(P[(j, k>]) => P[k] < P[i]
-# 2) falsz poniewaz bedziemy mogli dojechac najdalej do i + L gdzie i < k => i + L < k + L
 
-# z 1) i 2) nie istnieje takie i, ze koszt calkowity sciezki bylby mniejszy
+def get_path(parents, min_dist, t, min_f_i):
+  if min_dist == inf:
+    return None
+
+  if parents[t][min_f_i] is None:
+    return []
+
+  path = []
+  _v = (t, min_f_i)
+  while _v is not None:
+    v, f = _v
+    path.append(v)
+    _v = parents[v][f]
+
+  return path[::-1]
 
 
 # obliczyc minimalny koszt tankowan, zeby dojechac do t, na kazdej stacji mozna tankowac tylko do pelna
-def tank_b2(L, A, n, t):
-  l = L # obecny stan paliwa
-  pos = -1
-  cost = 0
-  curr = (0, 0)
-  path = []
+def tank_b2(L, S, P, n, t):
+  # F[i][f] - minimalny koszt, zeby dostac sie do i-tego pola z f paliwa
+  F = [[inf]*(L+1) for _ in range(t+1)]
+  parents = [[None]*(L+1) for _ in range(t+1)]
 
-  while True:
-    path.append(curr[0])
+  F[0][L] = 0 # startujemy na 0 z pelnym bakiem
 
-    if t - curr[0] <= l:
-      #print(f'mozna dojechac bez dotankowania')
-      path.append(t)
-      return (cost, path)
-    # jezeli mozna dotankowujac
-    elif t - curr[0] <= L:
-      #print(f'mozna dojechac dotankowujac, dodatkowy koszt: {curr[1]*(L-l)}')
-      path.append(t)
-      return (cost + curr[1]*(L-l), path)
+  for i in range(1, t+1):
+    for prev_i in range(i):
+      dist = i - prev_i
+      for f in range(L-dist+1):
+        s_i = bin_search(S, i)
+        if F[prev_i][f+dist] < F[i][f]:
+          F[i][f] = F[prev_i][f+dist]
+          parents[i][f] = (prev_i, f+dist)
 
-    # jezeli rozwazylismy wszystkie stacje i nie moglismy dojechac do celu
-    if pos + 1 >= n:
-      return (-1, None)
-        
-    pos += 1
-    best = A[pos]
-    # nie da sie dojechac do nastepnej stacji
-    if best[0] - curr[0] > L:
-      return (-1, None)
+        if s_i is not None:
+          new_cost = F[prev_i][f+dist] + P[s_i]*(L-f)
+          if new_cost < F[i][L]:
+            F[i][L] = new_cost
+            parents[i][L] = (prev_i, f+dist)
 
-    # szukamy nastepnej stacji z minimalnym kosztem paliwa
-    i = pos + 1
-    while i < n and A[i][0] <= curr[0] + L:
-      if A[i][1] < best[1]:
-        best = A[i]
-        pos = i
-      i += 1
+  min_f_i = 0
+  for f in range(L+1):
+    if F[t][f] < F[t][min_f_i]:
+      min_f_i = f
 
-    # jezeli na obecnej stacji jest tansze paliwo niz nastepnej najtanszej to tankujemy
-    if curr[1] < best[1]:
-      #print(f'dotankowano: {L - l}, dodatkowy koszt: {(L - l) * curr[1]}')
-      cost += (L - l) * curr[1]
-      l = L
-
-    # jezeli nie mamy wystarczajaco paliwa, zeby dojechac do nastepnej stacji to tankujemy
-    if l < best[0] - curr[0]:
-      #print(f'dotankowano: {L - l}, dodatkowy koszt: {(L - l) * curr[1]}')
-      cost += (L - l) * curr[1]
-      l = L
-
-    # jedziemy do nastepnej stacji
-    l -= best[0] - curr[0]
-    curr = best
+  return (F[t][min_f_i], get_path(parents, F[t][min_f_i], t, min_f_i))
 
 
 # zakladam, ze stacje sa w posortowanej kolejnosci
@@ -97,13 +89,12 @@ P = [1, 1, 1, 1, 1, 2]
 L = 19
 t = 20
 
-# (-1, None)
+# (inf, None)
 S = [2, 4, 8, 9, 15, 18]
 P = [1, 1, 1, 1, 1, 2]
 L = 4
 t = 20
 
-# zwraca (3.2, [0, 1, 3, 4, 6])!
 # (2.9, [0, 1, 2, 4, 6])
 S = [1, 2, 3, 4]
 P = [0.9, 1, 0.9, 0.5]
@@ -111,7 +102,4 @@ L = 2
 t = 6
 
 n = len(S) # ilosc stacji
-A = list(zip(S, P)) # A[i][0] = S[i], A[i][1] = P[i]
-print(tank_b2(L, A, n, t))
-
-# opis algorytmu i dowod to kopiuj wklej z b1, moze kiedys napisze dla b2
+print(tank_b2(L, S, P, n, t))
