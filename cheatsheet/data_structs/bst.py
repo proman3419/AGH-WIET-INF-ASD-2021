@@ -233,10 +233,63 @@ def print_breadth_first(tree):
     children = _children 
 
 
+def pretty_print_aux(self):
+  # brak dziecka
+  if self.right is None and self.left is None:
+    line = '%s' % self.key
+    width = len(line)
+    height = 1
+    middle = width // 2
+    return [line], width, height, middle
+
+  # tylko lewe dziecko
+  if self.right is None:
+    lines, n, p, x = pretty_print_aux(self.left)
+    s = '%s' % self.key
+    u = len(s)
+    first_line = (x + 1) * ' ' + (n - x - 1) * '_' + s
+    second_line = x * ' ' + '/' + (n - x - 1 + u) * ' '
+    shifted_lines = [line + u * ' ' for line in lines]
+    return [first_line, second_line] + shifted_lines, n + u, p + 2, n + u // 2
+
+  # tylko prawe dziecko
+  if self.left is None:
+    lines, n, p, x = pretty_print_aux(self.right)
+    s = '%s' % self.key
+    u = len(s)
+    first_line = s + x * '_' + (n - x) * ' '
+    second_line = (u + x) * ' ' + '\\' + (n - x - 1) * ' '
+    shifted_lines = [u * ' ' + line for line in lines]
+    return [first_line, second_line] + shifted_lines, n + u, p + 2, u // 2
+
+  # dwojka dzieci
+  left, n, p, x = pretty_print_aux(self.left)
+  right, m, q, y = pretty_print_aux(self.right)
+  s = '%s' % self.key
+  u = len(s)
+  first_line = (x + 1) * ' ' + (n - x - 1) * '_' + s + y * '_' + (m - y) * ' '
+  second_line = x * ' ' + '/' + (n - x - 1 + u + y) * ' ' + '\\' + (m - y - 1) * ' '
+  if p < q:
+    left += [n * ' '] * (q - p)
+  elif q < p:
+    right += [m * ' '] * (p - q)
+  zipped_lines = zip(left, right)
+  lines = [first_line, second_line] + [a + u * ' ' + b for a, b in zipped_lines]
+  return lines, n + m + u, max(p, q) + 2, n + u // 2
+
+
+def pretty_print(self):
+  lines, *_ = pretty_print_aux(self)
+  for line in lines:
+    print(line)
+
+
 A = [20, 10, 27, 5, 15, 13, 22, 30, 28, 35, 40]
 tree = array_to_bst(A)
 
-# print_nodes(tree)
+pretty_print(tree)
+print()
+
 print(bst_traversal(tree))
 print()
 
@@ -257,5 +310,5 @@ tree = remove(tree, 30)
 print_node(find(tree, 27))
 print(bst_traversal(tree))
 
-# print()
-# print_nodes(tree)
+print()
+pretty_print(tree)
