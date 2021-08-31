@@ -80,10 +80,12 @@ def remove(tree, key):
     if parent is None:
       return node.left or node.right
 
+    child = node.left or node.right
     if node == parent.left:
-      parent.left = node.left or node.right
+      parent.left = child
     else:
-      parent.right = node.left or node.right
+      parent.right = child
+    child.parent = parent
 
   return tree
 
@@ -155,6 +157,11 @@ def print_node(node):
   else:
     print('right: None')
 
+  if node.parent is not None:
+    print(f'parent: {node.parent.key}')
+  else:
+    print('parent: None')
+
 
 def print_nodes(tree):
   if tree is None:
@@ -198,7 +205,7 @@ def print_breadth_first(tree):
 A = [20, 10, 27, 5, 15, 13, 22, 30, 28, 35, 40]
 tree = array_to_bst(A)
 
-print_breadth_first(tree)
+# print_nodes(tree)
 
 # lisc
 print()
@@ -208,12 +215,12 @@ print_node(find(tree, 10))
 # 1 dziecko
 print()
 tree = remove(tree, 15)
-print_node(find(tree, 10))
+print_node(find(tree, 13))
 
 # 2 dzieci
 print()
 tree = remove(tree, 30)
 print_node(find(tree, 27))
 
-print()
-print_breadth_first(tree)
+# print()
+# print_nodes(tree)
