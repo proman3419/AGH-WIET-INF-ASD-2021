@@ -144,6 +144,37 @@ def find_successor(tree, key) -> BSTNode:
     return parent
 
 
+# O(n)
+def bst_traversal(tree):
+  prev = None
+  curr = tree
+
+  while curr.left is not None:
+    curr = curr.left
+
+  sorted_order = []
+
+  while curr is not None:
+    if prev is None:
+      if curr.left is not None:
+        curr = curr.left
+      elif curr.right is not None:
+        sorted_order.append(curr.key)
+        curr = curr.right
+      else:
+        sorted_order.append(curr.key)
+        prev, curr = curr, curr.parent
+    elif prev.key < curr.key and curr.right is not None:
+      sorted_order.append(curr.key)
+      prev, curr = None, curr.right
+    else:
+      if curr.right is None:
+        sorted_order.append(curr.key)
+      prev, curr = curr, curr.parent
+
+  return sorted_order
+
+
 def print_node(node):
   print(f'key: {node.key}')
 
@@ -206,21 +237,25 @@ A = [20, 10, 27, 5, 15, 13, 22, 30, 28, 35, 40]
 tree = array_to_bst(A)
 
 # print_nodes(tree)
+print(bst_traversal(tree))
+print()
 
 # lisc
-print()
 tree = remove(tree, 5)
 print_node(find(tree, 10))
+print(bst_traversal(tree))
 
 # 1 dziecko
 print()
 tree = remove(tree, 15)
 print_node(find(tree, 13))
+print(bst_traversal(tree))
 
 # 2 dzieci
 print()
 tree = remove(tree, 30)
 print_node(find(tree, 27))
+print(bst_traversal(tree))
 
 # print()
 # print_nodes(tree)
