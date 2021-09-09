@@ -18,7 +18,7 @@
 
 ### Graphs
 * [Bellman-Ford](https://github.com/proman3419/AGH-WIET-INF-ASD-2021/blob/master/cheatsheet/graphs/bellman-ford.py)
-* [BFS](https://github.com/proman3419/AGH-WIET-INF-ASD-2021/blob/master/cheatsheet/graphs/bfs.png) / [using Graph](https://github.com/proman3419/AGH-WIET-INF-ASD-2021/blob/master/cheatsheet/graphs/bfs_oop.py)
+* [BFS](https://github.com/proman3419/AGH-WIET-INF-ASD-2021/blob/master/cheatsheet/graphs/bfs.py) / [using Graph](https://github.com/proman3419/AGH-WIET-INF-ASD-2021/blob/master/cheatsheet/graphs/bfs_oop.py)
 * [Change graph format](https://github.com/proman3419/AGH-WIET-INF-ASD-2021/blob/master/cheatsheet/graphs/change_graph_format.py)
 * [Color bipartite](https://github.com/proman3419/AGH-WIET-INF-ASD-2021/blob/master/cheatsheet/graphs/color_bipartite.py)
 * [DFS](https://github.com/proman3419/AGH-WIET-INF-ASD-2021/blob/master/cheatsheet/graphs/dfs.py) / [using Graph](https://github.com/proman3419/AGH-WIET-INF-ASD-2021/blob/master/cheatsheet/graphs/dfs_oop.py)
