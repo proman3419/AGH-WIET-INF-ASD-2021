@@ -1,5 +1,5 @@
 # algorytm
-# sortujemy tablice wag tak, zeby zaczynala sie od najwiekszej i konczyla na najmniejszej.
+# sortujemy tablice wag nierosnaco.
 # przechodzimy nastepnie po niej i, jezeli mozemy, bierzemy przedmioty na przyczepe
 
 
