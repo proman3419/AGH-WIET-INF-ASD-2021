@@ -1,10 +1,10 @@
 # AGH-WIET-INF-ASD-2021
 * x - ćwiczenia nr x (jeżeli brakuje jakiegoś rozwiązania patrzeć w old)
-* bit_algo_start - problemy z BIT Algo Start
-* cheatsheet - kod gotowy do kopiowania
-* kol_egz - kolokwia i egzaminy (głównie z poprzednich lat)
-* offline - problemy offline
-* old - problemy z ćwiczeń z poprzedniego roku
+* [bit_algo_start](https://github.com/proman3419/AGH-WIET-INF-ASD-2021/tree/master/bit_algo_start) - problemy z BIT Algo Start
+* [cheatsheet](https://github.com/proman3419/AGH-WIET-INF-ASD-2021/tree/master/cheatsheet) - kod gotowy do kopiowania
+* [kol_egz](https://github.com/proman3419/AGH-WIET-INF-ASD-2021/tree/master/kol_egz) - kolokwia i egzaminy (głównie z poprzednich lat)
+* [offline](https://github.com/proman3419/AGH-WIET-INF-ASD-2021/tree/master/offline) - problemy offline
+* [old](https://github.com/proman3419/AGH-WIET-INF-ASD-2021/tree/master/old) - problemy z ćwiczeń z poprzedniego roku
 
 ## Ćwiczenia
 1. [Rozgrzewka po WDI](https://github.com/proman3419/AGH-WIET-INF-ASD-2021/tree/master/1)
