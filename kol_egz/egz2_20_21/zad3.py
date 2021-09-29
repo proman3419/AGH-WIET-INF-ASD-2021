@@ -1,5 +1,3 @@
-# Przemysław Roman
-
 # O(n+T)
 
 # symulujemy wykonywane wcisniecia przelacznikow zapamietujac obecny stan wszystkich lampek.

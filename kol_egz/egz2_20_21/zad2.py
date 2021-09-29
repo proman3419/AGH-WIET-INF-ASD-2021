@@ -1,5 +1,3 @@
-# Przemysław Roman
-
 # t: O(n) 
 # s: O(n)
 
