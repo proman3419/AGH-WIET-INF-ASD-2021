@@ -1,6 +1,7 @@
 1. [Sortowanie przez scalanie](https://github.com/proman3419/AGH-WIET-INF-ASD-2021/tree/master/offline/offline1)
 2. [QuickSort na listach](https://github.com/proman3419/AGH-WIET-INF-ASD-2021/tree/master/offline/offline2)
 3. [Magiczne Piątki](https://github.com/proman3419/AGH-WIET-INF-ASD-2021/tree/master/offline/offline3)
+4. brak
 5. [Wszystkie najdłuższe ciągi](https://github.com/proman3419/AGH-WIET-INF-ASD-2021/tree/master/offline/offline5)
 6. [Bitoniczny komiwojażer](https://github.com/proman3419/AGH-WIET-INF-ASD-2021/tree/master/offline/offline6)
 7. [Kody Huffmana](https://github.com/proman3419/AGH-WIET-INF-ASD-2021/tree/master/offline/offline7)
