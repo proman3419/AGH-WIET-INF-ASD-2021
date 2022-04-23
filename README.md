@@ -1,6 +1,5 @@
 # AGH-WIET-INF-ASD-2021
 Algorytmy i struktury danych
-* x - ćwiczenia nr x (jeżeli brakuje jakiegoś rozwiązania patrzeć w old)
 * [bit_algo_start](https://github.com/proman3419/AGH-WIET-INF-ASD-2021/tree/master/bit_algo_start) - problemy z BIT Algo Start
 * [cheatsheet](https://github.com/proman3419/AGH-WIET-INF-ASD-2021/tree/master/cheatsheet) - kod gotowy do kopiowania
 * [kol_egz](https://github.com/proman3419/AGH-WIET-INF-ASD-2021/tree/master/kol_egz) - kolokwia i egzaminy (głównie z poprzednich lat)
@@ -8,6 +7,7 @@ Algorytmy i struktury danych
 * [old](https://github.com/proman3419/AGH-WIET-INF-ASD-2021/tree/master/old) - problemy z ćwiczeń z poprzedniego roku
 
 ## Ćwiczenia
+Jeżeli brakuje jakiegoś rozwiązania patrzeć w old.
 1. [Rozgrzewka po WDI](https://github.com/proman3419/AGH-WIET-INF-ASD-2021/tree/master/1)
 2. [MergeSort i zastosowanie sortowań](https://github.com/proman3419/AGH-WIET-INF-ASD-2021/tree/master/2)
 3. [QuickSort i HeapSort](https://github.com/proman3419/AGH-WIET-INF-ASD-2021/tree/master/3)
