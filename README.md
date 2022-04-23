@@ -1,4 +1,5 @@
 # AGH-WIET-INF-ASD-2021
+Algorytmy i struktury danych
 * x - ćwiczenia nr x (jeżeli brakuje jakiegoś rozwiązania patrzeć w old)
 * [bit_algo_start](https://github.com/proman3419/AGH-WIET-INF-ASD-2021/tree/master/bit_algo_start) - problemy z BIT Algo Start
 * [cheatsheet](https://github.com/proman3419/AGH-WIET-INF-ASD-2021/tree/master/cheatsheet) - kod gotowy do kopiowania
